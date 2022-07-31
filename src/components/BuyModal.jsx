@@ -92,7 +92,7 @@ export default function BuyModal(props) {
   };
   return (
     <Dialog fullWidth maxWidth="sm" onClose={handleClose} open={open}>
-      <DialogTitle sx={{ pb: '8px' }}>Купить</DialogTitle>
+      <DialogTitle sx={{ pb: '8px' }}>Задонатить</DialogTitle>
       <DialogContent sx={{}}>
         <Box className="" sx={{ mt: { xs: 1, sm: 0 }, display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' } }}>
           <Controller
@@ -200,7 +200,7 @@ export default function BuyModal(props) {
           Закрыть
         </Button>
         <Button disabled={checkLoading} onClick={handleSubmit(onSubmit)} autoFocus variant="contained">
-          Оплатить
+          Задонатить
         </Button>
       </DialogActions>
     </Dialog>
