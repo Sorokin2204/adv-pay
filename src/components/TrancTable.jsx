@@ -51,7 +51,7 @@ export default function TrancTable({ title }) {
     </div>
   ) : (
     <div className="" style={{ width: '100%', margin: '0 auto', display: 'flex', justifyContent: 'center', fontSize: '24px', fontWeight: '600', color: 'black', opacity: '0.4', marginTop: '64px' }}>
-      Транзакций нет
+      Покупок нет
     </div>
   );
 }

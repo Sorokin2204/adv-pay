@@ -49,7 +49,7 @@ export default function PaymentModal(props) {
 
   return (
     <Dialog maxWidth="sm" onClose={handleClose} open={open}>
-      <DialogTitle sx={{ pb: '8px' }}>Создать платеж</DialogTitle>
+      <DialogTitle sx={{ pb: '8px' }}>Пополнить баланс</DialogTitle>
       <form method="POST" action="https://merchant.webmoney.ru/lmi/payment_utf.asp?at=authtype_16" accept-charset="utf-8">
         <DialogContent sx={{ pb: '16px', pt: '0px', pb: '24px' }}>
           <div style={{ justifyContent: 'center', display: 'flex', alignItems: 'center' }}>
@@ -78,7 +78,11 @@ export default function PaymentModal(props) {
                 endAdornment: <InputAdornment position="end">$</InputAdornment>,
               }}
             />{' '}
-            <IconButton sx={{ mt: '16px' }} onClick={() => setSum(sum + 5)}>
+            <IconButton
+              sx={{ mt: '16px' }}
+              onClick={() => {
+                if (sum !== 300) setSum(sum + 5);
+              }}>
               <AddIcon />
             </IconButton>
           </div>

@@ -92,9 +92,9 @@ export default function BuyModal(props) {
   };
   return (
     <Dialog fullWidth maxWidth="sm" onClose={handleClose} open={open}>
-      <DialogTitle sx={{ pb: '8px' }}>Создать платеж</DialogTitle>
+      <DialogTitle sx={{ pb: '8px' }}>Купить</DialogTitle>
       <DialogContent sx={{}}>
-        <Box className="" sx={{ mt: 1, display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' } }}>
+        <Box className="" sx={{ mt: { xs: 1, sm: 0 }, display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' } }}>
           <Controller
             control={control}
             rules={{ required: true }}
@@ -104,7 +104,7 @@ export default function BuyModal(props) {
           <Button variant="contained" sx={{ mb: { xs: 2, sm: 0 }, mt: { xs: 1, sm: 0 }, ml: { xs: 0, sm: 1 }, maxWidth: { xs: '228px', sm: 'auto' }, width: { xs: '100%', sm: 'auto' } }} onClick={() => onCheckPlayer()} disabled={checkLoading}>
             Проверить
           </Button>
-          <div style={{ height: '67.13px', display: 'flex', margin: '0 auto', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ height: '100px', display: 'flex', margin: '0 auto', justifyContent: 'center', alignItems: 'center' }}>
             {' '}
             {checkLoading ? (
               <div style={{ display: 'flex', margin: '0 auto', justifyContent: 'center' }}>
@@ -119,11 +119,11 @@ export default function BuyModal(props) {
                   <Typography sx={{ whiteSpace: 'nowrap', color: 'success.main', fontWeight: '600' }}>ID проверен</Typography>
                   <CheckIcon sx={{ ml: '4px', mb: '4px', color: 'success.main' }} />
                 </div>
-                <Box className="" sx={{ display: 'flex', fontSize: '14px' }}>
-                  <Box sx={{ opacity: '0.7', fontWeight: '600' }}>Ваш ник:&nbsp;</Box>
+                <Box className="" sx={{ display: 'flex', flexDirection: 'column', fontSize: '14px' }}>
+                  <Box sx={{ opacity: '0.7', fontWeight: '600' }}>Ник:&nbsp;</Box>
                   <b> {checkData?.nickname}</b>
                 </Box>{' '}
-                <Box className="" sx={{ display: 'flex', fontSize: '14px', mt: '2px' }}>
+                <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '14px', mt: '2px' }}>
                   <Box sx={{ opacity: '0.7', fontWeight: '600' }}>Ваш ID:&nbsp;</Box>
                   <b> {checkData?.id}</b>
                 </Box>
@@ -170,7 +170,7 @@ export default function BuyModal(props) {
             />
           </FormControl>
           <FormControl>
-            <FormLabel sx={{ mt: '16px' }}>Выберите план</FormLabel>
+            <FormLabel sx={{ mt: '16px' }}>Количество печатей</FormLabel>
             <Controller
               rules={{ required: true }}
               control={control}
@@ -183,8 +183,8 @@ export default function BuyModal(props) {
                       control={<Radio disabled={checkLoading} />}
                       label={
                         <div style={{ display: 'flex', alignItems: 'center', whiteSpace: 'nowrap' }}>
-                          <div>{packageItem?.name}</div>
-                          <Box sx={{ fontWeight: '600', fontSize: '18px', color: 'success.light' }}>&nbsp;{`- ${currencyFormat(packageItem?.price)}`}</Box>
+                          <div>{`${packageItem?.name} - `}</div>
+                          <Box sx={{ fontWeight: '600', fontSize: '18px', color: 'success.light' }}>&nbsp;{`${currencyFormat(packageItem?.price)}`}</Box>
                         </div>
                       }
                     />

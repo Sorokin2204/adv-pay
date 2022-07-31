@@ -109,7 +109,7 @@ function AuthPage() {
               render={({ field }) => <TextField {...field} error={createForm.formState.errors?.email} label="Почта" variant="outlined" size="small" autoComplete="off" />}
             />
             <Controller control={createForm.control} rules={{ required: true }} name="password" defaultValue="" render={({ field }) => <TextField error={createForm.formState?.errors?.password} {...field} sx={{ mt: '16px' }} label="Пароль" variant="outlined" size="small" autoComplete="off" />} />
-            <Controller control={createForm.control} rules={{ required: true }} name="name" defaultValue="" render={({ field }) => <TextField error={createForm.formState?.errors?.password} {...field} sx={{ mt: '16px' }} label="ФИО" variant="outlined" size="small" autoComplete="off" />} />
+            <Controller control={createForm.control} rules={{ required: true }} name="name" defaultValue="" render={({ field }) => <TextField error={createForm.formState?.errors?.password} {...field} sx={{ mt: '16px' }} label="Имя" variant="outlined" size="small" autoComplete="off" />} />
             <Button disabled={loadingLogin} variant="contained" sx={{ mt: '16px' }} onClick={createForm.handleSubmit(onSubmitRegister)}>
               Регистрация
             </Button>
