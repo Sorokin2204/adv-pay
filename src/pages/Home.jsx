@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import React, { useEffect } from 'react';
 import DrawerAppBar from '../components/MainLayout';
 import TrancTable from '../components/TrancTable';
@@ -12,6 +12,7 @@ import { getTransactions } from '../redux/slices/transaction.slice';
 import { getUser } from '../redux/slices/user.slice';
 import { getPayments } from '../redux/slices/payment.slice';
 import PaymentTable from '../components/PaymentTable';
+import Footer from '../components/Footer';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -75,20 +76,22 @@ const HomePage = () => {
   return !loading && data && !error ? (
     <>
       <DrawerAppBar>
-        <Box sx={{ width: '100%' }}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%' }}>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-              <Tab label="Покупки" {...a11yProps(0)} />
-              <Tab label="Пополнение счета" {...a11yProps(1)} />
-            </Tabs>
+        <Paper sx={{ height: '100%' }}>
+          <Box sx={{ width: '100%', height: '100%' }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%', height: '100%' }}>
+              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                <Tab label="Покупки" {...a11yProps(0)} />
+                <Tab label="Пополнение счета" {...a11yProps(1)} />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+              <TrancTable title="Последние покупки" />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <PaymentTable title="Пополнение счета" />
+            </TabPanel>
           </Box>
-          <TabPanel value={value} index={0}>
-            <TrancTable title="Последние покупки" />
-          </TabPanel>
-          <TabPanel value={value} index={1}>
-            <PaymentTable title="Пополнение счета" />
-          </TabPanel>
-        </Box>
+        </Paper>
       </DrawerAppBar>
     </>
   ) : (

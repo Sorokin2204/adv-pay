@@ -50,7 +50,7 @@ export default function TrancTable({ title }) {
       </TableContainer>
     </div>
   ) : (
-    <div className="" style={{ width: '100%', margin: '0 auto', display: 'flex', justifyContent: 'center', fontSize: '24px', fontWeight: '600', color: 'black', opacity: '0.4', marginTop: '64px' }}>
+    <div className="" style={{ width: '100%', margin: '0 auto', display: 'flex', justifyContent: 'center', fontSize: '24px', fontWeight: '600', opacity: '0.4', marginTop: '64px' }}>
       Покупок нет
     </div>
   );

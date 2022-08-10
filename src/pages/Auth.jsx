@@ -4,13 +4,15 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Button, makeStyles, TextField } from '@mui/material';
+import { Button, makeStyles, Paper, TextField } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../components/Loading';
 import { createUser, createUserReset, getUser, loginUser, loginUserReset, userReset } from '../redux/slices/user.slice';
 import { Navigate, useNavigate } from 'react-router';
 import axios from 'axios';
+import HomeLayout from '../components/HomeLayout';
+import Footer from '../components/Footer';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -51,7 +53,7 @@ function AuthPage() {
     if (dataLogin && !loadingLogin && !errorLogin) {
       dispatch(getUser());
       dispatch(loginUserReset());
-      navigate('/');
+      navigate('/account');
     }
   }, [dataLogin, loadingLogin, errorLogin]);
 
@@ -59,7 +61,7 @@ function AuthPage() {
     if (dataCreate && !loadingCreate && !errorCreate) {
       dispatch(getUser());
       dispatch(createUserReset());
-      navigate('/');
+      navigate('/account');
     }
   }, [dataCreate, loadingCreate, errorCreate]);
 
@@ -75,52 +77,56 @@ function AuthPage() {
     dispatch(createUser({ email: data.email, password: data.password, name: data.name }));
   };
   return !dataGet && !loadingGet && errorGet ? (
-    <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'start', height: '100vh' }}>
-      <div style={{ marginTop: '100px' }}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="Вход" {...a11yProps(0)} />
-            <Tab label="Регистрация" {...a11yProps(1)} />
-          </Tabs>
+    <HomeLayout>
+      <Paper>
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'start' }}>
+          <div style={{ marginTop: '100px' }}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                <Tab label="Вход" {...a11yProps(0)} />
+                <Tab label="Регистрация" {...a11yProps(1)} />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+              <div style={{ marginLeft: '-24px', marginRight: '-24px', display: 'flex', flexDirection: 'column' }}>
+                <Controller control={loginForm.control} rules={{ required: true }} name="email" defaultValue="" render={({ field }) => <TextField {...field} error={loginForm.formState.errors?.email} label="Почта" variant="outlined" size="small" autoComplete="off" />} />
+                <Controller control={loginForm.control} rules={{ required: true }} name="password" defaultValue="" render={({ field }) => <TextField error={loginForm.formState?.errors?.password} {...field} sx={{ mt: '16px' }} label="Пароль" variant="outlined" size="small" autoComplete="off" />} />
+                <Button disabled={loadingLogin} variant="contained" sx={{ mt: '16px' }} onClick={loginForm.handleSubmit(onSubmit)}>
+                  Вход
+                </Button>
+                {!loadingLogin && !dataLogin && errorLogin && <Box sx={{ fontSize: '14px', color: 'error.main', mt: '8px', mx: 'auto' }}>Неправильный логин или пароль</Box>}
+              </div>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <div style={{ marginLeft: '-24px', marginRight: '-24px', display: 'flex', flexDirection: 'column' }}>
+                <Controller
+                  control={createForm.control}
+                  rules={{
+                    required: true,
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                      message: 'invalid email address',
+                    },
+                  }}
+                  name="email"
+                  defaultValue=""
+                  render={({ field }) => <TextField {...field} error={createForm.formState.errors?.email} label="Почта" variant="outlined" size="small" autoComplete="off" />}
+                />
+                <Controller control={createForm.control} rules={{ required: true }} name="password" defaultValue="" render={({ field }) => <TextField error={createForm.formState?.errors?.password} {...field} sx={{ mt: '16px' }} label="Пароль" variant="outlined" size="small" autoComplete="off" />} />
+                <Controller control={createForm.control} rules={{ required: true }} name="name" defaultValue="" render={({ field }) => <TextField error={createForm.formState?.errors?.password} {...field} sx={{ mt: '16px' }} label="Имя" variant="outlined" size="small" autoComplete="off" />} />
+                <Button disabled={loadingLogin} variant="contained" sx={{ mt: '16px' }} onClick={createForm.handleSubmit(onSubmitRegister)}>
+                  Регистрация
+                </Button>
+                {!loadingCreate && !dataCreate && errorCreate && <Box sx={{ fontSize: '14px', color: 'error.main', mt: '8px', mx: 'auto' }}>{errorCreate?.error === 'USER_EXIST' ? 'Такой email уже существует' : 'Произошла непредвиденная ошибка'}</Box>}
+              </div>
+            </TabPanel>
+          </div>
+          {(loadingCreate || loadingLogin) && <Loading />}
         </Box>
-        <TabPanel value={value} index={0}>
-          <div style={{ marginLeft: '-24px', marginRight: '-24px', display: 'flex', flexDirection: 'column' }}>
-            <Controller control={loginForm.control} rules={{ required: true }} name="email" defaultValue="" render={({ field }) => <TextField {...field} error={loginForm.formState.errors?.email} label="Почта" variant="outlined" size="small" autoComplete="off" />} />
-            <Controller control={loginForm.control} rules={{ required: true }} name="password" defaultValue="" render={({ field }) => <TextField error={loginForm.formState?.errors?.password} {...field} sx={{ mt: '16px' }} label="Пароль" variant="outlined" size="small" autoComplete="off" />} />
-            <Button disabled={loadingLogin} variant="contained" sx={{ mt: '16px' }} onClick={loginForm.handleSubmit(onSubmit)}>
-              Вход
-            </Button>
-            {!loadingLogin && !dataLogin && errorLogin && <Box sx={{ fontSize: '14px', color: 'error.main', mt: '8px', mx: 'auto' }}>Неправильный логин или пароль</Box>}
-          </div>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <div style={{ marginLeft: '-24px', marginRight: '-24px', display: 'flex', flexDirection: 'column' }}>
-            <Controller
-              control={createForm.control}
-              rules={{
-                required: true,
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'invalid email address',
-                },
-              }}
-              name="email"
-              defaultValue=""
-              render={({ field }) => <TextField {...field} error={createForm.formState.errors?.email} label="Почта" variant="outlined" size="small" autoComplete="off" />}
-            />
-            <Controller control={createForm.control} rules={{ required: true }} name="password" defaultValue="" render={({ field }) => <TextField error={createForm.formState?.errors?.password} {...field} sx={{ mt: '16px' }} label="Пароль" variant="outlined" size="small" autoComplete="off" />} />
-            <Controller control={createForm.control} rules={{ required: true }} name="name" defaultValue="" render={({ field }) => <TextField error={createForm.formState?.errors?.password} {...field} sx={{ mt: '16px' }} label="Имя" variant="outlined" size="small" autoComplete="off" />} />
-            <Button disabled={loadingLogin} variant="contained" sx={{ mt: '16px' }} onClick={createForm.handleSubmit(onSubmitRegister)}>
-              Регистрация
-            </Button>
-            {!loadingCreate && !dataCreate && errorCreate && <Box sx={{ fontSize: '14px', color: 'error.main', mt: '8px', mx: 'auto' }}>{errorCreate?.error === 'USER_EXIST' ? 'Такой email уже существует' : 'Произошла непредвиденная ошибка'}</Box>}
-          </div>
-        </TabPanel>
-      </div>
-      {(loadingCreate || loadingLogin) && <Loading />}
-    </Box>
+      </Paper>
+    </HomeLayout>
   ) : (
-    <Navigate to="/" />
+    <Navigate to="/account" />
   );
 }
 export default AuthPage;

@@ -13,6 +13,11 @@ import { useEffect } from 'react';
 import Loading from './components/Loading';
 import SucessPage from './pages/Success';
 import ErrorPage from './pages/Error';
+import MainPage from './pages/MainPage';
+import AboutPage from './pages/AboutPage';
+import DonatePage from './pages/DonatePage';
+import RulesPage from './pages/RulesPage';
+import SupportPage from './pages/SupportPage';
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -24,14 +29,19 @@ function App() {
     dispatch(getUser());
   }, []);
   useEffect(() => {
-    if (!data && !loading && error) {
-      navigate('/auth');
+    if (!data && !loading && error && location.pathname.substring(0, 5) !== '/auth') {
+      navigate('/');
     }
   }, [data, loading, error]);
 
   let routes = useRoutes([
-    { path: '/', element: <HomePage /> },
+    { path: '/account', element: <HomePage /> },
+    { path: '/', element: <MainPage /> },
     { path: '/auth', element: <AuthPage /> },
+    { path: '/about', element: <AboutPage /> },
+    { path: '/donate', element: <DonatePage /> },
+    { path: '/rules', element: <RulesPage /> },
+    { path: '/support', element: <SupportPage /> },
   ]);
   console.log(location);
   return !loading && (data || error) && routes;

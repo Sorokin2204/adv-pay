@@ -24,6 +24,7 @@ import FormLabel from '@mui/material/FormLabel';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import { currencyFormat } from '../utils/currencyFormat';
+import { useSelector } from 'react-redux';
 export default function PaymentModal(props) {
   const { onClose, selectedValue, open } = props;
   const defaultValues = {
@@ -46,7 +47,9 @@ export default function PaymentModal(props) {
   React.useEffect(() => {
     axios.get('https://idv-back.herokuapp.com/v1/payment/rate').then((data) => setRate(data.data));
   }, []);
-
+  const {
+    getUserState: { data: user },
+  } = useSelector((state) => state.user);
   return (
     <Dialog maxWidth="sm" onClose={handleClose} open={open}>
       <DialogTitle sx={{ pb: '8px' }}>Пополнить баланс</DialogTitle>
@@ -103,7 +106,7 @@ export default function PaymentModal(props) {
         </DialogActions>
 
         <input type="hidden" name="token" value={localStorage.getItem('token')} />
-        <input type="hidden" name="LMI_PAYMENT_DESC" value="Оплата игровой валюты" />
+        <input type="hidden" name="LMI_PAYMENT_DESC" value={`Пополнение лицевого счета №${user?.id}`} />
         <input type="hidden" name="LMI_PAYMENT_NO" value="1234" />
         <input type="hidden" name="LMI_PAYEE_PURSE" value="Z250362075889" />
         {/* <input type="hidden" name="LMI_SIM_MODE" value="0" /> */}

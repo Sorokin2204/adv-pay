@@ -17,7 +17,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { purple, grey } from '@mui/material/colors';
 import { shadows } from '@mui/system';
-import { Container, Fab } from '@mui/material';
+import { Container, Fab, Paper } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import BuyModal from './BuyModal';
@@ -29,6 +29,7 @@ import PaymentModal from './PaymentModal';
 import ErrorModal from './ErrorModa';
 import Loading from './Loading';
 import { createTransactionReset } from '../redux/slices/transaction.slice';
+import Footer from './Footer';
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
@@ -130,86 +131,90 @@ function DrawerAppBar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <AppBar
-        component="nav"
-        sx={{
-          boxShadow: 3,
-          //   borderBottom: '1px solid grey',
-          background: '#fff',
-        }}>
-        <Toolbar variant="dense">
-          {/* <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton> */}
-          <div variant="h6" component="div" style={{ flexGrow: 1 }}></div>
-          <Box sx={{ display: 'flex', alignItems: 'center', mr: 1 }}>
-            <Button onClick={handleClickOpenPay} sx={{ display: { xs: 'none', sm: 'block' }, mr: 1 }} variant="contained" size="small">
-              Пополнить
-            </Button>
-            <IconButton onClick={handleClickOpenPay} sx={{ display: { xs: 'flex', sm: 'none' } }} aria-label="delete" size="medium">
-              <AddCardIcon fontSize="inherit" color="primary" style={{}} />
-            </IconButton>
-            <Typography sx={{ whiteSpace: 'nowrap', display: 'block', fontWeight: '600', mr: 1 }} color="success.light">
-              {currencyFormat(user.balance)}
-            </Typography>
-            <Typography color="primary" sx={{ display: 'block' }}>
-              {user.name}
-            </Typography>
-            <IconButton aria-label="delete" size="medium">
-              <AccountIcon fontSize="inherit" color="primary" style={{}} />
-            </IconButton>
-            <IconButton onClick={() => onExit()} aria-label="delete" color="error" size="medium">
-              <ExitIcon fontSize="inherit" />
-            </IconButton>{' '}
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Box component="nav">
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
+    <Paper sx={{ height: '100%', overflow: 'scroll' }}>
+      <Box sx={{ display: 'flex', height: '70%' }}>
+        <AppBar
+          component="nav"
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            boxShadow: 3,
+            //   borderBottom: '1px solid grey',
+            // background: '',
           }}>
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          width: '100%',
-          paddingTop: '48px',
-        }}>
-        <Container>
-          <div className="">
-            {props.children}
-            <Fab
-              onClick={handleClickOpen}
-              color="warning"
-              aria-label="add"
-              sx={{
-                position: 'fixed',
-                right: '20px',
-                bottom: '20px',
-              }}>
-              <AddIcon />
-            </Fab>
-          </div>
-        </Container>
-        <BuyModal open={open} onClose={handleClose} />
-        {transLoading && <Loading />}
-        <ErrorModal open={openError} text={errorText} onClose={handleCloseError} />
-        <SuccessModal open={openSucc} onClose={handleCloseSucc} />
-        <PaymentModal open={openPay} onClose={handleClosePay} />
-      </Box>
-    </Box>
+          <Toolbar variant="dense">
+            {/* <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
+              <MenuIcon />
+            </IconButton> */}
+            <div variant="h6" component="div" style={{ flexGrow: 1 }}></div>
+            <Box sx={{ display: 'flex', alignItems: 'center', mr: 1, height: '100%' }}>
+              <Button onClick={handleClickOpenPay} sx={{ display: { xs: 'none', sm: 'block' }, mr: 1 }} variant="contained" size="small">
+                Пополнить
+              </Button>
+              <IconButton onClick={handleClickOpenPay} sx={{ display: { xs: 'flex', sm: 'none' } }} aria-label="delete" size="medium">
+                <AddCardIcon fontSize="inherit" color="primary" style={{}} />
+              </IconButton>
+              <Typography sx={{ whiteSpace: 'nowrap', display: 'block', fontWeight: '600', mr: 1 }} color="success.light">
+                {currencyFormat(user.balance)}
+              </Typography>
+              <Typography color="primary" sx={{ display: 'block' }}>
+                {user.name}
+              </Typography>
+              <IconButton aria-label="delete" size="medium">
+                <AccountIcon fontSize="inherit" color="primary" style={{}} />
+              </IconButton>
+              <IconButton onClick={() => onExit()} aria-label="delete" color="error" size="medium">
+                <ExitIcon fontSize="inherit" />
+              </IconButton>{' '}
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Box component="nav">
+          <Drawer
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: 'block', sm: 'none' },
+              '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            }}>
+            {drawer}
+          </Drawer>
+        </Box>
+        <Box
+          component="main"
+          sx={{
+            width: '100%',
+            paddingTop: '48px',
+            height: '100%',
+          }}>
+          <Container sx={{ height: '100%' }}>
+            <div className="">
+              {props.children}
+              <Fab
+                onClick={handleClickOpen}
+                color="warning"
+                aria-label="add"
+                sx={{
+                  position: 'fixed',
+                  right: '20px',
+                  bottom: '20px',
+                }}>
+                <AddIcon />
+              </Fab>
+            </div>
+          </Container>
+          <BuyModal open={open} onClose={handleClose} />
+          {transLoading && <Loading />}
+          <ErrorModal open={openError} text={errorText} onClose={handleCloseError} />
+          <SuccessModal open={openSucc} onClose={handleCloseSucc} />
+          <PaymentModal open={openPay} onClose={handleClosePay} />
+        </Box>
+      </Box>{' '}
+      <Footer />
+    </Paper>
   );
 }
 
