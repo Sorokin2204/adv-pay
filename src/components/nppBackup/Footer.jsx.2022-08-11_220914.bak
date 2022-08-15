@@ -10,12 +10,12 @@ const Footer = () => {
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <Typography variant="subtitle2">Donate Gold © 2022</Typography>
         <Box sx={{ display: 'grid', gridTemplateColumns: { mobile: 'repeat(6,88px)', xs: 'repeat(3,88px)' }, gridGap: '10px', mt: 2 }}>
-          <img key={1} src="/bl.png" width="88" height="31" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
-          <img key={2} src="/visa.png" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
-          <img key={3} src="/mc.png" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
-          <img key={4} src="/mir.png" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
-          <a href="https://www.megastock.com/" target="_blank"><img src="https://www.webmoney.ru/img/icons/88x31_wm_black.png" alt="www.megastock.com" border="0"/></a>
-          <img key={6} src="/bl.png" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
+          <img key={1} src="/logo.webp" width="88" height="31" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
+          <img key={2} src="/logo.webp" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
+          <img key={3} src="/logo.webp" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
+          <img key={4} src="/logo.webp" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
+          <img key={5} src="/logo.webp" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
+          <img key={6} src="/logo.webp" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
         </Box>
         <Box sx={{ display: 'grid', gridTemplateColumns: { mobile: 'repeat(4,auto)', xs: 'repeat(2,auto)' }, gridGap: { mobile: '20px', xs: '10px' }, mt: 2 }}>
           <Button disableRipple={true} onClick={() => navigate('/about')} sx={{ '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '12px' }} size="small">

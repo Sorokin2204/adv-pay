@@ -132,7 +132,7 @@ function DrawerAppBar(props) {
 
   return (
     <Paper sx={{ height: '100%', overflow: 'scroll' }}>
-      <Box sx={{ display: 'flex', height: '70%' }} style={{ backgroundColor : "#000" }}>
+      <Box sx={{ display: 'flex', height: '70%' }}>
         <AppBar
           component="nav"
           sx={{

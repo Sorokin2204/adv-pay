@@ -51,8 +51,8 @@ function HomeLayout(props) {
     setAnchorEl(null);
   };
   return (
-    <Paper sx={{ height: '100%' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'scroll' }} style={{ backgroundColor : "#000" }}>
+    <Paper sx={{ height: '100%' }} style={{ background color : "#000" }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'scroll' }}>
         <AppBar
           component="nav"
           sx={{

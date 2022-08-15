@@ -14,7 +14,7 @@ const Footer = () => {
           <img key={2} src="/visa.png" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
           <img key={3} src="/mc.png" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
           <img key={4} src="/mir.png" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
-          <a href="https://www.megastock.com/" target="_blank"><img src="https://www.webmoney.ru/img/icons/88x31_wm_black.png" alt="www.megastock.com" border="0"/></a>
+          <img key={5} src="/logo.webp" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
           <img key={6} src="/bl.png" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
         </Box>
         <Box sx={{ display: 'grid', gridTemplateColumns: { mobile: 'repeat(4,auto)', xs: 'repeat(2,auto)' }, gridGap: { mobile: '20px', xs: '10px' }, mt: 2 }}>

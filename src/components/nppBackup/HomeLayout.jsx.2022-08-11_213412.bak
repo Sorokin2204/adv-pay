@@ -52,7 +52,7 @@ function HomeLayout(props) {
   };
   return (
     <Paper sx={{ height: '100%' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'scroll' }} style={{ backgroundColor : "#000" }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'scroll' }}>
         <AppBar
           component="nav"
           sx={{
@@ -81,7 +81,7 @@ function HomeLayout(props) {
                   </Menu>
                 </Box>
                 <Link to="/">
-                  <img src="/logo.png" style={{ height: '50px', width: '120px', objectFit: 'cover', display: 'block' }} />
+                  <img src="/logo.webp" style={{ height: '50px', width: '120px', objectFit: 'cover', display: 'block' }} />
                 </Link>
               </Box>
               <Box sx={{ display: { mobile: 'flex', xs: 'none' }, justifyContent: 'center', alignItems: 'center', mr: 1 }}>
