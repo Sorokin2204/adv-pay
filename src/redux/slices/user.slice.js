@@ -2,14 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 export const createUser = createAsyncThunk('user/createUser', (user, { rejectWithValue }) => {
   return axios
-    .post(`https://idv-back.herokuapp.com/v1/user/add`, user)
+    .post(`${process.env.REACT_APP_SERVER_URL}/user/add`, user)
     .then((response) => response.data)
     .catch((error) => rejectWithValue(error.response.data));
 });
 
 export const loginUser = createAsyncThunk('user/loginUser', (user, { rejectWithValue }) => {
   return axios
-    .post(`https://idv-back.herokuapp.com/v1/user/login`, user)
+    .post(`${process.env.REACT_APP_SERVER_URL}/user/login`, user)
     .then((response) => response.data)
     .catch((error) => rejectWithValue(error.response.data));
 });
@@ -19,7 +19,7 @@ export const getUser = createAsyncThunk('user/getUser', (obj, { rejectWithValue 
   if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
 
   return axios
-    .get(`https://idv-back.herokuapp.com/v1/user/get`, {
+    .get(`${process.env.REACT_APP_SERVER_URL}/user/get`, {
       headers: {
         request_token: token,
       },
@@ -33,7 +33,7 @@ export const checkUser = createAsyncThunk('user/checkUser', (ids, { rejectWithVa
   if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
 
   return axios
-    .get(`https://idv-back.herokuapp.com/v1/user/check/${ids.playerId}/${ids.serverId}`, {
+    .get(`${process.env.REACT_APP_SERVER_URL}/user/check/${ids.playerId}/${ids.serverId}`, {
       headers: {
         request_token: token,
       },

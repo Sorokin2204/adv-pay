@@ -6,7 +6,7 @@ export const getPackage = createAsyncThunk('package/getPackage', (obj, { rejectW
   if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
 
   return axios
-    .get(`https://idv-back.herokuapp.com/v1/package/list`, {
+    .get(`${process.env.REACT_APP_SERVER_URL}/package/list`, {
       headers: {
         request_token: token,
       },

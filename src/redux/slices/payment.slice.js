@@ -6,7 +6,7 @@ export const getPayments = createAsyncThunk('payment/getPayments', (obj, { rejec
   if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
 
   return axios
-    .get(`https://idv-back.herokuapp.com/v1/payment/list`, {
+    .get(`${process.env.REACT_APP_SERVER_URL}/payment/list`, {
       headers: {
         request_token: token,
       },

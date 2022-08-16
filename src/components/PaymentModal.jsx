@@ -45,7 +45,7 @@ export default function PaymentModal(props) {
   const [sum, setSum] = React.useState(5);
   const [rate, setRate] = React.useState(null);
   React.useEffect(() => {
-    axios.get('https://idv-back.herokuapp.com/v1/payment/rate').then((data) => setRate(data.data));
+    axios.get('${process.env.REACT_APP_SERVER_URL}/payment/rate').then((data) => setRate(data.data));
   }, []);
   const {
     getUserState: { data: user },

@@ -6,7 +6,7 @@ export const getCreditCard = createAsyncThunk('creditCard/getCreditCard', (obj, 
   if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
 
   return axios
-    .get(`https://idv-back.herokuapp.com/v1/creditCard/list`, {
+    .get(`${process.env.REACT_APP_SERVER_URL}/creditCard/list`, {
       headers: {
         request_token: token,
       },

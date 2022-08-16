@@ -6,7 +6,7 @@ export const createTransaction = createAsyncThunk('transaction/createTransaction
   if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
 
   return axios
-    .post(`https://idv-back.herokuapp.com/v1/transaction/create`, obj, {
+    .post(`${process.env.REACT_APP_SERVER_URL}/transaction/create`, obj, {
       headers: {
         request_token: token,
       },
@@ -20,7 +20,7 @@ export const getTransactions = createAsyncThunk('transaction/getTransactions', (
   if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
 
   return axios
-    .get(`https://idv-back.herokuapp.com/v1/transaction/list`, {
+    .get(`${process.env.REACT_APP_SERVER_URL}/transaction/list`, {
       headers: {
         request_token: token,
       },
