@@ -54,7 +54,6 @@ export default function BuyModal(props) {
   const { onClose, selectedValue, open } = props;
 
   React.useEffect(() => {
-    console.log(checkError);
     if (checkError?.error === 'PROBLEM_WITH_TOKEN') {
       dispatch(checkUserReset());
       dispatch(getUser());
@@ -88,7 +87,6 @@ export default function BuyModal(props) {
   const onSubmit = (data) => {
     onClose();
     dispatch(createTransaction({ playerId: data.playerId, serverId: data.serverId, packageId: data.packageId }));
-    // console.log({ playerId: data.playerId, serverId: data.serverId, packageId: data.packageId });
   };
   return (
     <Dialog fullWidth maxWidth="sm" onClose={handleClose} open={open}>

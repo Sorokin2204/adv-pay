@@ -43,7 +43,6 @@ function App() {
     { path: '/rules', element: <RulesPage /> },
     { path: '/support', element: <SupportPage /> },
   ]);
-  console.log(location);
   return !loading && (data || error) && routes;
 }
 

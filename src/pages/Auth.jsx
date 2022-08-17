@@ -36,6 +36,7 @@ function a11yProps(index) {
 
 function AuthPage() {
   const [value, setValue] = React.useState(0);
+  const [showLoginSucc, setShowLoginSucc] = React.useState(false);
   const loginForm = useForm({});
   const createForm = useForm({});
 
@@ -59,9 +60,10 @@ function AuthPage() {
 
   React.useEffect(() => {
     if (dataCreate && !loadingCreate && !errorCreate) {
-      dispatch(getUser());
+      setShowLoginSucc(true);
+      // dispatch(getUser());
       dispatch(createUserReset());
-      navigate('/account');
+      // navigate('/account');
     }
   }, [dataCreate, loadingCreate, errorCreate]);
 
@@ -73,7 +75,6 @@ function AuthPage() {
     dispatch(loginUser({ email: data.email, password: data.password }));
   };
   const onSubmitRegister = (data) => {
-    console.log(data);
     dispatch(createUser({ email: data.email, password: data.password, name: data.name }));
   };
   return !dataGet && !loadingGet && errorGet ? (
@@ -94,7 +95,7 @@ function AuthPage() {
                 <Button disabled={loadingLogin} variant="contained" sx={{ mt: '16px' }} onClick={loginForm.handleSubmit(onSubmit)}>
                   Вход
                 </Button>
-                {!loadingLogin && !dataLogin && errorLogin && <Box sx={{ fontSize: '14px', color: 'error.main', mt: '8px', mx: 'auto' }}>Неправильный логин или пароль</Box>}
+                {!loadingLogin && !dataLogin && errorLogin && <Box sx={{ fontSize: '14px', color: 'error.main', mt: '8px', mx: 'auto' }}>{errorLogin?.error === 'ACCOUNT_NOT_ACTIVE' ? 'Подтвердите email' : 'Неправильный логин или пароль'} </Box>}
               </div>
             </TabPanel>
             <TabPanel value={value} index={1}>
@@ -118,6 +119,11 @@ function AuthPage() {
                   Регистрация
                 </Button>
                 {!loadingCreate && !dataCreate && errorCreate && <Box sx={{ fontSize: '14px', color: 'error.main', mt: '8px', mx: 'auto' }}>{errorCreate?.error === 'USER_EXIST' ? 'Такой email уже существует' : 'Произошла непредвиденная ошибка'}</Box>}
+                {showLoginSucc && (
+                  <Box sx={{ fontSize: '14px', color: 'success.main', mt: '8px', mx: 'auto', textAlign: 'center' }}>
+                    Ссылка на подтверждение <br /> отправлена на почту
+                  </Box>
+                )}
               </div>
             </TabPanel>
           </div>
