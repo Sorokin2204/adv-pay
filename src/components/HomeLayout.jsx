@@ -52,7 +52,16 @@ function HomeLayout(props) {
   };
   return (
     <Paper sx={{ height: '100%' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'scroll' }} style={{ backgroundColor : "#000" }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
+          overflow: 'scroll',
+          '&::-webkit-scrollbar': {
+            width: '0 !important',
+          },
+        }}>
         <AppBar
           component="nav"
           sx={{

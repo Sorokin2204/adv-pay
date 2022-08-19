@@ -101,6 +101,7 @@ const userSlice = createSlice({
       };
     },
     [getUser.rejected]: (state, action) => {
+      localStorage.removeItem('token');
       state.getUserState = {
         loading: false,
         data: null,
@@ -116,7 +117,6 @@ const userSlice = createSlice({
       };
     },
     [createUser.fulfilled]: (state, action) => {
-      localStorage.setItem('token', action.payload.token);
       state.createUserState = {
         loading: false,
         data: action.payload,

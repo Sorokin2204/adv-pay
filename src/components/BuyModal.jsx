@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import { Box, CircularProgress, DialogActions, DialogContent, DialogContentText, Input, TextField } from '@mui/material';
 import Radio from '@mui/material/Radio';
+import SearchOffIcon from '@mui/icons-material/SearchOff';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
@@ -92,6 +93,36 @@ export default function BuyModal(props) {
     <Dialog fullWidth maxWidth="sm" onClose={handleClose} open={open}>
       <DialogTitle sx={{ pb: '8px' }}>Задонатить</DialogTitle>
       <DialogContent sx={{}}>
+        <FormControl>
+          <FormLabel sx={{ mt: '16px' }}>Выберите сервер</FormLabel>
+          <Controller
+            rules={{ required: true }}
+            control={control}
+            name="serverId"
+            render={({ field }) => (
+              <RadioGroup {...field} sx={{ display: 'flex', flexDirection: 'row' }}>
+                <FormControlLabel
+                  value={'2001'}
+                  control={<Radio disabled={checkLoading} />}
+                  label={
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <div>Asia</div>
+                    </div>
+                  }
+                />{' '}
+                <FormControlLabel
+                  value={'2011'}
+                  control={<Radio disabled={checkLoading} />}
+                  label={
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <div>NA and EU</div>
+                    </div>
+                  }
+                />
+              </RadioGroup>
+            )}
+          />
+        </FormControl>
         <Box className="" sx={{ mt: { xs: 1, sm: 0 }, display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' } }}>
           <Controller
             control={control}
@@ -102,7 +133,7 @@ export default function BuyModal(props) {
           <Button variant="contained" sx={{ mb: { xs: 2, sm: 0 }, mt: { xs: 1, sm: 0 }, ml: { xs: 0, sm: 1 }, maxWidth: { xs: '228px', sm: 'auto' }, width: { xs: '100%', sm: 'auto' } }} onClick={() => onCheckPlayer()} disabled={checkLoading}>
             Проверить
           </Button>
-          <div style={{ height: '100px', display: 'flex', margin: '0 auto', justifyContent: 'center', alignItems: 'center' }}>
+          <div style={{ height: '130px', display: 'flex', margin: '0 auto', justifyContent: 'center', alignItems: 'center' }}>
             {' '}
             {checkLoading ? (
               <div style={{ display: 'flex', margin: '0 auto', justifyContent: 'center' }}>
@@ -114,14 +145,14 @@ export default function BuyModal(props) {
             ) : checkData && !checkError ? (
               <div style={{ marginLeft: '16px', display: 'flex', flexDirection: 'column', margin: '0 auto' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <Typography sx={{ whiteSpace: 'nowrap', color: 'success.main', fontWeight: '600' }}>ID проверен</Typography>
+                  <Typography sx={{ whiteSpace: 'nowrap', color: 'success.main', fontWeight: '600', fontSize: '20px' }}>ID проверен</Typography>
                   <CheckIcon sx={{ ml: '4px', mb: '4px', color: 'success.main' }} />
                 </div>
-                <Box className="" sx={{ display: 'flex', flexDirection: 'column', fontSize: '14px' }}>
+                <Box className="" sx={{ display: 'flex', flexDirection: 'column', fontSize: '18px' }}>
                   <Box sx={{ opacity: '0.7', fontWeight: '600' }}>Ник:&nbsp;</Box>
                   <b> {checkData?.nickname}</b>
                 </Box>{' '}
-                <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '14px', mt: '2px' }}>
+                <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '18px', mt: '2px' }}>
                   <Box sx={{ opacity: '0.7', fontWeight: '600' }}>Ваш ID:&nbsp;</Box>
                   <b> {checkData?.id}</b>
                 </Box>
@@ -129,44 +160,14 @@ export default function BuyModal(props) {
             ) : (
               <div style={{ marginLeft: '16px', display: 'flex', flexDirection: 'column', margin: '0 auto' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <Typography sx={{ whiteSpace: 'nowrap', color: 'error.main', fontWeight: '600' }}>ID не найден</Typography>
-                  <CheckIcon sx={{ ml: '4px', mb: '4px', color: 'error.main' }} />
+                  <Typography sx={{ whiteSpace: 'nowrap', color: 'error.main', fontWeight: '600', fontSize: '20px' }}>ID не найден</Typography>
+                  <SearchOffIcon sx={{ ml: '4px', mb: '4px', color: 'error.main', fontSize: '30px' }} />
                 </div>
               </div>
             )}
           </div>
         </Box>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <FormControl>
-            <FormLabel sx={{ mt: '16px' }}>Выберите сервер</FormLabel>
-            <Controller
-              rules={{ required: true }}
-              control={control}
-              name="serverId"
-              render={({ field }) => (
-                <RadioGroup {...field} sx={{ display: 'flex', flexDirection: 'row' }}>
-                  <FormControlLabel
-                    value={'2001'}
-                    control={<Radio disabled={checkLoading} />}
-                    label={
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <div>Asia</div>
-                      </div>
-                    }
-                  />{' '}
-                  <FormControlLabel
-                    value={'2011'}
-                    control={<Radio disabled={checkLoading} />}
-                    label={
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <div>NA and EU</div>
-                      </div>
-                    }
-                  />
-                </RadioGroup>
-              )}
-            />
-          </FormControl>
           <FormControl>
             <FormLabel sx={{ mt: '16px' }}>Количество печатей</FormLabel>
             <Controller

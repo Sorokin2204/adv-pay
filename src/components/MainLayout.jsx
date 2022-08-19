@@ -131,8 +131,15 @@ function DrawerAppBar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Paper sx={{ height: '100%', overflow: 'scroll' }}>
-      <Box sx={{ display: 'flex', height: '70%' }} style={{ backgroundColor : "#000" }}>
+    <Paper
+      sx={{
+        height: '100%',
+        overflow: 'scroll',
+        '&::-webkit-scrollbar': {
+          width: '0 !important',
+        },
+      }}>
+      <Box sx={{ display: 'flex', height: '70%' }}>
         <AppBar
           component="nav"
           sx={{
