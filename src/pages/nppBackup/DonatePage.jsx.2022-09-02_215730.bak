@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import HomeLayout from '../components/HomeLayout';
 import { Box, Container, Typography } from '@mui/material';
 import Footer from '../components/Footer';
-const AboutPage = () => {
+const DonatePage = () => {
   return (
     <>
       {' '}
@@ -13,11 +13,13 @@ const AboutPage = () => {
         <Container>
           <Box sx={{ marginTop: 4 }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'start' }}>
+              <img src="/logo.webp" style={{ height: '200px', width: '100%', maxWidth: ' 350px', objectFit: 'cover' }} />
+
               <Typography variant="h4" sx={{ mt: 2 }}>
-                О сервисе
+                Как донатить
               </Typography>
-              <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
-                Сервис позволяет донатить в мобильные и компьютерные игры напрямую разработчикам через их API. Все транзакции абсолютно легальны. Банов ваших аккаунтов не будет, так как все пополнения идут напрямую разработчикам. Список игр будет постепенно расширяться.
+              <Typography variant="body1" sx={{ maxWidth: '600px', mt: 2 }}>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis natus perspiciatis porro laudantium! Expedita, officia accusantium omnis iusto nobis eveniet quidem dignissimos. Voluptatibus reiciendis quae, fugit repellat nulla enim expedita!
               </Typography>
             </Box>
           </Box>
@@ -27,4 +29,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default DonatePage;

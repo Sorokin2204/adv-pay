@@ -17,8 +17,8 @@ const MainPage = () => {
 			<Typography variant="h4" sx={{ mt: 2 }}>
               Игры
             </Typography>
-            <Box sx={{ display: 'grid', gridTemplateColumns: { mobile: 'repeat(3,150px)', xs: 'auto' }, justifyContent: { mobile: 'space-between', xs: 'center' }, gap: { xs: '20px' }, width: '100%', mt: 5, mb: 5 }}>
-              <img src="/blank.png" style={{ height: '150px', width: '150px', objectFit: 'cover' }} /> <img src="/identityv.png" style={{ height: '150px', width: '150px', objectFit: 'cover' }} /> <img src="/blank.png" style={{ height: '150px', width: '150px', objectFit: 'cover' }} />
+            <Box sx={{ display: 'grid', gridTemplateColumns: { mobile: 'repeat(3,250px)', xs: 'auto' }, justifyContent: { mobile: 'space-between', xs: 'center' }, gap: { xs: '20px' }, width: '100%', mt: 5, mb: 5 }}>
+              <img src="/blank.png" style={{ height: '100px', width: '250px', objectFit: 'cover' }} /> <img src="/identityv.jpg" style={{ height: '100px', width: '250px', objectFit: 'cover' }} /> <img src="/blank.png" style={{ height: '100px', width: '250px', objectFit: 'cover' }} />
             </Box>
           </Box>
         </Box>

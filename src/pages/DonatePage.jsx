@@ -13,14 +13,13 @@ const DonatePage = () => {
         <Container>
           <Box sx={{ marginTop: 4 }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'start' }}>
-              <img src="/logo.webp" style={{ height: '200px', width: '100%', maxWidth: ' 350px', objectFit: 'cover' }} />
-
               <Typography variant="h4" sx={{ mt: 2 }}>
                 Как донатить
               </Typography>
-              <Typography variant="body1" sx={{ maxWidth: '600px', mt: 2 }}>
+              <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis natus perspiciatis porro laudantium! Expedita, officia accusantium omnis iusto nobis eveniet quidem dignissimos. Voluptatibus reiciendis quae, fugit repellat nulla enim expedita!
               </Typography>
+			  <img src="/logo.webp" style={{ height: '200px', width: '100%', maxWidth: ' 350px', objectFit: 'cover' }} />
             </Box>
           </Box>
         </Container>

@@ -13,11 +13,13 @@ const AboutPage = () => {
         <Container>
           <Box sx={{ marginTop: 4 }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'start' }}>
+              <img src="/logo.webp" style={{ height: '200px', width: '100%', maxWidth: ' 350px', objectFit: 'cover' }} />
+
               <Typography variant="h4" sx={{ mt: 2 }}>
                 О сервисе
               </Typography>
-              <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
-                Сервис позволяет донатить в мобильные и компьютерные игры напрямую разработчикам через их API. Все транзакции абсолютно легальны. Банов ваших аккаунтов не будет, так как все пополнения идут напрямую разработчикам. Список игр будет постепенно расширяться.
+              <Typography variant="body1" sx={{ maxWidth: '600px', mt: 2 }}>
+                Сервис позволяет донатить в мобильные и компьютерные игры напрямую разработчикам через их API. Все транзакции абсолютно легальны. Банов аккаунтов не будет, так как все пополнения идут напрямую разработчикам. Скоро наш список игр будет расширяться.
               </Typography>
             </Box>
           </Box>
