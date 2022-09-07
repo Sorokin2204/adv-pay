@@ -52,11 +52,11 @@ const DonatePage = () => {
 				В правом нижнем углу личного кабинета вы найдете желтую кнопку с плюсиком. Нажмите на неё и откроется форма доната. Далее выбираете сервер, вводите свой ID. И нажимаете кнопку "проверить".<br />
 				Выбираете количество печатей и нажимаете на кнопку "Задонатить".
               </Typography>
-			  <img src="/ins5.png" style={{ height: '688px', width: '100%', maxWidth: '600px', objectFit: 'cover' }} />
+			  <img src="/ins5.png" style={{ height: '688px', width: '100%', maxWidth: '600px', objectFit: 'cover' }} /><br />
 			  <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
 				Через несколько секунд донат придет на ваш аккаунт.
-              </Typography><br />
-			  <img src="/ins6.png" style={{ height: '111px', width: '100%', maxWidth: '600px', objectFit: 'cover' }} />
+              </Typography>
+			  <img src="/ins6.png" style={{ height: '111px', width: '100%', maxWidth: '600px', objectFit: 'cover' }} /><br />
 			  <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
 				При возникновении ошибок обращайтесь в нашу техническую поддержку.
               </Typography>
