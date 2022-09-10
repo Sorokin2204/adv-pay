@@ -93,7 +93,7 @@ export default function BuyModal(props) {
     <Dialog fullWidth maxWidth="sm" onClose={handleClose} open={open}>
       <DialogTitle sx={{ pb: '8px' }}>Задонатить</DialogTitle>
       <DialogContent sx={{}}>
-        <FormControl>
+<FormControl>
           <FormLabel sx={{ mt: '16px' }}>Выберите сервер</FormLabel>
           <Controller
             rules={{ required: true }}
@@ -106,19 +106,19 @@ export default function BuyModal(props) {
                   control={<Radio disabled={checkLoading} />}
                   label={
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <div>Asia</div>
-                    </div>
-                  }
-                />{' '}
-                <FormControlLabel
-                  value={'2011'}
-                  control={<Radio disabled={checkLoading} />}
-                  label={
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
                       <div>NA and EU</div>
                     </div>
                   }
                 />
+        <FormControlLabel
+                  value={'2011'}
+                  control={<Radio disabled={checkLoading} />}
+                  label={
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <div>Asia</div>
+                    </div>
+                  }
+                />{' '}
               </RadioGroup>
             )}
           />
