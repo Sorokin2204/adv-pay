@@ -42,7 +42,7 @@ export default function BuyModal(props) {
   const defaultValues = {
     packageId: null,
     playerId: '',
-    serverId: '2001',
+    serverId: '2011',
   };
   const {
     setValue,
@@ -64,7 +64,7 @@ export default function BuyModal(props) {
     if (transData) {
       setValue('packageId', packageList?.[0]?.code);
       setValue('playerId', null);
-      setValue('serverId', '2001');
+      setValue('serverId', '2011');
       dispatch(checkUserReset());
     }
   }, [transData]);
@@ -102,7 +102,7 @@ export default function BuyModal(props) {
             render={({ field }) => (
               <RadioGroup {...field} sx={{ display: 'flex', flexDirection: 'row' }}>
                 <FormControlLabel
-                  value={'2001'}
+                  value={'2011'}
                   control={<Radio disabled={checkLoading} />}
                   label={
                     <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -111,7 +111,7 @@ export default function BuyModal(props) {
                   }
                 />
         <FormControlLabel
-                  value={'2011'}
+                  value={'2001'}
                   control={<Radio disabled={checkLoading} />}
                   label={
                     <div style={{ display: 'flex', alignItems: 'center' }}>
