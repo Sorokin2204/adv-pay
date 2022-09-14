@@ -24,11 +24,11 @@ const DonatePage = () => {
 				<br />
 				Для пополнения баланса нажмите на кнопку карты с плюсиком.
               </Typography>
-			  <img src="/ins1.png" style={{ height: '155px', width: '100%', maxWidth: '600px', objectFit: 'cover' }} />
+			  <img src="/ins1.png" style={{ height: 'auto', width: '100%', maxWidth: '600px', objectFit: 'cover' }} />
 			  <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
                 Откроется форма пополнения баланса. 
 				</Typography>
-				<img src="/ins2.png" style={{ height: '234px', width: '100%', maxWidth: '600px', objectFit: 'cover' }} />
+				<img src="/ins2.png" style={{ height: 'auto', width: '100%', maxWidth: '600px', objectFit: 'cover' }} />
 				<Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
 				На сегодняшний день за один перевод можно пополнить баланс на сумму от 5 до 300 долларов с карты российского банка. Шаг - 5 долларов. С вашей карты будет списываться сумма в рублях. 
 				<br />
@@ -36,12 +36,12 @@ const DonatePage = () => {
 				<br /><br />
 				После нажатия на кнопку "пополнить" откроется сайт системы электронных платежей WebMoney. В способе оплаты выберите "Бановская карта" и перейдите к оплате.
               </Typography><br />
-			  <img src="/ins3.png" style={{ height: '388px', width: '100%', maxWidth: '600px', objectFit: 'cover' }} /><br />
+			  <img src="/ins3.png" style={{ height: 'auto', width: '100%', maxWidth: '600px', objectFit: 'cover' }} /><br />
 			  <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
 				Откроется окно ввода данных карты. Заполняете данные и нажимаете кнопку оплатить. 
               </Typography>
 			  <br />
-			  <img src="/ins4.png" style={{ height: '488px', width: '100%', maxWidth: '600px', objectFit: 'cover' }} /><br />
+			  <img src="/ins4.png" style={{ height: 'auto', width: '100%', maxWidth: '600px', objectFit: 'cover' }} /><br />
 			  <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
 				После оплаты сумма будет зачислена на ваш лицевой счет. 
               </Typography>
@@ -52,11 +52,11 @@ const DonatePage = () => {
 				В правом нижнем углу личного кабинета вы найдете желтую кнопку с плюсиком. Нажмите на неё и откроется форма доната. Далее выбираете сервер, вводите свой ID. И нажимаете кнопку "проверить".<br />
 				Выбираете количество печатей и нажимаете на кнопку "Задонатить".
               </Typography>
-			  <img src="/ins5.png" style={{ height: '688px', width: '100%', maxWidth: '600px', objectFit: 'cover' }} />
+			  <img src="/ins5.png" style={{ height: 'auto', width: '100%', maxWidth: '600px', objectFit: 'cover' }} />
 			  <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
 				Через несколько секунд донат придет на ваш аккаунт.
               </Typography><br />
-			  <img src="/ins6.png" style={{ height: '111px', width: '100%', maxWidth: '600px', objectFit: 'cover' }} />
+			  <img src="/ins6.png" style={{ height: 'auto', width: '100%', maxWidth: '600px', objectFit: 'cover' }} />
 			  <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
 				При возникновении ошибок обращайтесь в нашу техническую поддержку.
               </Typography>
