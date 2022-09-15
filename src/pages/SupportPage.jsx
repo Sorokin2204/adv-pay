@@ -19,7 +19,7 @@ const SupportPage = () => {
               <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
                По любым вопросам сервиса вы можете обращаться:<br/>
 ВК - <a href="https://vk.com/im?sel=-213480825" target="_blank">Написать нам</a> <br/>
-email - donategold.s@gmail.com<br/><br/>
+email - support@donate-gold.ru<br/><br/>
 Режим работы: ежедневно с 10:00 до 20:00<br/><br/><br/>
 
 
