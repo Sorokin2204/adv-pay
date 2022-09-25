@@ -1,0 +1,78 @@
+.game-card {
+  transition: background-color 0.5s;
+  padding: 20px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  &__img {
+    width: 100%;
+  }
+
+  &__middle {
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    &::before {
+      content: '';
+      display: block;
+      background-image: url(../../public/coin.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: 0 70%;
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  &__bottom {
+    padding-top: 18px;
+    margin-top: 18px;
+    border-top: 1px solid #363c3f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__price {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  &__btn-box {
+    display: flex;
+    align-items: center;
+  }
+
+  &__cart {
+    background-color: #320d05;
+    border: none;
+    width: 40px;
+    height: 30px;
+    padding: 0;
+    position: relative;
+    margin-right: 16px;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: block;
+      mask-image: url(../../public/cart.svg);
+      mask-size: contain;
+      background-color: #fff;
+      opacity: 0.3;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__donate {
+    height: 30px;
+    background-color: #e08418;
+    border: none;
+    padding: 0 16px;
+    font-size: 16px;
+    padding-bottom: 1px;
+  }
+}

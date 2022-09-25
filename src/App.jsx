@@ -18,6 +18,14 @@ import AboutPage from './pages/AboutPage';
 import DonatePage from './pages/DonatePage';
 import RulesPage from './pages/RulesPage';
 import SupportPage from './pages/SupportPage';
+import GamePage from './pages/GamePage';
+import TermsOfUsePage from './pages/TermsOfUsePage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import FaqPage from './pages/FaqPage';
+import ReviewsPage from './pages/ReviewsPage';
+import GuarantePage from './pages/GuarantePage';
+import ReturnPolicyPage from './pages/ReturnPolicyPage';
+
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -42,6 +50,13 @@ function App() {
     { path: '/donate', element: <DonatePage /> },
     { path: '/rules', element: <RulesPage /> },
     { path: '/support', element: <SupportPage /> },
+    { path: '/game/:id', element: <GamePage /> },
+    { path: '/terms-of-use', element: <TermsOfUsePage /> },
+    { path: '/privacy-policy', element: <PrivacyPolicyPage /> },
+    { path: '/faq', element: <FaqPage /> },
+    { path: '/reviews', element: <ReviewsPage /> },
+    { path: '/guarante', element: <GuarantePage /> },
+    { path: '/return-policy', element: <ReturnPolicyPage /> },
   ]);
   return !loading && (data || error) && routes;
 }

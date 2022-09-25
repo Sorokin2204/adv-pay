@@ -84,9 +84,9 @@ function HomeLayout(props) {
                       'aria-labelledby': 'basic-button',
                     }}>
                     <MenuItem onClick={() => navigate('/about')}>О сервисе</MenuItem>
-                    <MenuItem onClick={() => navigate('/donate')}> Как донатить</MenuItem>
+                    <MenuItem onClick={() => navigate('/donate')}> Инструкция</MenuItem>
                     <MenuItem onClick={() => navigate('/rules')}> Правила</MenuItem>
-                    <MenuItem onClick={() => navigate('/support')}> Поддержка</MenuItem>
+                    <MenuItem onClick={() => navigate('/support')}> Поддержка</MenuItem> <MenuItem onClick={() => navigate('/faq')}> Faq</MenuItem> <MenuItem onClick={() => navigate('/reviews')}> Отзывы</MenuItem> <MenuItem onClick={() => navigate('/guarante')}> Гарантии</MenuItem>
                   </Menu>
                 </Box>
                 <Link to="/">
@@ -94,17 +94,26 @@ function HomeLayout(props) {
                 </Link>
               </Box>
               <Box sx={{ display: { mobile: 'flex', xs: 'none' }, justifyContent: 'center', alignItems: 'center', mr: 1 }}>
-                <Button disableRipple={true} onClick={() => navigate('/about')} sx={{ '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                <Button disableRipple={true} onClick={() => navigate('/about')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
                   О сервисе
                 </Button>{' '}
-                <Button disableRipple={true} onClick={() => navigate('/donate')} sx={{ '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
-                  Как донатить
+                <Button disableRipple={true} onClick={() => navigate('/donate')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                  Инструкция
                 </Button>{' '}
-                <Button disableRipple={true} onClick={() => navigate('/rules')} sx={{ '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                <Button disableRipple={true} onClick={() => navigate('/rules')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
                   Правила
                 </Button>{' '}
-                <Button disableRipple={true} onClick={() => navigate('/support')} sx={{ '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                <Button disableRipple={true} onClick={() => navigate('/support')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
                   Поддержка
+                </Button>
+                <Button disableRipple={true} onClick={() => navigate('/faq')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                  Faq
+                </Button>
+                <Button disableRipple={true} onClick={() => navigate('/reviews')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                  Отзывы
+                </Button>{' '}
+                <Button disableRipple={true} onClick={() => navigate('/guarante')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                  Гарантии
                 </Button>
               </Box>
               <Box>

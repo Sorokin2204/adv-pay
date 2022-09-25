@@ -17,15 +17,25 @@ const SupportPage = () => {
                 Техническая поддержка
               </Typography>
               <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
-               По любым вопросам сервиса вы можете обращаться:<br/>
-ВК - <a href="https://vk.com/im?sel=-213480825" target="_blank">Написать нам</a> <br/>
-email - support@donate-gold.ru<br/><br/>
-Режим работы: ежедневно с 10:00 до 20:00<br/><br/><br/>
-
-
-<img src="/v_white_on_transp_ru.png"/><br/>
-<a href="https://passport.webmoney.ru/asp/certview.asp?wmid=386255644072" target="_blank"><span>Проверить аттестат</span></a>
-
+                По любым вопросам сервиса вы можете обращаться:
+                <br />
+                ВК -{' '}
+                <a class="link" href="https://vk.com/im?sel=-213480825" target="_blank">
+                  Написать нам
+                </a>{' '}
+                <br />
+                email - support@donate-gold.ru
+                <br />
+                <br />
+                Режим работы: ежедневно с 10:00 до 20:00
+                <br />
+                <br />
+                <br />
+                <img src="/v_white_on_transp_ru.png" />
+                <br />
+                <a class="link" href="https://passport.webmoney.ru/asp/certview.asp?wmid=386255644072" target="_blank">
+                  <span>Проверить аттестат</span>
+                </a>
               </Typography>
             </Box>
           </Box>

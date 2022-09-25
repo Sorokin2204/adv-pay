@@ -44,3 +44,15 @@ input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
+* {
+  font-family: 'Fira Sans', sans-serif !important;
+  font-weight: 300 !important;
+}
+.link {
+  color: gold;
+  text-decoration: underline;
+  display: inline-block;
+}
+html {
+  scroll-behavior: smooth;
+}

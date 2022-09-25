@@ -14,7 +14,7 @@ const darkTheme = createTheme({
     MuiAppBar: {
       styleOverrides: {
         root: {
-          backgroundColor: '#111',
+          backgroundColor: '#222',
         },
       },
     },
@@ -22,7 +22,7 @@ const darkTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundImage: 'none',
-          backgroundColor: '#000',
+          backgroundColor: '#111',
         },
       },
     },
