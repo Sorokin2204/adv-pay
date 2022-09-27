@@ -28,7 +28,7 @@ export default function ErrorModal(props) {
   };
 
   return (
-    <Dialog fullWidth maxWidth="sm" onClose={handleClose} open={open}>
+    <Dialog fullWidth onClose={handleClose} open={open}>
       <DialogContent sx={{ height: { xs: '100px', sm: '170px' } }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', transform: 'translateY(20px)' }}>
           <Typography variant="h5" sx={{ fontWeight: '600', fontSize: { xs: '16px', sm: '24px' } }}>

@@ -106,7 +106,7 @@ function HomeLayout(props) {
                 <Button disableRipple={true} onClick={() => navigate('/support')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
                   Поддержка
                 </Button>
-                <Button disableRipple={true} onClick={() => navigate('/faq')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                <Button disableRipple={true} onClick={() => navigate('/faq')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block', minWidth: 0 }}>
                   Faq
                 </Button>
                 <Button disableRipple={true} onClick={() => navigate('/reviews')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
@@ -136,7 +136,7 @@ function HomeLayout(props) {
             width: '100%',
             paddingTop: '68px',
           }}>
-          <Container>
+          <Container style={{ ...(props.isFullContainer && { maxWidth: 'none' }) }}>
             <div className="">
               {props.children}
               {/* <Fab

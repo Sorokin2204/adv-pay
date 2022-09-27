@@ -236,9 +236,9 @@ function DrawerAppBar(props) {
               paddingTop: '48px',
               height: '100%',
             }}>
-            <Container sx={{ height: '100%', ...(isFull && { maxWidth: 'none', padding: 0 }) }}>
+            <div sx={{ height: '100%', ...(isFull && { maxWidth: 'none', padding: 0 }) }}>
               <div className="" style={{ display: 'grid', gridTemplateRows: '1fr auto', height: 'calc(100vh - 65px' }}>
-                {props.children}
+                <Container style={{ ...(isFull && { maxWidth: 'none', padding: 0 }) }}> {props.children}</Container>
                 <Footer />
                 {/* <Fab
                   onClick={handleClickOpen}
@@ -252,7 +252,7 @@ function DrawerAppBar(props) {
                   <AddIcon />
                 </Fab> */}
               </div>
-            </Container>
+            </div>
             <BuyModal open={open} onClose={handleClose} />
             {transLoading && <Loading />}
             <ErrorModal open={openError} text={errorText} onClose={handleCloseError} />

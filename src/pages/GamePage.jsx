@@ -60,6 +60,7 @@ const GamePage = () => {
   } = useForm({ defaultValues });
   const [playerId, setPlayerId] = React.useState('');
   const [isAgree, setIsAgree] = useState(false);
+  const [activeCard, setActiveCard] = useState();
   const handleAgree = () => setIsAgree(!isAgree);
   React.useEffect(() => {
     if (checkError?.error === 'PROBLEM_WITH_TOKEN') {
@@ -99,7 +100,7 @@ const GamePage = () => {
       <div className="game">
         <Container>
           <div className="game__content">
-            <div className="game__title">Донаты в игру Identity V</div>
+            <div className="game__title">Донат в игру Identity V</div>
             <ul className="game__list">
               <li className="game__list-item"> печати в игру приходят моментально, каждый пак содержит бонусные печати</li>
               <li className="game__list-item"> ваш донат полностью легален, печати засчитываются в накопительный игровой счет Мисс Соловья</li>
@@ -166,10 +167,14 @@ const GamePage = () => {
               <div className="game__card-grid">
                 {packageList?.map((packageItem, index) => (
                   <GameCard
+                    active={activeCard === index}
                     img={`/game-img-${index + 1}.png`}
                     price={packageItem?.price}
                     value={packageItem?.code}
                     label={packageItem?.name}
+                    onClickCard={() => {
+                      setActiveCard(index);
+                    }}
                     onClick={() => {
                       if (isAgree) {
                         onSubmit(packageItem?.code);

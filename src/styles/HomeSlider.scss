@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 58px;
+  padding-top: 20px;
   & .swiper-pagination-bullet {
     margin: 0 14px !important;
     width: 12px;
@@ -43,7 +43,7 @@
     background: #ccc;
   }
   & .swiper-pagination-bullet-active {
-    background-color: #44d62c;
+    background-color: #e2ba7e;
   }
 }
 .hero-slide .content {
@@ -66,6 +66,6 @@
     }
   }
   .swiper-pagination-custom {
-    padding-top: 48px;
+    padding-top: 20px;
   }
 }

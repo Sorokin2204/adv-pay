@@ -64,7 +64,7 @@ const HomeSlider = () => {
                   Get Rebates and More
                 </Box>
               </div>{' '}
-              <button class="slider-button">Find out Now</button>
+              {/* <button class="slider-button">Find out Now</button> */}
             </Box>
           </div>
         </div>
@@ -94,7 +94,7 @@ const HomeSlider = () => {
                   Grab Bonus NC And Royale Chest Tickets
                 </Box>
               </div>{' '}
-              <button class="slider-button">Find out Now</button>
+              {/* <button class="slider-button">Find out Now</button> */}
             </Box>
           </div>
         </div>

@@ -9,7 +9,7 @@ import ListGame from '../components/ListGame';
 import HomeSlider from '../components/HomeSlider';
 const MainPage = () => {
   return (
-    <HomeLayout>
+    <HomeLayout isFullContainer>
       <Container style={{ maxWidth: 'none', padding: '0', marginLeft: '-16px', width: 'calc(100% + 32px)' }}>
         <HomeSlider />
       </Container>

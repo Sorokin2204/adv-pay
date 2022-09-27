@@ -16,7 +16,7 @@ const RulesPage = () => {
               <Typography variant="h4" sx={{ mt: 2 }}>
                 Пользовательское соглашение
               </Typography>
-              <Typography variant="body1" sx={{ maxWidth: '80%', mt: 2 }}>
+              <Typography variant="body1" sx={{ margin: '0 auto', maxWidth: '100%', mt: 2 }}>
                 Данные правила регламентируют условия отношений между пользователем и сервисом сайта{' '}
                 <a href="https://donate-gold.ru" class="link">
                   https://donate-gold.ru

@@ -18,6 +18,13 @@ const darkTheme = createTheme({
         },
       },
     },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          maxWidth: '1000px',
+        },
+      },
+    },
     MuiPaper: {
       styleOverrides: {
         root: {

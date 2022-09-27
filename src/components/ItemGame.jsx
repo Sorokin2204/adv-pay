@@ -7,7 +7,7 @@ import { Box } from '@mui/material';
 const ItemGame = ({ img, name, link }) => {
   const navigate = useNavigate();
   const [color, setColor] = useState();
-  const [boxShadow, setBoxShadow] = useState();
+  // const [boxShadow, setBoxShadow] = useState();
   return (
     <Box
       onClick={() => {
@@ -20,7 +20,7 @@ const ItemGame = ({ img, name, link }) => {
         cursor: 'pointer',
         userSelect: 'none',
         padding: '12px',
-        '&:hover .item-game__img-box': { borderColor: color, boxShadow: boxShadow },
+        '&:hover .item-game__img-box': { borderColor: color },
         '&:hover img': {
           transform: 'scale(1.1)',
         },
@@ -28,7 +28,7 @@ const ItemGame = ({ img, name, link }) => {
       onMouseEnter={() => {
         const colorRand = '#' + Math.floor(Math.random() * 16777215).toString(16);
         setColor(colorRand);
-        setBoxShadow('0px 0px 8px 0px ' + colorRand);
+        // setBoxShadow('0px 0px 8px 0px ' + colorRand);
       }}>
       <Box className="item-game__img-box" sx={{ width: '163px', height: '163px', border: '1px solid #28aadc', borderRadius: '4px', transition: 'all 0.3s', overflow: 'hidden' }}>
         <img src={img} class="item-game__img" style={{ transition: 'all 0.3s' }} />

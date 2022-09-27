@@ -50,19 +50,21 @@ const HomePage = () => {
           <Box sx={{ width: '100%', height: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%', height: 'auto' }}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                <Tab label="Покупки" {...a11yProps(0)} />
-                <Tab label="Пополнение счета" {...a11yProps(1)} />
-                <Tab label="Игры" {...a11yProps(2)} />
+                <Tab label="Игры" {...a11yProps(0)} />
+                <Tab label="Покупки " {...a11yProps(1)} />
+                <Tab label="Пополнение счета" {...a11yProps(2)} />
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              <TrancTable title="Последние покупки" />
+              {' '}
+              <ListGame />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <PaymentTable title="Пополнение счета" />
+              {' '}
+              <TrancTable title="Последние покупки" />
             </TabPanel>
             <TabPanel value={value} index={2}>
-              <ListGame />
+              <PaymentTable title="Пополнение счета" />
             </TabPanel>
           </Box>
         </Paper>
