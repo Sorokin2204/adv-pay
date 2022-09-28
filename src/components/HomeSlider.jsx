@@ -58,13 +58,13 @@ const HomeSlider = () => {
               }}>
               <div data-swiper-parallax={parallaxAmount} data-swiper-parallax-opacity={parallaxOpacity}>
                 <Box className="" sx={{ marginBottom: '5px', fontSize: { mobile: '24px', xs: '18px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Enjoy 7% Rebate And Pull The Newest Characters
+                  Кроссовер Identity V x Bungou Stray Dogs уже скоро!
                 </Box>
                 <Box className="mb-5 small" sx={{ opacity: '0.7', marginBottom: { mobile: '0px', xs: '15px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Get Rebates and More
+                  Старт 12 октября!
                 </Box>
               </div>{' '}
-              {/* <button class="slider-button">Find out Now</button> */}
+              {/* <button class="slider-button">Identity V</button> */}
             </Box>
           </div>
         </div>
@@ -88,10 +88,10 @@ const HomeSlider = () => {
               }}>
               <div data-swiper-parallax={parallaxAmount} data-swiper-parallax-opacity={parallaxOpacity}>
                 <Box className="" sx={{ marginBottom: '5px', fontSize: { mobile: '24px', xs: '18px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  RazerStore Rewards
+                  Костюм Почтальона А класса «Осенние грезы»
                 </Box>
                 <Box className="mb-5 small" sx={{ opacity: '0.7', marginBottom: { mobile: '0px', xs: '15px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Grab Bonus NC And Royale Chest Tickets
+                  Событие доступно с 29.09 по 09.10
                 </Box>
               </div>{' '}
               {/* <button class="slider-button">Find out Now</button> */}

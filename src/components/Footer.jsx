@@ -30,7 +30,7 @@ const Footer = () => {
           <Button disableRipple={true} onClick={() => navigate('/support')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">
             Поддержка
           </Button>
-          <Button disableRipple={true} onClick={() => navigate('/faq')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">
+          <Button disableRipple={true} onClick={() => navigate('/faq')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px', minWidth: 0 }} size="small">
             Faq
           </Button>
           <Button disableRipple={true} onClick={() => navigate('/reviews')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">

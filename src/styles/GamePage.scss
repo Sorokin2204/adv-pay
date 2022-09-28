@@ -74,6 +74,7 @@
   }
 }
 .check-id-btn {
+  transition: all 0.3s;
   padding-left: 18px;
   padding-right: 18px;
   height: 40px;
@@ -86,6 +87,11 @@
   border: none;
   outline: 0;
   color: #e2ba7e;
+  cursor: pointer;
+  &:hover {
+    background-color: #e2ba7e;
+    color: #9c2628;
+  }
 }
 .accept-checkbox {
   user-select: none;
