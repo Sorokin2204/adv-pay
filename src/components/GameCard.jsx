@@ -7,7 +7,7 @@ const GameCard = ({ img, price, label, value, onClickCard, onClick = () => {}, a
   return (
     <div className={`game-card ${active && 'game-card--active'}`} onClick={onClickCard}>
       <img src={img} alt="" className="game-card__img" />
-      <div className="game-card__middle">{`× ${value} печатей`}</div>
+      <div className="game-card__middle">{`× ${label} печатей`}</div>
       <div className="game-card__bottom">
         <div className="game-card__price">{currencyFormat(price)}</div>
         <div className="game-card__btn-box">
