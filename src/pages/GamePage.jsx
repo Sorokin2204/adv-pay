@@ -190,11 +190,8 @@ const GamePage = () => {
           <label class="accept-checkbox" id="agree-block">
             <input type="checkbox" name="accept" onClick={handleAgree} checked={isAgree} />
             <span>
-              Игровую валюту на данной странице вы донатите в пользу NetEase Games. Мы не являемся правообладателем игровой валюты Identity V, не определяем порядок её использования и функционирования в игре. Производя донат в игру Identity V вы соглашаетесь с данным пользовательским соглашениям
-              <a class="link" href="https://game.longeplay.com.tw/member/complete_agreement">
-                &nbsp;https://game.longeplay.com.tw/member/complete_agreement
-              </a>
-              , пользовательским соглашением Donate Gold и политикой конфиденциальности.
+              Игровую валюту на данной странице вы донатите в пользу NetEase Games. Мы не являемся правообладателем игровой валюты Identity V, не определяем порядок её использования и функционирования в игре. Производя донат в игру Identity V вы соглашаетесь с данным <a class="link" href="https://game.longeplay.com.tw/member/complete_agreement">
+пользовательским соглашением</a>, пользовательским соглашением Donate Gold и политикой конфиденциальности.
             </span>
           </label>
         </Container>
