@@ -80,7 +80,7 @@ const HomeSlider = () => {
                 display: 'flex',
                 justifyContent: { mobile: 'space-between', xs: 'end' },
                 alignItems: { mobile: ' end', xs: 'center' },
-                height: { mobile: '480px', xs: '350px' },
+                height: { mobile: '480px', xs: '200px' },
                 margin: '0 auto',
                 padding: ' 0 30px',
                 paddingBottom: { mobile: '0px', xs: '30px' },
