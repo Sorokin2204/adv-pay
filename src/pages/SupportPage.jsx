@@ -17,14 +17,16 @@ const SupportPage = () => {
                 Техническая поддержка
               </Typography>
               <Typography variant="body1" sx={{ maxWidth: '100%', mt: 2 }}>
-                По любым вопросам сервиса вы можете обращаться:
+                По вопросам работы сайта обращайтесь:
                 <br />
-                ВК -{' '}
+                ВК {' '}
                 <a class="link" href="https://vk.com/im?sel=-213480825" target="_blank">
                   Написать нам
                 </a>{' '}
                 <br />
-                email - support@donate-gold.ru
+                Телеграм {' '}
+                <a class="link" href="https://t.me/DonateGold" target="_blank">@DonateGold</a>{' '}<br />
+				email - support@donate-gold.ru
                 <br />
                 <br />
                 Режим работы: ежедневно с 10:00 до 20:00
