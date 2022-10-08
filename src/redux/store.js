@@ -5,6 +5,7 @@ import { creditCardReducer } from './slices/creditCard.slice';
 import { userReducer } from './slices/user.slice';
 import { transactionReducer } from './slices/transaction.slice';
 import { paymentReducer } from './slices/payment.slice';
+import { vkReviewsReducer } from './slices/app.slice';
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +14,6 @@ export const store = configureStore({
     package: packageReducer,
     creditCard: creditCardReducer,
     transaction: transactionReducer,
+    app: vkReviewsReducer,
   },
 });

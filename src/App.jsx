@@ -37,7 +37,17 @@ function App() {
     dispatch(getUser());
   }, []);
   useEffect(() => {
-    if (!data && !loading && error && location.pathname.substring(0, 5) !== '/auth') {
+    const staticPageRule =
+      location.pathname.substring(0, 5) !== '/auth' &&
+      location.pathname !== '/about' &&
+      location.pathname !== '/donate' &&
+      location.pathname !== '/rules' &&
+      location.pathname !== '/support' &&
+      location.pathname !== '/faq' &&
+      location.pathname !== '/reviews' &&
+      location.pathname !== '/guarante' &&
+      location.pathname !== '/return-policy';
+    if (!data && !loading && error && staticPageRule) {
       navigate('/');
     }
   }, [data, loading, error]);

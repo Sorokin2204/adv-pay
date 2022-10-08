@@ -46,7 +46,7 @@ const darkTheme = createTheme({
     mode: 'dark',
   },
   breakpoints: {
-    values: { xs: 0, mobile: 1000 },
+    values: { xs: 0, mobile: 1000, mob: 600 },
   },
 });
 
