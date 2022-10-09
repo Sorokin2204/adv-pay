@@ -4,7 +4,7 @@ import axios from 'axios';
 export const getVkReviews = createAsyncThunk('vkReviews/getVkReviews', (page, { rejectWithValue }) => {
   let offset = 30 * page;
   return axios
-    .get(`https://api.vk.com/method/board.getComments?v=5.131&group_id=213480825&topic_id=48841807&access_token=484899304848993048489930764b584f4944848484899302b79180d8fb65f87bb71e34a&extended=1&count=30&lang=0&sort=desc&offset=${offset}`, {})
+    .get(`${process.env.REACT_APP_SERVER_URL}/vk-comments?offset=${offset}`, {})
     .then((response) => response.data)
     .catch((error) => rejectWithValue(error.response.data));
 });
