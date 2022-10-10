@@ -46,7 +46,7 @@ const HomePage = () => {
   return (
     <>
       <DrawerAppBar>
-        <Paper sx={{ height: 'auto' }}>
+        <Paper sx={{ height: 'auto', marginTop: '22px' }}>
           <Box sx={{ width: '100%', height: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%', height: 'auto' }}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">

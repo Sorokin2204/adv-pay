@@ -13,7 +13,15 @@ export const loginUser = createAsyncThunk('user/loginUser', (user, { rejectWithV
     .then((response) => response.data)
     .catch((error) => rejectWithValue(error.response.data));
 });
-
+export const resetPasswordUser = createAsyncThunk('user/resetPasswordUser', ({ name, email }, { rejectWithValue }) => {
+  return axios
+    .post(`${process.env.REACT_APP_SERVER_URL}/user/reset-password`, {
+      name,
+      email,
+    })
+    .then((response) => response.data)
+    .catch((error) => rejectWithValue(error.response.data));
+});
 export const getUser = createAsyncThunk('user/getUser', (obj, { rejectWithValue }) => {
   const token = localStorage?.getItem('token');
   if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
@@ -24,6 +32,24 @@ export const getUser = createAsyncThunk('user/getUser', (obj, { rejectWithValue 
         request_token: token,
       },
     })
+    .then((response) => response.data)
+    .catch((error) => rejectWithValue(error.response.data));
+});
+
+export const generatePromoCode = createAsyncThunk('user/generatePromocode', (obj, { rejectWithValue }) => {
+  const token = localStorage?.getItem('token');
+  if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
+
+  return axios
+    .post(
+      `${process.env.REACT_APP_SERVER_URL}/user/generate-promo-code`,
+      {},
+      {
+        headers: {
+          request_token: token,
+        },
+      },
+    )
     .then((response) => response.data)
     .catch((error) => rejectWithValue(error.response.data));
 });
@@ -63,6 +89,16 @@ const userInitialState = {
     loading: false,
     error: null,
   },
+  resetPasswordUserState: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  generatePromoCodeState: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   activeUser: null,
   isAuth: false,
 };
@@ -82,6 +118,12 @@ const userSlice = createSlice({
     },
     setActiveUser: (state, { payload }) => {
       state.activeUser = payload;
+    },
+    resetPasswordUserReset: (state, action) => {
+      state.resetPasswordUserState = userInitialState.resetPasswordUserState;
+    },
+    resetGeneratePromoCode: (state, action) => {
+      state.generatePromoCodeState = userInitialState.generatePromoCodeState;
     },
   },
   extraReducers: {
@@ -176,7 +218,52 @@ const userSlice = createSlice({
         error: action.payload,
       };
     },
+    // RESET PASSWORD
+    [resetPasswordUser.pending]: (state, action) => {
+      state.resetPasswordUserState = {
+        loading: true,
+        data: null,
+        error: null,
+      };
+    },
+
+    [resetPasswordUser.fulfilled]: (state, action) => {
+      state.resetPasswordUserState = {
+        loading: false,
+        data: action.payload,
+        error: null,
+      };
+    },
+    [resetPasswordUser.rejected]: (state, action) => {
+      state.resetPasswordUserState = {
+        loading: false,
+        data: null,
+        error: action.payload,
+      };
+    },
+    [generatePromoCode.pending]: (state, action) => {
+      state.generatePromoCodeState = {
+        loading: true,
+        data: null,
+        error: null,
+      };
+    },
+
+    [generatePromoCode.fulfilled]: (state, action) => {
+      state.generatePromoCodeState = {
+        loading: false,
+        data: action.payload,
+        error: null,
+      };
+    },
+    [generatePromoCode.rejected]: (state, action) => {
+      state.generatePromoCodeState = {
+        loading: false,
+        data: null,
+        error: action.payload,
+      };
+    },
   },
 });
-export const { loginUserReset, setActiveUser, checkUserReset, createUserReset } = userSlice.actions;
+export const { loginUserReset, setActiveUser, checkUserReset, createUserReset, resetPasswordUserReset, resetGeneratePromoCode } = userSlice.actions;
 export const userReducer = userSlice.reducer;

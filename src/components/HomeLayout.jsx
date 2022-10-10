@@ -33,6 +33,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import ResetPassModal from './ResetPassModal';
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
@@ -85,10 +86,10 @@ function HomeLayout(props) {
                     }}>
                     <MenuItem onClick={() => navigate('/about')}>О сервисе</MenuItem>
                     <MenuItem onClick={() => navigate('/donate')}>Инструкция</MenuItem>
-					<MenuItem onClick={() => navigate('/faq')}>FAQ</MenuItem> 
-					<MenuItem onClick={() => navigate('/reviews')}>Отзывы</MenuItem> 
-					<MenuItem onClick={() => navigate('/guarante')}>Гарантии</MenuItem>
-					<MenuItem onClick={() => navigate('/support')}>Поддержка</MenuItem> 
+                    <MenuItem onClick={() => navigate('/faq')}>FAQ</MenuItem>
+                    <MenuItem onClick={() => navigate('/reviews')}>Отзывы</MenuItem>
+                    <MenuItem onClick={() => navigate('/guarante')}>Гарантии</MenuItem>
+                    <MenuItem onClick={() => navigate('/support')}>Поддержка</MenuItem>
                   </Menu>
                 </Box>
                 <Link to="/">
@@ -111,7 +112,7 @@ function HomeLayout(props) {
                 <Button disableRipple={true} onClick={() => navigate('/guarante')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
                   Гарантии
                 </Button>
-				 <Button disableRipple={true} onClick={() => navigate('/support')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                <Button disableRipple={true} onClick={() => navigate('/support')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
                   Поддержка
                 </Button>
               </Box>
@@ -151,7 +152,22 @@ function HomeLayout(props) {
               </Fab> */}
             </div>
           </Container>
-        </Box>{' '}
+        </Box>
+        <Box
+          sx={{
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'black',
+            zIndex: 100000000,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'fixed',
+          }}>
+          На сайте ведутся технические работы. Скоро сайт заработает
+        </Box>
         <Footer />
       </Box>
     </Paper>

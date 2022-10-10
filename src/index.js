@@ -18,6 +18,13 @@ const darkTheme = createTheme({
         },
       },
     },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          marginTop: '4px !important',
+        },
+      },
+    },
     MuiContainer: {
       styleOverrides: {
         root: {
@@ -56,7 +63,7 @@ root.render(
     <Router>
       <Provider store={store}>
         <ThemeProvider theme={darkTheme}>
-          <App />{' '}
+          <App />
         </ThemeProvider>
       </Provider>
     </Router>

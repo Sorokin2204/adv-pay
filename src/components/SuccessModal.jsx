@@ -21,7 +21,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 export default function SuccessModal(props) {
-  const { onClose, selectedValue, open } = props;
+  const { onClose, selectedValue, open, fullWidth, text = 'Платеж успешно завершен' } = props;
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -32,11 +32,21 @@ export default function SuccessModal(props) {
   };
 
   return (
-    <Dialog fullWidth maxWidth="sm" onClose={handleClose} open={open}>
+    <Dialog
+      fullWidth={fullWidth}
+      maxWidth="sm"
+      onClose={handleClose}
+      open={open}
+      sx={{
+        '& .MuiPaper-root': {
+          width: '100%',
+          maxWidth: '600px', // Set your width here
+        },
+      }}>
       <DialogContent sx={{ height: { xs: '100px', sm: '170px' } }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', transform: 'translateY(20px)' }}>
-          <Typography variant="h5" sx={{ fontWeight: '600', fontSize: { xs: '16px', sm: '24px' } }}>
-            Платеж успешно завершен
+          <Typography variant="h5" sx={{ fontWeight: '600', fontSize: { xs: '16px', mob: '24px' } }}>
+            {text}
           </Typography>
           <CheckIcon sx={{ ml: '8px', mb: '4px', fontSize: { xs: '30px', sm: '40px' }, color: 'success.main' }} />
         </div>

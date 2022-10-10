@@ -17,7 +17,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { purple, grey } from '@mui/material/colors';
 import { shadows } from '@mui/system';
-import { Container, Fab, Paper } from '@mui/material';
+import { Container, Fab, Menu, MenuItem, Paper } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import BuyModal from './BuyModal';
@@ -33,6 +33,7 @@ import Footer from './Footer';
 import { getPackage } from '../redux/slices/package.slice';
 import { getPayments } from '../redux/slices/payment.slice';
 import { Navigate, useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
@@ -40,6 +41,7 @@ function DrawerAppBar(props) {
   const { window, isFull } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+
   const [mobileOpenSucc, setMobileOpenSucc] = React.useState(false);
   const [openSucc, setOpenSucc] = React.useState(false);
   const [openPay, setOpenPay] = React.useState(false);
@@ -115,18 +117,20 @@ function DrawerAppBar(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const onExit = () => {
-    localStorage.removeItem('token');
-    dispath(getUser());
-  };
-
   React.useEffect(() => {
     if (transData) {
       setOpenSucc(true);
       dispath(createTransactionReset());
     }
   }, [transData]);
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClickMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+  const openMenu = Boolean(anchorEl);
   React.useEffect(() => {
     if (transError) {
       const err =
@@ -182,35 +186,96 @@ function DrawerAppBar(props) {
               // background: '',
             }}>
             <Toolbar variant="dense">
-              {/* <IconButton color="inherit" aria-label="open drawer" edge="start" onClick={handleDrawerToggle} sx={{ mr: 2 }}>
-                <MenuIcon />
-              </IconButton> */}
-              <div variant="h6" component="div" style={{ flexGrow: 1 }}></div>
-              <Box sx={{ display: 'flex', alignItems: 'center', mr: 1, height: '100%' }}>
-                <Button onClick={handleClickOpenPay} sx={{ display: { xs: 'none', sm: 'block' }, mr: 1 }} variant="contained" size="small">
-                  Пополнить
-                </Button>
-                <IconButton onClick={handleClickOpenPay} sx={{ display: { xs: 'flex', sm: 'none' } }} aria-label="delete" size="medium">
-                  <AddCardIcon fontSize="inherit" color="primary" style={{}} />
-                </IconButton>
-                <Typography sx={{ whiteSpace: 'nowrap', display: 'block', fontWeight: '600', mr: 1 }} color="success.light">
-                  {currencyFormat(user.balance)}
-                </Typography>
-                <Typography color="primary" sx={{ display: 'block' }}>
-                  {user.name}
-                </Typography>
-                <IconButton
-                  onClick={() => {
-                    navigate('/account');
-                  }}
-                  aria-label="delete"
-                  size="medium">
-                  <AccountIcon fontSize="inherit" color="primary" style={{}} />
-                </IconButton>
-                <IconButton onClick={() => onExit()} aria-label="delete" color="error" size="medium">
-                  <ExitIcon fontSize="inherit" />
-                </IconButton>{' '}
+              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  {' '}
+                  <Box sx={{ display: { mobile: 'none', xs: 'block' } }}>
+                    <Button id="basic-button" aria-controls={openMenu ? 'basic-menu' : undefined} aria-haspopup="true" aria-expanded={openMenu ? 'true' : undefined} onClick={handleClickMenu}>
+                      <MenuIcon sx={{ fontSize: '30px' }} />
+                    </Button>
+                    <Menu
+                      id="basic-menu"
+                      anchorEl={anchorEl}
+                      open={openMenu}
+                      onClose={handleCloseMenu}
+                      MenuListProps={{
+                        'aria-labelledby': 'basic-button',
+                      }}>
+                      <MenuItem onClick={() => navigate('/about')}>О сервисе</MenuItem>
+                      <MenuItem onClick={() => navigate('/donate')}>Инструкция</MenuItem>
+                      <MenuItem onClick={() => navigate('/faq')}>FAQ</MenuItem>
+                      <MenuItem onClick={() => navigate('/reviews')}>Отзывы</MenuItem>
+                      <MenuItem onClick={() => navigate('/guarante')}>Гарантии</MenuItem>
+                      <MenuItem onClick={() => navigate('/support')}>Поддержка</MenuItem>
+                    </Menu>
+                  </Box>
+                  <Link to="/">
+                    <img src="/logo.png" style={{ height: '50px', width: '200px', objectFit: 'cover', display: 'block' }} />
+                  </Link>
+                </Box>
+                <Box sx={{ display: { mobile: 'flex', xs: 'none' }, justifyContent: 'center', alignItems: 'center', mr: 1 }}>
+                  <Button disableRipple={true} onClick={() => navigate('/about')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                    О сервисе
+                  </Button>{' '}
+                  <Button disableRipple={true} onClick={() => navigate('/donate')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                    Инструкция
+                  </Button>{' '}
+                  <Button disableRipple={true} onClick={() => navigate('/faq')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block', minWidth: 0 }}>
+                    FAQ
+                  </Button>
+                  <Button disableRipple={true} onClick={() => navigate('/reviews')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                    Отзывы
+                  </Button>{' '}
+                  <Button disableRipple={true} onClick={() => navigate('/guarante')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                    Гарантии
+                  </Button>
+                  <Button disableRipple={true} onClick={() => navigate('/support')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
+                    Поддержка
+                  </Button>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', mr: 1, height: '100%' }}>
+                  <Button onClick={handleClickOpenPay} sx={{ display: { xs: 'none', sm: 'block' }, mr: 1 }} variant="contained" size="small">
+                    Пополнить
+                  </Button>
+                  <IconButton onClick={handleClickOpenPay} sx={{ display: { xs: 'flex', sm: 'none' } }} aria-label="delete" size="medium">
+                    <AddCardIcon fontSize="inherit" color="primary" style={{}} />
+                  </IconButton>
+                  <Typography sx={{ whiteSpace: 'nowrap', display: 'block', fontWeight: '600', mr: 1 }} color="success.light">
+                    {currencyFormat(user.balance)}
+                  </Typography>
+                  <Typography color="primary" sx={{ display: 'block' }}>
+                    {user.name}
+                  </Typography>
+                  <Button
+                    variant="outlined"
+                    onClick={() => {
+                      navigate('/account');
+                    }}
+                    sx={{ mr: 1, ml: 1 }}>
+                    Игры
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() => {
+                      navigate('/profile');
+                    }}>
+                    Кабинет
+                  </Button>
+                  {/* <IconButton
+                    onClick={() => {
+                      navigate('/account');
+                    }}
+                    aria-label="delete"
+                    size="medium">
+                    <AccountIcon fontSize="inherit" color="primary" style={{}} />
+                  </IconButton>
+                  <IconButton onClick={() => onExit()} aria-label="delete" color="error" size="medium">
+                    <ExitIcon fontSize="inherit" />
+                  </IconButton>{' '} */}
+                </Box>
               </Box>
+
+              <div variant="h6" component="div" style={{ flexGrow: 1 }}></div>
             </Toolbar>
           </AppBar>
           <Box component="nav">
@@ -258,6 +323,23 @@ function DrawerAppBar(props) {
             <ErrorModal open={openError} text={errorText} onClose={handleCloseError} />
             <SuccessModal open={openSucc} onClose={handleCloseSucc} />
             <PaymentModal open={openPay} onClose={handleClosePay} />
+          </Box>
+          <Box
+            sx={{
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'black',
+              zIndex: 100000000,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'fixed',
+              fontSize: '24px',
+              textAlign: 'center',
+            }}>
+            На сайте ведутся технические работы. Скоро сайт заработает
           </Box>
         </Box>{' '}
       </Paper>

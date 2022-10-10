@@ -25,6 +25,7 @@ import FaqPage from './pages/FaqPage';
 import ReviewsPage from './pages/ReviewsPage';
 import GuarantePage from './pages/GuarantePage';
 import ReturnPolicyPage from './pages/ReturnPolicyPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   const location = useLocation();
@@ -67,6 +68,7 @@ function App() {
     { path: '/reviews', element: <ReviewsPage /> },
     { path: '/guarante', element: <GuarantePage /> },
     { path: '/return-policy', element: <ReturnPolicyPage /> },
+    { path: '/profile', element: <ProfilePage /> },
   ]);
   return !loading && (data || error) && routes;
 }
