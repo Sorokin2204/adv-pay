@@ -153,7 +153,7 @@ function HomeLayout(props) {
             </div>
           </Container>
         </Box>
-        <Box
+        {/* <Box
           sx={{
             top: 0,
             left: 0,
@@ -167,7 +167,7 @@ function HomeLayout(props) {
             position: 'fixed',
           }}>
           На сайте ведутся технические работы. Скоро сайт заработает
-        </Box>
+        </Box> */}
         <Footer />
       </Box>
     </Paper>

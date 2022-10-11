@@ -6,7 +6,12 @@ export const createUser = createAsyncThunk('user/createUser', (user, { rejectWit
     .then((response) => response.data)
     .catch((error) => rejectWithValue(error.response.data));
 });
-
+export const googleLoginUser = createAsyncThunk('user/googleLoginUser', (user, { rejectWithValue }) => {
+  return axios
+    .post(`${process.env.REACT_APP_SERVER_URL}/user/google-auth`, user)
+    .then((response) => response.data)
+    .catch((error) => rejectWithValue(error.response.data));
+});
 export const loginUser = createAsyncThunk('user/loginUser', (user, { rejectWithValue }) => {
   return axios
     .post(`${process.env.REACT_APP_SERVER_URL}/user/login`, user)
@@ -99,6 +104,11 @@ const userInitialState = {
     loading: false,
     error: null,
   },
+  googleLoginUserState: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   activeUser: null,
   isAuth: false,
 };
@@ -109,6 +119,9 @@ const userSlice = createSlice({
   reducers: {
     loginUserReset: (state, action) => {
       state.loginUserState = userInitialState.loginUserState;
+    },
+    googleLoginReset: (state, action) => {
+      state.googleLoginUserState = userInitialState.googleLoginUserState;
     },
     createUserReset: (state, action) => {
       state.createUserState = userInitialState.createUserState;
@@ -263,7 +276,30 @@ const userSlice = createSlice({
         error: action.payload,
       };
     },
+    [googleLoginUser.pending]: (state, action) => {
+      state.googleLoginUserState = {
+        loading: true,
+        data: null,
+        error: null,
+      };
+    },
+
+    [googleLoginUser.fulfilled]: (state, action) => {
+      localStorage.setItem('token', action.payload.token);
+      state.googleLoginUserState = {
+        loading: false,
+        data: action.payload,
+        error: null,
+      };
+    },
+    [googleLoginUser.rejected]: (state, action) => {
+      state.googleLoginUserState = {
+        loading: false,
+        data: null,
+        error: action.payload,
+      };
+    },
   },
 });
-export const { loginUserReset, setActiveUser, checkUserReset, createUserReset, resetPasswordUserReset, resetGeneratePromoCode } = userSlice.actions;
+export const { loginUserReset, setActiveUser, checkUserReset, createUserReset, resetPasswordUserReset, resetGeneratePromoCode, googleLoginReset } = userSlice.actions;
 export const userReducer = userSlice.reducer;

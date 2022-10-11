@@ -26,6 +26,7 @@ import ReviewsPage from './pages/ReviewsPage';
 import GuarantePage from './pages/GuarantePage';
 import ReturnPolicyPage from './pages/ReturnPolicyPage';
 import ProfilePage from './pages/ProfilePage';
+import { gapi } from 'gapi-script';
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,12 @@ function App() {
     getUserState: { loading, data, error },
   } = useSelector((state) => state.user);
   useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: '1019470892500-41dfd9p6mvdcr1c8hl54s4q2hu1t5s8j.apps.googleusercontent.com',
+      });
+    }
+    gapi.load('client:auth2', start);
     dispatch(getUser());
   }, []);
   useEffect(() => {

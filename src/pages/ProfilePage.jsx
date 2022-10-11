@@ -103,7 +103,7 @@ const ProfilePage = () => {
             Реферальная программа
           </Typography>
           <Typography variant="body1" sx={{ mb: 1, textAlign: 'center' }}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Numquam unde a maxime aut debitis beatae optio, neque est! Eaque molestias in culpa facilis soluta cupiditate et impedit voluptas rem id?
+            Код вашей реферальной программы
           </Typography>{' '}
           {promoActive !== null && (
             <>
@@ -175,13 +175,13 @@ const ProfilePage = () => {
               <Typography variant="h6" sx={{ mb: 1 }}>
                 Начислено всего по программе
               </Typography>
-              {data?.totalRefferal && <Box sx={{ fontWeight: '600 !important', fontSize: '24px' }}>{currencyFormat(parseFloat(data?.totalRefferal))}</Box>}
+              {<Box sx={{ fontWeight: '600 !important', fontSize: '24px' }}>{data?.totalRefferal ? currencyFormat(parseFloat(data?.totalRefferal)) : currencyFormat(0)}</Box>}
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography variant="h6" sx={{ mb: 1 }}>
                 Начислено сегодня
               </Typography>
-              {data?.totalRefferalToday && <Box sx={{ fontWeight: '600 !important', fontSize: '24px' }}>{currencyFormat(parseFloat(data?.totalRefferalToday))}</Box>}
+              {<Box sx={{ fontWeight: '600 !important', fontSize: '24px' }}>{data?.totalRefferalToday ? currencyFormat(parseFloat(data?.totalRefferalToday)) : currencyFormat(0)}</Box>}
             </Box>
           </Box>
         )}

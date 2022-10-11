@@ -31,7 +31,7 @@ export default function ErrorModal(props) {
     <Dialog fullWidth onClose={handleClose} open={open}>
       <DialogContent sx={{ height: { xs: '100px', sm: '170px' } }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', transform: 'translateY(20px)' }}>
-          <Typography variant="h5" sx={{ fontWeight: '600', fontSize: { xs: '16px', sm: '24px' } }}>
+          <Typography variant="h5" sx={{ fontWeight: '600', fontSize: { xs: '16px', mob: '24px' } }}>
             {text}
           </Typography>
           <ErrorIcon sx={{ ml: '8px', mb: '4px', fontSize: { xs: '30px', sm: '40px' }, color: 'error.main' }} />

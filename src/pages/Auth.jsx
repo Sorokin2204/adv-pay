@@ -4,11 +4,13 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import ReCAPTCHA from 'react-google-recaptcha';
+import GoogleIcon from '@mui/icons-material/Google';
 import { Button, Checkbox, FormControlLabel, FormGroup, IconButton, InputAdornment, makeStyles, Paper, TextField } from '@mui/material';
 import { useForm, Controller } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../components/Loading';
-import { createUser, createUserReset, getUser, loginUser, loginUserReset, resetPasswordUserReset, userReset } from '../redux/slices/user.slice';
+import { createUser, createUserReset, getUser, googleLoginReset, googleLoginUser, loginUser, loginUserReset, resetPasswordUserReset, userReset } from '../redux/slices/user.slice';
 import { Navigate, useNavigate } from 'react-router';
 import axios from 'axios';
 import HomeLayout from '../components/HomeLayout';
@@ -16,6 +18,7 @@ import Footer from '../components/Footer';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import ResetPassModal from '../components/ResetPassModal';
 import SuccessModal from '../components/SuccessModal';
+import { GoogleLogin } from 'react-google-login';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -45,6 +48,7 @@ function AuthPage() {
 
   const {
     createUserState: { loading: loadingCreate, data: dataCreate, error: errorCreate },
+    googleLoginUserState: { loading: googleAuthLoading, data: googleAuthData, error: googleAuthError },
   } = useSelector((state) => state.user);
   const {
     loginUserState: { loading: loadingLogin, data: dataLogin, error: errorLogin },
@@ -73,6 +77,22 @@ function AuthPage() {
     }
   }, [dataCreate, loadingCreate, errorCreate]);
 
+  React.useEffect(() => {
+    if (googleAuthData && !googleAuthLoading) {
+      dispatch(getUser());
+      dispatch(googleLoginReset());
+      navigate('/account');
+    }
+  }, [googleAuthData, googleAuthLoading]);
+  React.useEffect(() => {
+    if (googleAuthError && !googleAuthLoading) {
+      setGoogleLoading(false);
+    }
+  }, [googleAuthError]);
+  React.useEffect(() => {
+    createForm.register('gToken', { required: true });
+  }, []);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -81,7 +101,7 @@ function AuthPage() {
     dispatch(loginUser({ email: data.email, password: data.password }));
   };
   const onSubmitRegister = (data) => {
-    dispatch(createUser({ email: data.email, password: data.password, name: data.name, referralCode: data.referralCode?.toUpperCase() }));
+    dispatch(createUser({ email: data.email, password: data.password, name: data.name, referralCode: data.referralCode?.toUpperCase(), gToken: data.gToken }));
   };
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
@@ -106,14 +126,34 @@ function AuthPage() {
       dispatch(resetPasswordUserReset());
     }
   }, [resetData]);
-
+  function onChange(value) {
+    createForm.setValue('gToken', value);
+  }
+  const handleLogin = (data) => {
+    dispatch(googleLoginUser({ gToken: data?.tokenId, referralCode: createForm.getValues('referralCode') }));
+  };
+  const handleError = (data) => {
+    setGoogleLoading(false);
+  };
+  const [googleLoading, setGoogleLoading] = React.useState(false);
+  const handleRequest = (data) => {
+    setGoogleLoading(true);
+  };
   return !dataGet && !loadingGet && errorGet ? (
     <HomeLayout>
       <Paper>
         <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'start' }}>
           <div style={{ marginTop: '100px' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+              <Tabs
+                sx={{
+                  '& .MuiTabs-flexContainer': {
+                    justifyContent: 'center',
+                  },
+                }}
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example">
                 <Tab label="Вход" {...a11yProps(0)} />
                 <Tab label="Регистрация" {...a11yProps(1)} />
               </Tabs>
@@ -243,12 +283,8 @@ function AuthPage() {
                       {...field}
                       sx={{
                         mt: '16px',
-                        textTransform: 'uppercase',
-                        '& .MuiInputLabel-root': {
-                          textTransform: 'initial',
-                        },
                       }}
-                      inputProps={{ maxLength: 5 }}
+                      inputProps={{ maxLength: 5, sx: { textTransform: 'uppercase !important' } }}
                       label="Промо код (необязательно)"
                       variant="outlined"
                       size="small"
@@ -256,24 +292,54 @@ function AuthPage() {
                     />
                   )}
                 />
-                <Button disabled={loadingLogin} variant="contained" sx={{ mt: '16px' }} onClick={createForm.handleSubmit(onSubmitRegister)}>
+                <Button disabled={loadingLogin} variant="contained" sx={{ mt: '16px', mb: '8px' }} onClick={createForm.handleSubmit(onSubmitRegister)}>
                   Регистрация
                 </Button>
-                {!loadingCreate && !dataCreate && errorCreate && (
-                  <Box sx={{ fontSize: '14px', color: 'error.main', mt: '8px', mx: 'auto' }}>{errorCreate?.error === 'USER_EXIST' ? 'Такой email уже существует' : errorCreate?.error === 'NOT_FOUND_REFERRAL_CODE' ? 'Некорректный промокод' : 'Произошла непредвиденная ошибка'}</Box>
+                <ReCAPTCHA sitekey={process.env.REACT_APP_GOOGLE_RECAPTCHA_API_KEY} onChange={onChange} />
+
+                {((!loadingCreate && !dataCreate && errorCreate) || createForm.formState?.errors?.gToken) && (
+                  <Box sx={{ fontSize: '14px', color: 'error.main', mt: '8px', mx: 'auto' }}>
+                    {errorCreate?.error === 'CAPTHA_ERROR' || createForm.formState?.errors?.gToken
+                      ? 'reCaptcha не пройдена'
+                      : errorCreate?.error === 'USER_EXIST'
+                      ? 'Такой email уже существует'
+                      : errorCreate?.error === 'NOT_FOUND_REFERRAL_CODE'
+                      ? 'Некорректный промокод'
+                      : 'Произошла непредвиденная ошибка'}
+                  </Box>
                 )}
-                {showLoginSucc && (
+                {showLoginSucc && !errorCreate && (
                   <Box sx={{ fontSize: '14px', color: 'success.main', mt: '8px', mx: 'auto', textAlign: 'center' }}>
                     Ссылка на подтверждение <br /> отправлена на почту
                   </Box>
                 )}
               </div>
             </TabPanel>
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '-16px', marginBottom: '60px' }}>
+              <Box sx={{ mb: '8px' }}>или</Box>
+              <GoogleLogin
+                clientId={process.env.REACT_APP_GOOGLE_AUTH_API_KEY}
+                render={(renderProps) => (
+                  <Button size="large" startIcon={<GoogleIcon />} variant="contained" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                    Авторизироватся через Google
+                  </Button>
+                )}
+                buttonText="Войти через Google"
+                onRequest={handleRequest}
+                onSuccess={handleLogin}
+                onFailure={handleError}
+                cookiePolicy="single_host_origin"
+              />
+              {!googleAuthData && !googleAuthLoading && googleAuthError && (
+                <Box sx={{ fontSize: '14px', color: 'error.main', mt: '8px', mx: 'auto' }}>{googleAuthError?.error === 'USER_EXIST' ? 'Такой email уже существует' : googleAuthError?.error === 'NOT_FOUND_REFERRAL_CODE' ? 'Некорректный промокод' : 'Произошла непредвиденная ошибка'}</Box>
+              )}
+            </Box>
           </div>
           {(loadingCreate || loadingLogin) && <Loading />}
           <ResetPassModal open={openResetPassModal} onClose={handleHideResetModal} />
           <SuccessModal open={openResetPassSuccModal} text={'Новый пароль отправлен на почту'} onClose={handleHideResetSuccModal} />
         </Box>
+        {(googleLoading || googleAuthLoading) && <Loading />}
       </Paper>
     </HomeLayout>
   ) : (

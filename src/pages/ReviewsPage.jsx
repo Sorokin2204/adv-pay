@@ -10,6 +10,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import VK, { Comments } from 'react-vk';
 import moment from 'moment';
 import 'moment/locale/ru'; // without this line it didn't work
 moment.locale('ru');
@@ -64,6 +65,7 @@ const ReviewsPage = () => {
       }
     }
   }, [comments]);
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -76,7 +78,7 @@ const ReviewsPage = () => {
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label="Вконтакте" {...a11yProps(0)} />
-                {/* <Tab label="На сайте" {...a11yProps(1)} /> */}
+                <Tab label="На сайте" {...a11yProps(1)} />
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
@@ -130,12 +132,12 @@ const ReviewsPage = () => {
                 </button>
               )}
             </TabPanel>
-            {/* <TabPanel value={value} index={1}>
-              Item Two
+            <TabPanel value={value} index={1}>
+              <VK apiId={process.env.REACT_APP_VK_WIDGET_APP_KEY}>
+                <div className="" id="vk-comm"></div>
+                <Comments elementId={'vk-comm'} />
+              </VK>
             </TabPanel>
-            <TabPanel value={value} index={2}>
-              Item Three
-            </TabPanel> */}
           </Box>
         </Container>
       </HomeLayout>

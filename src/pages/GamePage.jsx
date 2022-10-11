@@ -33,6 +33,8 @@ import { createTransaction } from '../redux/slices/transaction.slice';
 import DrawerAppBar from '../components/MainLayout';
 import GameCard from '../components/GameCard';
 import '../styles/GamePage.scss';
+import PaymentModal from '../components/PaymentModal';
+import AcceptModal from '../components/AcceptModa';
 const GamePage = () => {
   const dispatch = useDispatch();
   const {
@@ -95,6 +97,15 @@ const GamePage = () => {
     const serverIdData = getValues('serverId');
     dispatch(createTransaction({ playerId: playerIdData, serverId: serverIdData, packageId }));
   };
+  const [openAccept, setOpenAccept] = useState(false);
+  const handleCloseAccept = () => {
+    setOpenAccept(false);
+  };
+
+  const handleNext = () => {
+    onSubmit(selectedGameCode);
+  };
+  const [selectedGameCode, setselectedGameCode] = useState(null);
   return (
     <DrawerAppBar isFull>
       <div className="game">
@@ -177,7 +188,8 @@ const GamePage = () => {
                     }}
                     onClick={() => {
                       if (isAgree) {
-                        onSubmit(packageItem?.code);
+                        setselectedGameCode(packageItem?.code);
+                        setOpenAccept(true);
                       } else {
                         document.getElementById('agree-block').scrollIntoView({ behavior: 'smooth' });
                       }
@@ -190,12 +202,16 @@ const GamePage = () => {
           <label class="accept-checkbox" id="agree-block">
             <input type="checkbox" name="accept" onClick={handleAgree} checked={isAgree} />
             <span>
-              Игровую валюту на данной странице вы донатите в пользу NetEase Games. Мы не являемся правообладателем игровой валюты Identity V, не определяем порядок её использования и функционирования в игре. Производя донат в игру Identity V вы соглашаетесь с данным <a class="link" href="https://game.longeplay.com.tw/member/complete_agreement">
-пользовательским соглашением</a>, пользовательским соглашением Donate Gold и политикой конфиденциальности.
+              Игровую валюту на данной странице вы донатите в пользу NetEase Games. Мы не являемся правообладателем игровой валюты Identity V, не определяем порядок её использования и функционирования в игре. Производя донат в игру Identity V вы соглашаетесь с данным{' '}
+              <a class="link" href="https://game.longeplay.com.tw/member/complete_agreement">
+                пользовательским соглашением
+              </a>
+              , пользовательским соглашением Donate Gold и политикой конфиденциальности.
             </span>
           </label>
         </Container>
       </div>
+      <AcceptModal open={openAccept} text={'Подтверждаем донат ?'} onClose={handleCloseAccept} onNext={handleNext} />
     </DrawerAppBar>
   );
 };

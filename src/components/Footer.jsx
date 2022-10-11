@@ -18,17 +18,35 @@ const Footer = () => {
           </a>
         </Box>
         <Box sx={{ display: 'grid', gridTemplateColumns: { mobile: 'repeat(7,auto)', xs: 'repeat(2,auto)' }, gridGap: { mobile: '20px', xs: '10px' }, mt: 2 }}>
-          <Button disableRipple={true} onClick={() => navigate('/about')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">О сервисе</Button>
-          <Button disableRipple={true} onClick={() => navigate('/donate')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">Инструкция</Button>
-          <Button disableRipple={true} onClick={() => navigate('/faq')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px', minWidth: 0 }} size="small">FAQ</Button>
-          <Button disableRipple={true} onClick={() => navigate('/reviews')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">Отзывы</Button>
-          <Button disableRipple={true} onClick={() => navigate('/guarante')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">Гарантии</Button>
-		  <Button disableRipple={true} onClick={() => navigate('/support')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">Поддержка</Button>
+          <Button disableRipple={true} onClick={() => navigate('/about')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">
+            О сервисе
+          </Button>
+          <Button disableRipple={true} onClick={() => navigate('/donate')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">
+            Инструкция
+          </Button>
+          <Button disableRipple={true} onClick={() => navigate('/faq')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px', minWidth: 0 }} size="small">
+            FAQ
+          </Button>
+          <Button disableRipple={true} onClick={() => navigate('/reviews')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">
+            Отзывы
+          </Button>
+          <Button disableRipple={true} onClick={() => navigate('/guarante')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">
+            Гарантии
+          </Button>
+          <Button disableRipple={true} onClick={() => navigate('/support')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, color: 'white', display: 'block', fontSize: '14px' }} size="small">
+            Поддержка
+          </Button>
         </Box>
         <Box sx={{ display: 'grid', gridTemplateColumns: { mobile: 'repeat(3,auto)', xs: 'repeat(1,auto)' }, gridGap: { mobile: '10px', xs: '5px' }, mt: 1 }}>
-          <Button disableRipple={true} onClick={() => navigate('/terms-of-use')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, opacity: 0.8, color: 'white', display: 'block', fontSize: '12px' }} size="small">Пользовательское соглашение</Button>
-          <Button disableRipple={true} onClick={() => navigate('/privacy-policy')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, opacity: 0.8, color: 'white', display: 'block', fontSize: '12px' }} size="small">Политика конфиденциальности</Button>
-          <Button disableRipple={true} onClick={() => navigate('/privacy-returns')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, opacity: 0.8, color: 'white', display: 'block', fontSize: '12px' }} size="small">Политика возврата</Button>
+          <Button disableRipple={true} onClick={() => navigate('/terms-of-use')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, opacity: 0.8, color: 'white', display: 'block', fontSize: '12px' }} size="small">
+            Пользовательское соглашение
+          </Button>
+          <Button disableRipple={true} onClick={() => navigate('/privacy-policy')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, opacity: 0.8, color: 'white', display: 'block', fontSize: '12px' }} size="small">
+            Политика конфиденциальности
+          </Button>
+          <Button disableRipple={true} onClick={() => navigate('/return-policy')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, opacity: 0.8, color: 'white', display: 'block', fontSize: '12px' }} size="small">
+            Политика возврата
+          </Button>
         </Box>
         <Typography style={{ fontSize: '12px', opacity: '0.3', margin: '0 auto' }}>v 1.1.0</Typography>
       </Box>

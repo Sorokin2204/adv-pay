@@ -324,7 +324,7 @@ function DrawerAppBar(props) {
             <SuccessModal open={openSucc} onClose={handleCloseSucc} />
             <PaymentModal open={openPay} onClose={handleClosePay} />
           </Box>
-          <Box
+          {/* <Box
             sx={{
               top: 0,
               left: 0,
@@ -340,7 +340,7 @@ function DrawerAppBar(props) {
               textAlign: 'center',
             }}>
             На сайте ведутся технические работы. Скоро сайт заработает
-          </Box>
+          </Box> */}
         </Box>{' '}
       </Paper>
     </>
