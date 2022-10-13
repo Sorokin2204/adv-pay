@@ -7,8 +7,8 @@ import ItemGame from './ItemGame';
 const ListGame = () => {
   const listGame = [
     { img: '/identityv.png', name: 'Identity V', link: 'identity-v' },
-    { img: '/soon.jpg', name: 'Скоро' },
-    { img: '/soon.jpg', name: 'Скоро' },
+    { img: '/lotr-risetowar.jpg', name: 'Скоро!' },
+    { img: '/oaglobalpay.jpg', name: 'Скоро!' },
   ];
   return (
     <>

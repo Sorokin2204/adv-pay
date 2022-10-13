@@ -210,7 +210,7 @@ function DrawerAppBar(props) {
                     </Menu>
                   </Box>
                   <Link to="/">
-                    <img src="/logo.png" style={{ height: '50px', width: '200px', objectFit: 'cover', display: 'block' }} />
+                    <img src="/logo.png" style={{ height: '60px', width: '101px', objectFit: 'cover', display: 'block' }} />
                   </Link>
                 </Box>
                 <Box sx={{ display: { mobile: 'flex', xs: 'none' }, justifyContent: 'center', alignItems: 'center', mr: 1 }}>
