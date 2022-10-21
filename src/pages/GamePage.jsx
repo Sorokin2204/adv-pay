@@ -35,6 +35,7 @@ import GameCard from '../components/GameCard';
 import '../styles/GamePage.scss';
 import PaymentModal from '../components/PaymentModal';
 import AcceptModal from '../components/AcceptModa';
+import PaymentCardModal from '../components/PaymentCardModal';
 const GamePage = () => {
   const dispatch = useDispatch();
   const {
@@ -98,14 +99,19 @@ const GamePage = () => {
     dispatch(createTransaction({ playerId: playerIdData, serverId: serverIdData, packageId }));
   };
   const [openAccept, setOpenAccept] = useState(false);
+  const [openPaymentModal, setOpenPaymentModal] = useState(false);
   const handleCloseAccept = () => {
     setOpenAccept(false);
+  };
+  const handleClosePaymentCardModal = () => {
+    setOpenPaymentModal(false);
   };
 
   const handleNext = () => {
     onSubmit(selectedGameCode);
   };
   const [selectedGameCode, setselectedGameCode] = useState(null);
+  const [selectedGamePrice, setSelectedPrice] = useState(null);
   return (
     <DrawerAppBar isFull>
       <div className="game">
@@ -194,6 +200,14 @@ const GamePage = () => {
                         document.getElementById('agree-block').scrollIntoView({ behavior: 'smooth' });
                       }
                     }}
+                    onClickCart={() => {
+                      if (isAgree) {
+                        setSelectedPrice(packageItem?.price);
+                        setOpenPaymentModal(true);
+                      } else {
+                        document.getElementById('agree-block').scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                   />
                 ))}
               </div>
@@ -212,6 +226,7 @@ const GamePage = () => {
         </Container>
       </div>
       <AcceptModal open={openAccept} text={'Подтверждаем донат ?'} onClose={handleCloseAccept} onNext={handleNext} />
+      <PaymentCardModal open={openPaymentModal} price={selectedGamePrice} onClose={handleClosePaymentCardModal} />
     </DrawerAppBar>
   );
 };

@@ -72,6 +72,19 @@ export const checkUser = createAsyncThunk('user/checkUser', (ids, { rejectWithVa
     .then((response) => response.data)
     .catch((error) => rejectWithValue(error.response.data));
 });
+export const initPaymentCard = createAsyncThunk('user/initPaymentCard', (data, { rejectWithValue }) => {
+  const token = localStorage?.getItem('token');
+  if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
+
+  return axios
+    .post(`${process.env.REACT_APP_SERVER_URL}/user/init-payment`, data, {
+      headers: {
+        request_token: token,
+      },
+    })
+    .then((response) => response.data)
+    .catch((error) => rejectWithValue(error.response.data));
+});
 
 const userInitialState = {
   createUserState: {
@@ -105,6 +118,11 @@ const userInitialState = {
     error: null,
   },
   googleLoginUserState: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  initPaymentCardState: {
     data: null,
     loading: false,
     error: null,
@@ -294,6 +312,28 @@ const userSlice = createSlice({
     },
     [googleLoginUser.rejected]: (state, action) => {
       state.googleLoginUserState = {
+        loading: false,
+        data: null,
+        error: action.payload,
+      };
+    },
+    [initPaymentCard.pending]: (state, action) => {
+      state.initPaymentCardState = {
+        loading: true,
+        data: null,
+        error: null,
+      };
+    },
+
+    [initPaymentCard.fulfilled]: (state, action) => {
+      state.initPaymentCardState = {
+        loading: false,
+        data: action.payload,
+        error: null,
+      };
+    },
+    [initPaymentCard.rejected]: (state, action) => {
+      state.initPaymentCardState = {
         loading: false,
         data: null,
         error: action.payload,
