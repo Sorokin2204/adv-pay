@@ -38,7 +38,7 @@ function App() {
   useEffect(() => {
     function start() {
       gapi.client.init({
-        clientId: '1019470892500-41dfd9p6mvdcr1c8hl54s4q2hu1t5s8j.apps.googleusercontent.com',
+        clientId: process.env.REACT_APP_GOOGLE_AUTH_API_KEY,
       });
     }
     gapi.load('client:auth2', start);
