@@ -25,6 +25,7 @@ import { initPaymentCard } from '../redux/slices/user.slice';
 import Loading from './Loading';
 import axios from 'axios';
 import md5 from 'md5';
+import { useEffect } from 'react';
 
 export default function PaymentCardModal(props) {
   const { onClose, price, open } = props;
@@ -40,28 +41,16 @@ export default function PaymentCardModal(props) {
     getUserState: { data: user },
   } = useSelector((state) => state.user);
   const onSubmit = () => {
-    let postData = {
-      action: 'initPayment',
-      project: 1251,
-      sum: price,
-      currency: 'RUB',
-      returnLink: 1,
-      innerID: user?.id,
-      email: user?.email,
-      payWay: value,
-    };
-
-    const sign = md5(process.env.REACT_APP_SECRET_PAYMENT + postData.action + postData.project + postData.sum + postData.currency + postData.innerID + postData.email + postData.payWay);
-    postData.sign = sign;
-    console.log(postData);
-    axios.post('https://pay.primepayments.io/API/v1/', postData).then((res) => {
-      console.log(res.data);
-    });
-    // dispatch(initPaymentCard({ price, payWay: value }));
+    dispatch(initPaymentCard({ price }));
   };
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+  useEffect(() => {
+    if (dataPayment?.result) {
+      window.location.href = dataPayment?.result;
+    }
+  }, [dataPayment]);
 
   return (
     <Dialog
@@ -70,15 +59,15 @@ export default function PaymentCardModal(props) {
       sx={{
         '& .MuiPaper-root': {
           width: '100%',
-          maxWidth: '500px', // Set your width here
+          maxWidth: '400px', // Set your width here
         },
       }}>
-      <DialogContent sx={{ height: { xs: '500px', mob: '270px' } }}>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <Typography variant="h5" sx={{ maxWidth: { xs: '203px', mob: 'none' }, mx: 'auto', mb: '24px', fontWeight: '600', fontSize: { mob: '24px', textAlign: 'center' } }}>
-            {`Пополнить счет на ${currencyFormat(price)} `}
+      <DialogContent sx={{ height: { xs: '100px', mob: '100px' } }}>
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <Typography variant="h5" sx={{ maxWidth: { xs: '203px', mob: 'none' }, mt: '24px', mx: 'auto', fontWeight: '600', fontSize: { mob: '24px', textAlign: 'center' } }}>
+            {`Пополнить счет на ${currencyFormat(price)} ?`}
           </Typography>
-          <FormControl>
+          {/* <FormControl>
             <FormLabel id="demo-controlled-radio-buttons-group" sx={{ mb: '8px', mx: { xs: 'auto', mob: '0' } }}>
               Способ пополнения
             </FormLabel>
@@ -103,8 +92,8 @@ export default function PaymentCardModal(props) {
                 label={<img src="/pay-4.png" style={{}} />}
               />
             </RadioGroup>
-          </FormControl>
-          {loadingPayment && <Loading />}
+          </FormControl> */}
+          {(loadingPayment || dataPayment) && <Loading />}
         </div>
       </DialogContent>
       <DialogActions sx={{ mt: '16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '8px', padding: '16px' }}>
