@@ -185,12 +185,12 @@ function DrawerAppBar(props) {
               //   borderBottom: '1px solid grey',
               // background: '',
             }}>
-            <Toolbar variant="dense">
+            <Toolbar variant="dense" sx={{ minHeight: '60px' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   {' '}
                   <Box sx={{ display: { mobile: 'none', xs: 'block' } }}>
-                    <Button id="basic-button" aria-controls={openMenu ? 'basic-menu' : undefined} aria-haspopup="true" aria-expanded={openMenu ? 'true' : undefined} onClick={handleClickMenu}>
+                    <Button id="basic-button" aria-controls={openMenu ? 'basic-menu' : undefined} aria-haspopup="true" aria-expanded={openMenu ? 'true' : undefined} onClick={handleClickMenu} sx={{ px: '0', minWidth: '30px' }}>
                       <MenuIcon sx={{ fontSize: '30px' }} />
                     </Button>
                     <Menu
@@ -201,6 +201,7 @@ function DrawerAppBar(props) {
                       MenuListProps={{
                         'aria-labelledby': 'basic-button',
                       }}>
+                      <MenuItem onClick={() => navigate('/')}>Главная</MenuItem>
                       <MenuItem onClick={() => navigate('/about')}>О сервисе</MenuItem>
                       <MenuItem onClick={() => navigate('/donate')}>Инструкция</MenuItem>
                       <MenuItem onClick={() => navigate('/faq')}>FAQ</MenuItem>
@@ -209,9 +210,11 @@ function DrawerAppBar(props) {
                       <MenuItem onClick={() => navigate('/support')}>Поддержка</MenuItem>
                     </Menu>
                   </Box>
-                  <Link to="/">
-                    <img src="/logo.png" style={{ height: '60px', width: '101px', objectFit: 'cover', display: 'block' }} />
-                  </Link>
+                  <Box sx={{ display: { xs: 'none', mob: 'block' } }}>
+                    <Link to="/">
+                      <img src="/logo.png" style={{ height: '60px', width: '101px', objectFit: 'cover', display: 'block' }} />
+                    </Link>
+                  </Box>
                 </Box>
                 <Box sx={{ display: { mobile: 'flex', xs: 'none' }, justifyContent: 'center', alignItems: 'center', mr: 1 }}>
                   <Button disableRipple={true} onClick={() => navigate('/about')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
@@ -233,7 +236,7 @@ function DrawerAppBar(props) {
                     Поддержка
                   </Button>
                 </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', mr: 1, height: '100%' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
                   <Button onClick={handleClickOpenPay} sx={{ display: { xs: 'none', sm: 'block' }, mr: 1 }} variant="contained" size="small">
                     Пополнить
                   </Button>

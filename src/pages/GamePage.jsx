@@ -201,12 +201,8 @@ const GamePage = () => {
                       }
                     }}
                     onClickCart={() => {
-                      if (isAgree) {
-                        setSelectedPrice(packageItem?.price);
-                        setOpenPaymentModal(true);
-                      } else {
-                        document.getElementById('agree-block').scrollIntoView({ behavior: 'smooth' });
-                      }
+                      setSelectedPrice(packageItem?.price);
+                      setOpenPaymentModal(true);
                     }}
                   />
                 ))}
