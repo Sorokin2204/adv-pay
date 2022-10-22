@@ -23,6 +23,8 @@ import { currencyFormat } from '../utils/currencyFormat';
 import { useDispatch, useSelector } from 'react-redux';
 import { initPaymentCard } from '../redux/slices/user.slice';
 import Loading from './Loading';
+import axios from 'axios';
+import md5 from 'md5';
 
 export default function PaymentCardModal(props) {
   const { onClose, price, open } = props;
@@ -34,12 +36,33 @@ export default function PaymentCardModal(props) {
   };
   const [value, setValue] = React.useState('1');
   const dispatch = useDispatch();
+  const {
+    getUserState: { data: user },
+  } = useSelector((state) => state.user);
   const onSubmit = () => {
-    dispatch(initPaymentCard({ price, payWay: value }));
+    let postData = {
+      action: 'initPayment',
+      project: 1251,
+      sum: price,
+      currency: 'RUB',
+      returnLink: 1,
+      innerID: user?.id,
+      email: user?.email,
+      payWay: value,
+    };
+
+    const sign = md5(process.env.REACT_APP_SECRET_PAYMENT + postData.action + postData.project + postData.sum + postData.currency + postData.innerID + postData.email + postData.payWay);
+    postData.sign = sign;
+    console.log(postData);
+    axios.post('https://pay.primepayments.io/API/v1/', postData).then((res) => {
+      console.log(res.data);
+    });
+    // dispatch(initPaymentCard({ price, payWay: value }));
   };
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
   return (
     <Dialog
       onClose={handleClose}
