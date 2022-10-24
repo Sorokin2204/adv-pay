@@ -118,13 +118,13 @@ export default function PaymentCardModal(props) {
               value={value}
               onChange={handleChange}>
               <FormControlLabel
-                sx={{ '& img': { userSelect: 'none', pointerEvents: 'none', boxSizing: 'border-box', p: '0px', backgroundColor: '#fff', width: '140px', height: '80px', objectFit: 'contain', display: 'block' } }}
+                sx={{ '& img': { userSelect: 'none', pointerEvents: 'none', boxSizing: 'border-box', p: '0px', width: '140px', height: '80px', objectFit: 'contain', display: 'block' } }}
                 value="1"
                 control={<Radio />}
                 label={<img src="/pay-1.png" style={{}} />}
               />
               <FormControlLabel
-                sx={{ '& img': { pointerEvents: 'none', boxSizing: 'border-box', p: '10px', backgroundColor: '#fff', width: '140px', height: '80px', objectFit: 'contain', display: 'block', userSelect: 'none' } }}
+                sx={{ '& img': { pointerEvents: 'none', boxSizing: 'border-box', p: '10px', width: '140px', height: '80px', objectFit: 'contain', display: 'block', userSelect: 'none' } }}
                 value="2"
                 control={<Radio />}
                 label={<img src="/pay-2.png" style={{}} />}
