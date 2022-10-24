@@ -49,6 +49,7 @@
   }
 
   &__cart {
+    cursor: pointer;
     &:hover {
       opacity: 0.9;
     }
