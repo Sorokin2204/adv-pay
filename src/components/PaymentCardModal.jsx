@@ -118,19 +118,19 @@ export default function PaymentCardModal(props) {
                 control={<Radio />}
                 label={<img src="/pay-1.png" style={{}} />}
               />
-              {/* <FormControlLabel
+              <FormControlLabel
                 sx={{ '& img': { pointerEvents: 'none', boxSizing: 'border-box', p: '10px', backgroundColor: '#fff', width: '140px', height: '80px', objectFit: 'contain', display: 'block', userSelect: 'none' } }}
                 value="2"
                 control={<Radio />}
                 label={<img src="/pay-2.png" style={{}} />}
               />
               <FormControlLabel sx={{ userSelect: 'none', '& img': { pointerEvents: 'none', userSelect: 'none', backgroundColor: '#fff', width: '140px', height: '80px', objectFit: 'contain', display: 'block' } }} value="3" control={<Radio />} label={<img src="/pay-3.png" style={{}} />} />
-              <FormControlLabel
+              {/* <FormControlLabel
                 sx={{ userSelect: 'none', '& img': { pointerEvents: 'none', boxSizing: 'border-box', p: '18px', backgroundColor: '#fff', width: '140px', height: '80px', objectFit: 'contain', display: 'block', userSelect: 'none' } }}
                 value="4"
                 control={<Radio />}
                 label={<img src="/pay-4.png" style={{}} />}
-              /> */}
+              />  */}
             </RadioGroup>
           </FormControl>
           {(loadingPayment || dataPayment) && <Loading />}
