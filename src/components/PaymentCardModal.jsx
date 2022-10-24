@@ -70,7 +70,7 @@ export default function PaymentCardModal(props) {
           maxWidth: '500px', // Set your width here
         },
       }}>
-      <DialogContent sx={{ height: { xs: '500px', mob: '270px' } }}>
+      <DialogContent sx={{ height: { xs: '500px', mob: '360px' } }}>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <Typography variant="h5" sx={{ maxWidth: { xs: '203px', mob: 'none' }, mb: '24px', mx: 'auto', fontWeight: '600', fontSize: { mob: '24px', textAlign: 'center' } }}>
             {`Пополнить счет на ${currencyFormat(price * sum)} ?`}
@@ -111,7 +111,12 @@ export default function PaymentCardModal(props) {
             <FormLabel id="demo-controlled-radio-buttons-group" sx={{ mb: '8px', mx: { xs: 'auto', mob: '0' } }}>
               Способ пополнения
             </FormLabel>
-            <RadioGroup sx={{ display: 'grid', gridTemplateColumns: { xs: 'auto ', mob: 'auto auto' }, rowGap: '20px', justifyContent: 'start' }} aria-labelledby="demo-controlled-radio-buttons-group" name="controlled-radio-buttons-group" value={value} onChange={handleChange}>
+            <RadioGroup
+              sx={{ display: 'grid', gridTemplateColumns: { xs: 'auto ', mob: 'auto auto' }, margin: { xs: '0 auto', mob: '0' }, rowGap: '20px', justifyContent: 'start' }}
+              aria-labelledby="demo-controlled-radio-buttons-group"
+              name="controlled-radio-buttons-group"
+              value={value}
+              onChange={handleChange}>
               <FormControlLabel
                 sx={{ '& img': { userSelect: 'none', pointerEvents: 'none', boxSizing: 'border-box', p: '10px', backgroundColor: '#fff', width: '140px', height: '80px', objectFit: 'contain', display: 'block' } }}
                 value="1"
