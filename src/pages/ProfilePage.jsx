@@ -8,6 +8,7 @@ import { currencyFormat } from '../utils/currencyFormat';
 import { generatePromoCode, getUser, resetGeneratePromoCode } from '../redux/slices/user.slice';
 import moment from 'moment';
 import Loading from '../components/Loading';
+import PaymentModal from '../components/PaymentModal';
 const ProfilePage = () => {
   const {
     getUserState: { loading, data, error },
@@ -17,9 +18,17 @@ const ProfilePage = () => {
   const [promoActive, setPromoActive] = useState(null);
   const [diffDaysPromo, setDiffDaysPromo] = useState(null);
   const [openCopyPromo, setOpenCopyPromo] = React.useState(false);
+  const [openPay, setOpenPay] = React.useState(false);
   const dispatch = useDispatch();
   const handleTooltipClose = () => {
     setOpenCopy(false);
+  };
+  const handleClickOpenPay = () => {
+    setOpenPay(true);
+  };
+
+  const handleClosePay = (value) => {
+    setOpenPay(false);
   };
   useEffect(() => {
     if (data?.selfReferralCode) {
@@ -70,6 +79,12 @@ const ProfilePage = () => {
           <Typography variant="body1" sx={{ opacity: 0.7 }}>
             {`Аккаунт ${data?.email}`}
           </Typography>
+          <Typography variant="body1" sx={{}}>
+            {`${data?.name}`}
+          </Typography>{' '}
+          <Button onClick={handleClickOpenPay} sx={{ mt: 3 }} variant="outlined" size="large">
+            Пополнить
+          </Button>
           <Typography variant="h5" sx={{ mt: 8, mb: 1 }}>
             Ваш ID на сайте
           </Typography>
@@ -199,6 +214,7 @@ const ProfilePage = () => {
         </Box>
         {loadingGenPromo && <Loading />}
       </Container>
+      <PaymentModal open={openPay} onClose={handleClosePay} />
     </DrawerAppBar>
   );
 };

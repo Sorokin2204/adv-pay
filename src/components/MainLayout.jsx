@@ -44,7 +44,7 @@ function DrawerAppBar(props) {
 
   const [mobileOpenSucc, setMobileOpenSucc] = React.useState(false);
   const [openSucc, setOpenSucc] = React.useState(false);
-  const [openPay, setOpenPay] = React.useState(false);
+
   const [openError, setOpenError] = React.useState(false);
   const [errorText, setErrorText] = React.useState(false);
   const dispatch = useDispatch();
@@ -103,13 +103,7 @@ function DrawerAppBar(props) {
     setOpenSucc(false);
     dispath(getUser());
   };
-  const handleClickOpenPay = () => {
-    setOpenPay(true);
-  };
 
-  const handleClosePay = (value) => {
-    setOpenPay(false);
-  };
   const handleCloseError = (value) => {
     setOpenError(false);
   };
@@ -136,8 +130,7 @@ function DrawerAppBar(props) {
       const err =
         transError?.error === 'PACKAGE_NOT_ACTIVE' ? (
           <div>
-            Данный пакет не доступен. <br />
-            Попробуйте выбрать другой
+            Данный пак сейчас загружается в базу данных. <br /> Повторите попытку через 30 минут или воспользуйтесь другим паком.
           </div>
         ) : transError?.error === 'BALANCE_ERROR' ? (
           'Недостаточно средств'
@@ -237,18 +230,10 @@ function DrawerAppBar(props) {
                   </Button>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                  <Button onClick={handleClickOpenPay} sx={{ display: { xs: 'none', sm: 'block' }, mr: 1 }} variant="contained" size="small">
-                    Пополнить
-                  </Button>
-                  <IconButton onClick={handleClickOpenPay} sx={{ display: { xs: 'flex', sm: 'none' } }} aria-label="delete" size="medium">
-                    <AddCardIcon fontSize="inherit" color="primary" style={{}} />
-                  </IconButton>
                   <Typography sx={{ whiteSpace: 'nowrap', display: 'block', fontWeight: '600', mr: 1 }} color="success.light">
                     {currencyFormat(user.balance)}
                   </Typography>
-                  <Typography color="primary" sx={{ display: 'block' }}>
-                    {user.name}
-                  </Typography>
+
                   <Button
                     variant="outlined"
                     onClick={() => {
@@ -325,7 +310,6 @@ function DrawerAppBar(props) {
             {transLoading && <Loading />}
             <ErrorModal open={openError} text={errorText} onClose={handleCloseError} />
             <SuccessModal open={openSucc} onClose={handleCloseSucc} />
-            <PaymentModal open={openPay} onClose={handleClosePay} />
           </Box>
           {/* <Box
             sx={{

@@ -53,20 +53,25 @@
     &:hover {
       opacity: 0.9;
     }
+    display: flex;
+    align-items: center;
     transition: opacity 0.3s;
     background-color: #9c2628;
     border: none;
-    width: 40px;
+    // width: 40px;
+    padding: 0 10px;
     height: 30px;
-    padding: 0;
+
     position: relative;
     margin-right: 6px;
-    &::after {
+    color: #e2ba7e;
+    &::before {
       content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      // position: absolute;
+      // top: 50%;
+      // left: 50%;
+      // transform: translate(-50%, -50%);
+      margin-right: 4px;
       display: block;
       mask-image: url(../../public/cart.svg);
       mask-size: contain;
@@ -86,11 +91,15 @@
     padding: 0 12px;
     font-size: 14px;
     padding-bottom: 1px;
-	font-weight: 400!important;
-    &:hover,
+    color: #000 !important;
+    font-weight: 400 !important;
+    &:not(:disabled):hover,
     &--active {
       background-color: #9c2628;
-      color: #e2ba7e;
+      color: #e2ba7e !important;
+    }
+    &:disabled {
+      opacity: 0.5 !important;
     }
   }
 }

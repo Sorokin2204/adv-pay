@@ -64,6 +64,9 @@ const GamePage = () => {
   const [playerId, setPlayerId] = React.useState('');
   const [isAgree, setIsAgree] = useState(false);
   const [activeCard, setActiveCard] = useState();
+  const [disableCheck, setDisableCheck] = useState(false);
+  const [disableDonate, setDisableDonate] = useState(true);
+  const [repeatCheck, setRepeatCheck] = useState(false);
   const handleAgree = () => setIsAgree(!isAgree);
   React.useEffect(() => {
     if (checkError?.error === 'PROBLEM_WITH_TOKEN') {
@@ -86,10 +89,16 @@ const GamePage = () => {
     }
   }, [packageList]);
   const onCheckPlayer = () => {
-    const playerId = getValues('playerId');
-    const serverId = getValues('serverId');
-    if (playerId) {
-      dispatch(checkUser({ playerId, serverId }));
+    if (repeatCheck) {
+      setRepeatCheck(false);
+      setDisableCheck(false);
+      setDisableDonate(true);
+    } else {
+      const playerId = getValues('playerId');
+      const serverId = getValues('serverId');
+      if (playerId) {
+        dispatch(checkUser({ playerId, serverId }));
+      }
     }
   };
 
@@ -110,6 +119,17 @@ const GamePage = () => {
   const handleNext = () => {
     onSubmit(selectedGameCode);
   };
+  useEffect(() => {
+    if (!checkData && checkError) {
+      setDisableDonate(true);
+      setDisableCheck(false);
+    } else if (checkData && !checkError) {
+      setDisableDonate(false);
+      setDisableCheck(true);
+      setRepeatCheck(true);
+    }
+  }, [checkData, checkError]);
+
   const [selectedGameCode, setselectedGameCode] = useState(null);
   const [selectedGamePrice, setSelectedPrice] = useState(null);
   return (
@@ -128,14 +148,14 @@ const GamePage = () => {
             <div style={{ marginTop: '16px' }} class="custom-radio-label">
               Выберите сервер
             </div>
-            <div class="custom-radio">
+            <div class="custom-radio" style={{ opacity: checkLoading || disableCheck ? '0.7' : '1' }}>
               <label>
-                <input {...register('serverId', { required: true })} type="radio" value="2011" disabled={checkLoading} />
+                <input {...register('serverId', { required: true })} type="radio" value="2011" disabled={checkLoading || disableCheck} />
                 {/* <input type="radio" name="radio" /> */}
                 <span>NA/EU</span>
               </label>
               <label>
-                <input {...register('serverId', { required: true })} type="radio" value="2001" disabled={checkLoading} />
+                <input {...register('serverId', { required: true })} type="radio" value="2001" disabled={checkLoading || disableCheck} />
                 <span>Asia</span>
               </label>
             </div>
@@ -144,9 +164,9 @@ const GamePage = () => {
               <div className="check-id-box">
                 {' '}
                 <div className="check-id-label">Ваш игровой ID</div>
-                <Controller control={control} rules={{ required: true }} name="playerId" render={({ field }) => <input class="check-id-input" {...field} type="number" disabled={checkLoading} autoComplete="off" />} />
-                <button class="check-id-btn" onClick={() => onCheckPlayer()} disabled={checkLoading}>
-                  Подтвердить
+                <Controller control={control} rules={{ required: true }} name="playerId" render={({ field }) => <input class="check-id-input" {...field} type="number" disabled={checkLoading || disableCheck} autoComplete="off" />} />
+                <button class="check-id-btn" onClick={() => onCheckPlayer()} disabled={checkLoading} style={{ opacity: checkLoading ? '0.7' : '1' }}>
+                  {repeatCheck ? 'Ввести снова' : 'Подтвердить'}
                 </button>
               </div>
 
@@ -184,13 +204,14 @@ const GamePage = () => {
               <div className="game__card-grid">
                 {packageList?.map((packageItem, index) => (
                   <GameCard
+                    disabled={disableDonate}
                     active={activeCard === index}
                     img={`/game-img-${index + 1}.png`}
                     price={packageItem?.price}
                     value={packageItem?.code}
                     label={packageItem?.name}
                     onClickCard={() => {
-                      setActiveCard(index);
+                      if (!disableDonate) setActiveCard(index);
                     }}
                     onClick={() => {
                       if (isAgree) {
