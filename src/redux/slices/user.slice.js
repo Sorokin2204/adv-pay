@@ -161,6 +161,9 @@ const userSlice = createSlice({
     resetPasswordUserReset: (state, action) => {
       state.resetPasswordUserState = userInitialState.resetPasswordUserState;
     },
+    resetInitPaymentCardState: (state, action) => {
+      state.initPaymentCardState = userInitialState.initPaymentCardState;
+    },
     resetGeneratePromoCode: (state, action) => {
       state.generatePromoCodeState = userInitialState.generatePromoCodeState;
     },
@@ -349,5 +352,5 @@ const userSlice = createSlice({
     },
   },
 });
-export const { loginUserReset, setActiveUser, checkUserReset, createUserReset, resetPasswordUserReset, resetGeneratePromoCode, googleLoginReset, setCart, setUpdateCartEmpty } = userSlice.actions;
+export const { loginUserReset, setActiveUser, checkUserReset, createUserReset, resetPasswordUserReset, resetGeneratePromoCode, googleLoginReset, setCart, setUpdateCartEmpty, resetInitPaymentCardState } = userSlice.actions;
 export const userReducer = userSlice.reducer;

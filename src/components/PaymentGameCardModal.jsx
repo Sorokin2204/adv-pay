@@ -60,16 +60,7 @@ export default function PaymentGameCardModal(props) {
     }
     handleClose();
     dispatch(setUpdateCartEmpty());
-    // dispatch(initPaymentCard({ price: priceCalc }));
   };
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-  useEffect(() => {
-    if (dataPayment?.result) {
-      window.location.href = dataPayment?.result;
-    }
-  }, [dataPayment]);
 
   return (
     <Dialog

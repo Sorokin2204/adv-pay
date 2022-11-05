@@ -22,7 +22,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { currencyFormat } from '../utils/currencyFormat';
 import { useDispatch, useSelector } from 'react-redux';
-import { initPaymentCard, setCart, setUpdateCartEmpty } from '../redux/slices/user.slice';
+import { initPaymentCard, resetInitPaymentCardState, setCart, setUpdateCartEmpty } from '../redux/slices/user.slice';
 import Loading from './Loading';
 import axios from 'axios';
 import md5 from 'md5';
@@ -55,6 +55,7 @@ export default function PaymentCardModal(props) {
       window.location.href = dataPayment?.result;
       localStorage.removeItem('cart');
       dispatch(setUpdateCartEmpty());
+      dispatch(resetInitPaymentCardState());
     }
   }, [dataPayment]);
   console.log(cart);
