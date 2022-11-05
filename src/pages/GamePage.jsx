@@ -36,6 +36,7 @@ import '../styles/GamePage.scss';
 import PaymentModal from '../components/PaymentModal';
 import AcceptModal from '../components/AcceptModa';
 import PaymentCardModal from '../components/PaymentCardModal';
+import PaymentGameCardModal from '../components/PaymentGameCardModal';
 const GamePage = () => {
   const dispatch = useDispatch();
   const {
@@ -131,7 +132,7 @@ const GamePage = () => {
   }, [checkData, checkError]);
 
   const [selectedGameCode, setselectedGameCode] = useState(null);
-  const [selectedGamePrice, setSelectedPrice] = useState(null);
+  const [selectedPackageId, setSelectedPackageId] = useState(null);
   return (
     <DrawerAppBar isFull>
       <div className="game">
@@ -222,7 +223,7 @@ const GamePage = () => {
                       }
                     }}
                     onClickCart={() => {
-                      setSelectedPrice(packageItem?.price);
+                      setSelectedPackageId(packageItem?.id);
                       setOpenPaymentModal(true);
                     }}
                   />
@@ -243,7 +244,7 @@ const GamePage = () => {
         </Container>
       </div>
       <AcceptModal open={openAccept} text={'Подтверждаем донат ?'} onClose={handleCloseAccept} onNext={handleNext} />
-      <PaymentCardModal open={openPaymentModal} price={selectedGamePrice} onClose={handleClosePaymentCardModal} />
+      <PaymentGameCardModal open={openPaymentModal} packageId={selectedPackageId} onClose={handleClosePaymentCardModal} />
     </DrawerAppBar>
   );
 };

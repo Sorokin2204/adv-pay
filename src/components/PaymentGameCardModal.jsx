@@ -22,21 +22,21 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { currencyFormat } from '../utils/currencyFormat';
 import { useDispatch, useSelector } from 'react-redux';
-import { initPaymentCard, setCart, setUpdateCartEmpty } from '../redux/slices/user.slice';
+import { initPaymentCard, setUpdateCartEmpty } from '../redux/slices/user.slice';
 import Loading from './Loading';
 import axios from 'axios';
 import md5 from 'md5';
 import { useEffect } from 'react';
 
-export default function PaymentCardModal(props) {
-  const { onClose, price, open } = props;
+export default function PaymentGameCardModal(props) {
+  const { onClose, packageId, open } = props;
   const [sum, setSum] = React.useState(1);
   const {
     initPaymentCardState: { loading: loadingPayment, data: dataPayment, error: errorPayment },
-    cart,
   } = useSelector((state) => state.user);
   const handleClose = () => {
     onClose();
+    setSum(1);
   };
   const [value, setValue] = React.useState('1');
   const dispatch = useDispatch();
@@ -44,8 +44,23 @@ export default function PaymentCardModal(props) {
     getUserState: { data: user },
   } = useSelector((state) => state.user);
   const onSubmit = () => {
-    const totalPrice = cart?.map((cartItem) => cartItem?.price * cartItem?.count).reduce((partialSum, a) => partialSum + a, 0);
-    dispatch(initPaymentCard({ price: totalPrice }));
+    let cartData = JSON.parse(localStorage.getItem('cart'));
+    if (cartData instanceof Array) {
+      const findInCartExist = cartData?.find((itemCart) => itemCart?.packageId === packageId && parseInt(itemCart?.count) > 0);
+      if (findInCartExist) {
+        findInCartExist.count = parseInt(findInCartExist.count) + sum;
+      } else {
+        cartData.push({ packageId, count: sum });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cartData));
+    } else {
+      const newCart = [{ packageId, count: sum }];
+      localStorage.setItem('cart', JSON.stringify(newCart));
+    }
+    handleClose();
+    dispatch(setUpdateCartEmpty());
+    // dispatch(initPaymentCard({ price: priceCalc }));
   };
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -53,11 +68,9 @@ export default function PaymentCardModal(props) {
   useEffect(() => {
     if (dataPayment?.result) {
       window.location.href = dataPayment?.result;
-      localStorage.removeItem('cart');
-      dispatch(setUpdateCartEmpty());
     }
   }, [dataPayment]);
-  console.log(cart);
+
   return (
     <Dialog
       onClose={handleClose}
@@ -65,37 +78,46 @@ export default function PaymentCardModal(props) {
       sx={{
         '& .MuiPaper-root': {
           width: '100%',
-          maxWidth: '500px', // Set your width here
+          maxWidth: '400px', // Set your width here
         },
       }}>
-      {}
-      <DialogContent sx={{ height: { xs: '280px', mob: '280px' } }}>
+      <DialogContent sx={{ height: { xs: '150px', mob: '150px' } }}>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
           <Typography variant="h5" sx={{ maxWidth: { xs: '203px', mob: 'none' }, mb: '24px', mx: 'auto', fontWeight: '600', fontSize: { mob: '24px', textAlign: 'center' } }}>
-            {`Пополнить счет на ${currencyFormat(cart?.map((cartItem) => cartItem?.price * cartItem?.count).reduce((partialSum, a) => partialSum + a, 0))}?`}
+            {`Добавить пак в корзину?`}
           </Typography>
-          <FormControl>
-            <FormLabel id="demo-controlled-radio-buttons-group" sx={{ mb: '8px', mx: { xs: 'auto', mob: '0' } }}>
-              Способ пополнения
-            </FormLabel>
-            <RadioGroup
-              sx={{ display: 'grid', gridTemplateColumns: { xs: 'auto ', mob: 'auto auto' }, margin: { xs: '0 auto', mob: '0' }, rowGap: '20px', justifyContent: 'start' }}
-              aria-labelledby="demo-controlled-radio-buttons-group"
-              name="controlled-radio-buttons-group"
-              value={value}
-              onChange={handleChange}>
-              <FormControlLabel sx={{ '& img': { userSelect: 'none', pointerEvents: 'none', boxSizing: 'border-box', p: '0px', width: '140px', height: '80px', objectFit: 'contain', display: 'block' } }} value="1" control={<Radio />} label={<img src="/pay-1.png" style={{}} />} />
-              <FormControlLabel sx={{ '& img': { pointerEvents: 'none', boxSizing: 'border-box', p: '10px', width: '140px', height: '80px', objectFit: 'contain', display: 'block', userSelect: 'none' } }} value="2" control={<Radio />} label={<img src="/pay-2.png" style={{}} />} />
-              <FormControlLabel sx={{ userSelect: 'none', '& img': { pointerEvents: 'none', userSelect: 'none', width: '140px', height: '80px', objectFit: 'contain', display: 'block' } }} value="3" control={<Radio />} label={<img src="/pay-3.png" style={{}} />} />
-              {/* <FormControlLabel
-                sx={{ userSelect: 'none', '& img': { pointerEvents: 'none', boxSizing: 'border-box', p: '18px', backgroundColor: '#fff', width: '140px', height: '80px', objectFit: 'contain', display: 'block', userSelect: 'none' } }}
-                value="4"
-                control={<Radio />}
-                label={<img src="/pay-4.png" style={{}} />}
-              />  */}
-            </RadioGroup>
-          </FormControl>
-          {(loadingPayment || dataPayment) && <Loading />}
+          <Typography variant="body" sx={{ maxWidth: { xs: '203px', mob: 'none' }, mb: '0px', mx: 'auto', fontWeight: '600', fontSize: '16px' }}>
+            {`Количество паков`}
+          </Typography>
+          <div style={{ justifyContent: 'center', display: 'flex', alignItems: 'center', marginBottom: '24px' }}>
+            <IconButton
+              sx={{ mt: '8px' }}
+              onClick={() => {
+                if (sum !== 1) setSum(sum - 1);
+              }}>
+              <MinusIcon />
+            </IconButton>
+            <TextField
+              onChange={(e) => {
+                e.stopPropagation();
+              }}
+              value={sum}
+              type="number"
+              inputProps={{ min: 0, style: { textAlign: 'center' } }}
+              sx={{ mt: '8px', maxWidth: '100px', textAlign: 'center' }}
+              label={''}
+              variant="outlined"
+              size="small"
+              autoComplete="off"
+            />{' '}
+            <IconButton
+              sx={{ mt: '8px' }}
+              onClick={() => {
+                setSum(sum + 1);
+              }}>
+              <AddIcon />
+            </IconButton>
+          </div>
         </div>
       </DialogContent>
       <DialogActions sx={{ mt: '16px', display: 'grid', gridTemplateColumns: '1fr 1fr', gridGap: '8px', padding: '16px' }}>
@@ -103,7 +125,7 @@ export default function PaymentCardModal(props) {
           Назад
         </Button>
         <Button color="success" autoFocus variant="contained" sx={{ margin: '0 !important', color: '#fff' }} onClick={onSubmit}>
-          Пополнить
+          В корзину
         </Button>
       </DialogActions>
     </Dialog>

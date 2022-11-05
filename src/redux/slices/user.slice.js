@@ -129,12 +129,20 @@ const userInitialState = {
   },
   activeUser: null,
   isAuth: false,
+  cart: null,
+  updateCartEmpty: {},
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState: userInitialState,
   reducers: {
+    setCart: (state, action) => {
+      state.cart = action.payload;
+    },
+    setUpdateCartEmpty: (state, action) => {
+      state.updateCartEmpty = {};
+    },
     loginUserReset: (state, action) => {
       state.loginUserState = userInitialState.loginUserState;
     },
@@ -341,5 +349,5 @@ const userSlice = createSlice({
     },
   },
 });
-export const { loginUserReset, setActiveUser, checkUserReset, createUserReset, resetPasswordUserReset, resetGeneratePromoCode, googleLoginReset } = userSlice.actions;
+export const { loginUserReset, setActiveUser, checkUserReset, createUserReset, resetPasswordUserReset, resetGeneratePromoCode, googleLoginReset, setCart, setUpdateCartEmpty } = userSlice.actions;
 export const userReducer = userSlice.reducer;

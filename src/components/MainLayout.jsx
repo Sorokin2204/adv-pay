@@ -17,23 +17,28 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { purple, grey } from '@mui/material/colors';
 import { shadows } from '@mui/system';
-import { Container, Fab, Menu, MenuItem, Paper } from '@mui/material';
+import { Badge, Container, Fab, Menu, MenuItem, Paper, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import BuyModal from './BuyModal';
 import SuccessModal from './SuccessModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from '../redux/slices/user.slice';
+import { getUser, setCart, setUpdateCartEmpty } from '../redux/slices/user.slice';
 import { currencyFormat } from '../utils/currencyFormat';
 import PaymentModal from './PaymentModal';
+import CloseIcon from '@mui/icons-material/Close';
 import ErrorModal from './ErrorModa';
 import Loading from './Loading';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { createTransactionReset, getTransactions } from '../redux/slices/transaction.slice';
 import Footer from './Footer';
 import { getPackage } from '../redux/slices/package.slice';
 import { getPayments } from '../redux/slices/payment.slice';
 import { Navigate, useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import PaymentCardModal from './PaymentCardModal';
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
@@ -44,18 +49,23 @@ function DrawerAppBar(props) {
 
   const [mobileOpenSucc, setMobileOpenSucc] = React.useState(false);
   const [openSucc, setOpenSucc] = React.useState(false);
-
+  const [openPaymentModal, setOpenPaymentModal] = useState(false);
   const [openError, setOpenError] = React.useState(false);
   const [errorText, setErrorText] = React.useState(false);
+  const handleClosePaymentCardModal = () => {
+    setOpenPaymentModal(false);
+  };
   const dispatch = useDispatch();
   const {
     getUserState: { loading, data, error },
+    cart,
+    updateCartEmpty,
   } = useSelector((state) => state.user);
   const {
     getCreditCardState: { error: errorCreditCard },
   } = useSelector((state) => state.creditCard);
   const {
-    getPackageState: { error: errorGetPackage },
+    getPackageState: { data: dataPackages, error: errorGetPackage },
   } = useSelector((state) => state.package);
   const {
     createTransactionState: { error: errorCreateTransaction },
@@ -71,6 +81,30 @@ function DrawerAppBar(props) {
       dispatch(getPayments());
     }
   }, []);
+  useEffect(() => {
+    console.log(window);
+    const cartLocal = JSON.parse(localStorage.getItem('cart'));
+    const cartData = [];
+    console.log('LOCAL', cartLocal);
+    if (dataPackages && cartLocal instanceof Array) {
+      cartLocal?.map((cartItem) => {
+        const findPackage = dataPackages?.find((packageItem) => packageItem?.id === cartItem?.packageId);
+        if (findPackage && parseInt(cartItem?.count) > 0) {
+          cartData?.push({
+            packageId: findPackage?.id,
+            price: findPackage?.price,
+            count: cartItem?.count,
+            name: findPackage?.name,
+          });
+        }
+      });
+      dispatch(setCart(cartData));
+    } else {
+      setOpenPaymentModal(false);
+      dispatch(setCart([]));
+    }
+  }, [dataPackages, updateCartEmpty]);
+
   const navigate = useNavigate();
   React.useEffect(() => {
     if (errorCreditCard?.error === 'PROBLEM_WITH_TOKEN' || errorGetPackage?.error === 'PROBLEM_WITH_TOKEN' || errorCreateTransaction?.error === 'PROBLEM_WITH_TOKEN' || errorGetTransactions?.error === 'PROBLEM_WITH_TOKEN' || errorgetPayments?.error === 'PROBLEM_WITH_TOKEN') {
@@ -158,7 +192,13 @@ function DrawerAppBar(props) {
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
-
+  const [showCart, setShowCart] = useState(false);
+  const handleCloseCart = () => {
+    setShowCart(false);
+  };
+  const handleOpenCart = () => {
+    setShowCart(true);
+  };
   return !loading && data && !error ? (
     <>
       <Paper
@@ -310,6 +350,136 @@ function DrawerAppBar(props) {
             {transLoading && <Loading />}
             <ErrorModal open={openError} text={errorText} onClose={handleCloseError} />
             <SuccessModal open={openSucc} onClose={handleCloseSucc} />
+            <Drawer
+              anchor={'right'}
+              open={showCart}
+              onClose={handleCloseCart}
+              sx={{
+                '& .MuiPaper-root': { minWidth: '300px', boxSizing: 'border-box', padding: '80px 20px' },
+              }}>
+              <IconButton onClick={handleCloseCart} disableRipple sx={{ position: 'absolute', top: '0', right: '0', padding: '16px' }}>
+                <CloseIcon />
+              </IconButton>
+              {cart?.length > 0 ? (
+                <>
+                  {cart?.map((itemCart, indexCart) => (
+                    <div style={{ paddingBottom: '14px', borderBottom: '1px solid #474747', paddingTop: indexCart == 0 ? '0' : '14px' }}>
+                      <div style={{ display: 'grid', alignItems: 'center', gridGap: '60px', gridTemplateColumns: 'auto auto' }}>
+                        <div class="game-card__middle" style={{ marginBottom: '6px', fontSize: '14px' }}>
+                          {`× ${itemCart?.name} печатей`}
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <TextField
+                            onChange={(event) => {
+                              let updateCount = parseInt(event.target.value);
+
+                              if (updateCount < 1 || isNaN(updateCount)) {
+                                updateCount = 1;
+                              } else if (updateCount > 100) {
+                                updateCount = 100;
+                              }
+                              let cartData = JSON.parse(localStorage.getItem('cart'));
+                              if (cartData instanceof Array) {
+                                const findDeletedItem = cartData?.find((cartDataItem) => cartDataItem.packageId === itemCart?.packageId);
+                                if (findDeletedItem !== -1) {
+                                  findDeletedItem.count = updateCount;
+                                  localStorage.setItem('cart', JSON.stringify(cartData));
+                                  dispatch(setUpdateCartEmpty());
+                                }
+                              }
+                            }}
+                            value={itemCart?.count}
+                            type={'number'}
+                            size="small"
+                            sx={{
+                              fontSize: '12px',
+                              '& input': {
+                                width: '40px',
+                                fontSize: '12px',
+                                padding: '4.5px 2px 4.5px 14px',
+                              },
+                              '& input::-webkit-outer-spin-button,& input::-webkit-inner-spin-button': {
+                                '-webkit-appearance': 'auto',
+                              },
+                            }}
+                          />
+                          <IconButton
+                            onClick={() => {
+                              let cartData = JSON.parse(localStorage.getItem('cart'));
+                              if (cartData instanceof Array) {
+                                const findDeletedItem = cartData?.findIndex((cartDataItem) => cartDataItem.packageId === itemCart?.packageId);
+                                if (findDeletedItem !== -1) {
+                                  cartData.splice(findDeletedItem, 1);
+                                  localStorage.setItem('cart', JSON.stringify(cartData));
+                                  dispatch(setUpdateCartEmpty());
+                                }
+                              }
+                            }}
+                            size="small"
+                            disableRipple
+                            sx={{ marginLeft: '2px' }}>
+                            <CloseIcon sx={{ fontSize: '16px', opacity: '0.5' }} />
+                          </IconButton>
+                        </div>
+                      </div>
+                      <div class="game-card__price" style={{ marginTop: '4px' }}>
+                        {currencyFormat(itemCart?.price * itemCart?.count)}
+                      </div>
+                    </div>
+                  ))}
+
+                  <Box sx={{ borderTop: '1px solid #474747', display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '8px' }}>
+                    <Box sx={{ fontWeight: '600 !important', fontSize: '18px' }}>Итого к оплате</Box>
+                    <Box sx={{ fontWeight: '600 !important', fontSize: '18px' }}> {currencyFormat(cart?.map((cartItem) => cartItem?.price * cartItem?.count).reduce((partialSum, a) => partialSum + a, 0))}</Box>
+                  </Box>
+                  <Box sx={{ display: 'grid', gridGap: '8px', gridTemplateColumns: '1fr 1fr' }}>
+                    <Button onClick={handleCloseCart} variant="contained" color="error" size="medium" sx={{ width: '100%', color: '#fff', marginTop: '24px', marginLeft: 'auto', padding: '6px 24px' }}>
+                      {' '}
+                      Закрыть
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        setOpenPaymentModal(true);
+                      }}
+                      variant="contained"
+                      color="success"
+                      size="medium"
+                      sx={{ width: '100%', color: '#fff', marginTop: '24px', marginLeft: 'auto', padding: '6px 24px' }}>
+                      {' '}
+                      Оплатить
+                    </Button>
+                  </Box>
+                  <Button
+                    onClick={() => {
+                      localStorage.removeItem('cart');
+                      dispatch(setUpdateCartEmpty());
+                    }}
+                    color="error"
+                    sx={{ '&:hover': { backgroundColor: 'transparent' }, marginTop: '16px', textTransform: 'none' }}>
+                    Очистить корзину
+                  </Button>
+                </>
+              ) : (
+                <div style={{ margin: '0 auto' }}>Корзина пуста</div>
+              )}
+            </Drawer>
+            <Badge
+              onClick={handleOpenCart}
+              badgeContent={cart?.length || 0}
+              color="primary"
+              sx={{
+                cursor: 'pointer',
+                position: 'fixed',
+                bottom: '30px',
+                right: '40px',
+                '& .MuiBadge-badge': { color: '#e2ba7e', backgroundColor: '#9c2628', fontWeight: '600 !important' },
+                '& svg': {
+                  fill: '#e2ba7e',
+                },
+              }}>
+              <ShoppingCartIcon sx={{ fontSize: '30px' }} />
+            </Badge>
+            <PaymentCardModal open={openPaymentModal} onClose={handleClosePaymentCardModal} />
           </Box>
           {/* <Box
             sx={{
