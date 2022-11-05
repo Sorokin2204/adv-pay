@@ -470,8 +470,8 @@ function DrawerAppBar(props) {
               sx={{
                 cursor: 'pointer',
                 position: 'fixed',
-                bottom: '30px',
-                right: '40px',
+                top: '50%',
+                right: '30px',
                 '& .MuiBadge-badge': { color: '#e2ba7e', backgroundColor: '#9c2628', fontWeight: '600 !important' },
                 '& svg': {
                   fill: '#e2ba7e',
