@@ -58,10 +58,10 @@ const HomeSlider = () => {
               }}>
               <div data-swiper-parallax={parallaxAmount} data-swiper-parallax-opacity={parallaxOpacity}>
                 <Box className="" sx={{ marginBottom: '5px', fontSize: { mobile: '24px', xs: '18px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Кроссовер Identity V x Bungou Stray Dogs уже скоро!
+                  Кроссовер Identity V x Bungou Stray Dogs!
                 </Box>
                 <Box className="mb-5 small" sx={{ opacity: '0.7', marginBottom: { mobile: '0px', xs: '15px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Старт отложен
+                  Событие уже в игре!
                 </Box>
               </div>{' '}
               {/* <button class="slider-button">Identity V</button> */}
