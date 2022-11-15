@@ -51,7 +51,7 @@ const HomePage = () => {
             <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%', height: 'auto' }}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label="Игры" {...a11yProps(0)} />
-                <Tab label="Покупки " {...a11yProps(1)} />
+                <Tab label="Донаты " {...a11yProps(1)} />
                 <Tab label="Пополнение счета" {...a11yProps(2)} />
               </Tabs>
             </Box>
@@ -61,7 +61,7 @@ const HomePage = () => {
             </TabPanel>
             <TabPanel value={value} index={1}>
               {' '}
-              <TrancTable title="Последние покупки" />
+              <TrancTable title="Последние донаты" />
             </TabPanel>
             <TabPanel value={value} index={2}>
               <PaymentTable title="Пополнение счета" />

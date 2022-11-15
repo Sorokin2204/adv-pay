@@ -118,13 +118,17 @@ function HomeLayout(props) {
               </Box>
               <Box>
                 {!data && !loading && error ? (
-                  <Button disableRipple={true} onClick={() => navigate('/auth')} sx={{ '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }} variant="outlined">
-                    Войти
+                  <Button class="login-custom" disableRipple={true} onClick={() => navigate('/auth')} sx={{ '&:hover': { backgroundColor: 'transparent', transform: 'scale(0.78)' }, my: 2, color: 'white', display: 'block' }} variant="outlined">
+                    <div></div>
+                    <span> Войти</span>
                   </Button>
                 ) : (
-                  <IconButton aria-label="delete" size="medium" onClick={() => navigate('/account')}>
-                    <AccountIcon fontSize="3" color="primary" style={{ fontSize: '40px' }} />
-                  </IconButton>
+                  <Button
+                    style={{ height: '30px', lineHeight: '2', textTransform: 'none', background: '#000000a3', color: ' rgb(255 255 255)', height: '30px', lineHeight: '2', textTransform: 'none', border: '1px solid rgb(255 255 255 / 50%)' }}
+                    variant="outlined"
+                    onClick={() => navigate('/account')}>
+                    Кабинет
+                  </Button>
                 )}
               </Box>
             </Box>
