@@ -148,7 +148,7 @@ const GamePageComponent = ({ data }) => {
   const [showHelp, setShowHelp] = useState(false);
   return (
     <>
-      <div className="game">
+      <div className="game" style={{ backgroundImage: `url("${data?.background}")` }}>
         <Container>
           <div className="game__content">
             <div className="game__title">{data?.name}</div>
@@ -192,7 +192,7 @@ const GamePageComponent = ({ data }) => {
                 <Box sx={{ display: 'flex', flexDirection: { xs: 'column', mob: 'row' } }}>
                   <Controller control={control} rules={{ required: true }} name="playerId" render={({ field }) => <input class="check-id-input" {...field} type="number" disabled={checkLoading || disableCheck} autoComplete="off" />} />
                   {data?.checkPlayer && (
-                    <button class="check-id-btn" onClick={() => onCheckPlayer()} disabled={checkLoading} style={{ opacity: checkLoading ? '0.7' : '1', minWidth: '210px' }}>
+                    <button class="check-id-btn" onClick={() => onCheckPlayer()} disabled={checkLoading} style={{ opacity: checkLoading ? '0.7' : '1', minWidth: '210px', cursor: checkLoading ? 'auto' : 'pointer' }}>
                       {repeatCheck ? 'Ввести снова' : 'Подтвердить'}
                     </button>
                   )}
@@ -234,7 +234,7 @@ const GamePageComponent = ({ data }) => {
                 <button
                   disabled={disableDonate}
                   class="check-id-btn finish-donate"
-                  style={{ marginTop: '10px', position: 'absolute', ...(!disableDonate ? { bottom: '-30px' } : { top: '0px' }), left: 0 }}
+                  style={{ marginTop: '10px', position: 'absolute', ...(!disableDonate || checkData ? { bottom: '-30px' } : { top: '0px' }), left: 0 }}
                   onClick={() => {
                     const playerIdData = getValues('playerId');
                     if (playerIdData) {

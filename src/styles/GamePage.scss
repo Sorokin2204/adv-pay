@@ -1,6 +1,6 @@
 .game {
   width: 100%;
-  background-image: url('../../public/game-bg.jpg');
+
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 30px;
@@ -94,6 +94,9 @@
   outline: 0;
   color: #e2ba7e;
   cursor: pointer;
+  &:disabled {
+    cursor: auto;
+  }
   &:hover {
     background-color: #e2ba7e;
     color: #9c2628;

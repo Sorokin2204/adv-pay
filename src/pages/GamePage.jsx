@@ -25,6 +25,7 @@ const GamePage = () => {
         </>
       ),
       helpImage: `/game-img-1.png`,
+      background: '/game-bg.jpg',
       checkPlayer: true,
       serverList: [
         {
@@ -61,6 +62,7 @@ const GamePage = () => {
         </>
       ),
       helpImage: `/game-img-1.png`,
+      background: '/game-bg.jpg',
       checkPlayer: false,
       serverList: [
         {

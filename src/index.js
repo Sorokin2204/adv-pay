@@ -18,6 +18,13 @@ const darkTheme = createTheme({
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+        },
+      },
+    },
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
