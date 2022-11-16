@@ -64,9 +64,7 @@ export default function SelectPackageModal(props) {
             Выберите пак
           </Typography>
           <FormControl>
-            <FormLabel id="demo-controlled-radio-buttons-group" sx={{ mb: '8px', mx: 'auto' }}>
-              Способ пополнения
-            </FormLabel>
+            <FormLabel id="demo-controlled-radio-buttons-group" sx={{ mb: '8px', mx: 'auto' }}></FormLabel>
             <RadioGroup sx={{ display: 'flex', flexDirection: 'column', margin: '0 auto' }} aria-labelledby="demo-controlled-radio-buttons-group" name="controlled-radio-buttons-group" value={value} onChange={handleChange}>
               {packageList?.map(
                 (packageItem) =>

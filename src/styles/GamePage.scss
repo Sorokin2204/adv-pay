@@ -100,6 +100,7 @@
   }
 }
 .accept-checkbox {
+  margin-top: 12px;
   user-select: none;
   cursor: pointer;
   & input {
@@ -150,6 +151,7 @@
   column-gap: 24px;
   row-gap: 50px;
   margin-bottom: 70px;
+  margin-top: 30px;
 }
 $primary-color: #ad2305; // Change color here. C'mon, try it!
 $text-color: mix(#000, $primary-color, 64%);

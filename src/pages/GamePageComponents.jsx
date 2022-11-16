@@ -175,7 +175,7 @@ const GamePageComponent = ({ data }) => {
                   }}>
                   <div className="check-id-label">
                     <span>Ваш игровой ID</span>
-                    <div style={{ position: 'relative' }}>
+                    {/* <div style={{ position: 'relative' }}>
                       <IconButton
                         onClick={() => {
                           setShowHelp(!showHelp);
@@ -185,7 +185,7 @@ const GamePageComponent = ({ data }) => {
                         <HelpOutlineOutlined sx={{ fontSize: '20px', color: '#e2ba7e' }} />
                       </IconButton>
                       <img style={{ position: 'absolute', bottom: '100%', left: 0, maxHeight: '200px', transition: 'opacity 0.3s, visibility 0.3s', ...(!showHelp && { visibility: 'hidden', opacity: '0' }) }} src={data?.helpImage} />
-                    </div>
+                    </div> */}
                   </div>
                 </OutsideClickHandler>
 
@@ -197,6 +197,10 @@ const GamePageComponent = ({ data }) => {
                     </button>
                   )}
                 </Box>
+                <label class="accept-checkbox" id="agree-block">
+                  <input type="checkbox" name="accept" onClick={handleAgree} checked={isAgree} />
+                  <span>{data?.privacyContent}</span>
+                </label>
               </div>
 
               <div style={{ height: data?.checkPlayer ? '130px' : '22px', display: 'flex', marginRight: 'auto', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
@@ -277,10 +281,6 @@ const GamePageComponent = ({ data }) => {
               </div>
             </div>
           </div>
-          <label class="accept-checkbox" id="agree-block">
-            <input type="checkbox" name="accept" onClick={handleAgree} checked={isAgree} />
-            <span>{data?.privacyContent}</span>
-          </label>
         </Container>
       </div>
       <AcceptModal open={openAccept} selectedPackage={selectedGameCode} text={'Подтверждаем донат?'} onClose={handleCloseAccept} onNext={handleNext} />
@@ -291,6 +291,7 @@ const GamePageComponent = ({ data }) => {
         onNext={(selectPackage) => {
           if (selectPackage) {
             setselectedGameCode(selectPackage);
+            handleCloseSelectPackage();
             setOpenAccept(true);
           }
         }}
