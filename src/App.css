@@ -135,3 +135,71 @@ html {
   outline: 0;
   width: 100%;
 }
+
+.login-custom {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  margin: 0 auto;
+  width: 106px;
+  text-align: center;
+  position: relative;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: var(--cp-color-1);
+  display: block;
+  z-index: 2;
+  overflow: hidden;
+  padding: 3px;
+}
+
+.login-custom div {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(115deg, #4fcf70, #fad648, #a767e5, #12bcfe, #44ce7b);
+  background-size: 50% 100%;
+  animation: qer 1.5s linear infinite;
+  /* transition: all 0.4s linear; */
+}
+@keyframes qer {
+  0% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(-106px);
+  }
+}
+.login-custom span {
+  transform: scaleX(1.02) scaleY(1.1);
+  position: relative;
+  z-index: 2;
+  padding: 8px 0;
+  font-size: 14px;
+  align-items: center;
+  background: #222222;
+  border-radius: 3px;
+  display: block;
+  justify-content: center;
+  box-sizing: border-box;
+  height: 100%;
+}
+#tsparticles {
+  background: #000000a3;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0;
+  margin: 0;
+  z-index: 0; /* if you use -1 you have to set to `"window"` the interactivity.detectsOn property */
+}
+h4,
+h5 {
+  font-size: 20px !important;
+}

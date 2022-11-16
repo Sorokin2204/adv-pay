@@ -27,8 +27,9 @@
 }
 .check-id-box {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: start;
+  flex-direction: column;
+  // flex-wrap: wrap;
   padding-bottom: 12px;
   padding-right: 36px;
   border-bottom: 2px solid #2e3234;
@@ -36,6 +37,7 @@
 @media (max-width: 600px) {
   .check-id-box {
     width: 100%;
+    align-items: center;
     // max-width: 300px;
     margin: 0 auto;
     padding-right: 0;
@@ -51,8 +53,10 @@
   }
 }
 .check-id-label {
-  flex-basis: 100%;
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  // flex-basis: 100%;
+  font-size: 18px;
   margin-bottom: 8px;
   font-weight: 300;
 }
@@ -79,6 +83,7 @@
   padding-left: 18px;
   padding-right: 18px;
   height: 40px;
+
   //   padding-top: 6px;
   font-weight: 400;
   //   padding-bottom: 8px;
@@ -95,6 +100,7 @@
   }
 }
 .accept-checkbox {
+  margin-top: 12px;
   user-select: none;
   cursor: pointer;
   & input {
@@ -145,6 +151,7 @@
   column-gap: 24px;
   row-gap: 50px;
   margin-bottom: 70px;
+  margin-top: 30px;
 }
 $primary-color: #ad2305; // Change color here. C'mon, try it!
 $text-color: mix(#000, $primary-color, 64%);

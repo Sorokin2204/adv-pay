@@ -39,6 +39,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import PaymentCardModal from './PaymentCardModal';
+import GameButton from './GameButton';
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
@@ -164,7 +165,7 @@ function DrawerAppBar(props) {
       const err =
         transError?.error === 'PACKAGE_NOT_ACTIVE' ? (
           <div>
-            Данный пак сейчас загружается в базу данных. <br /> Повторите попытку через 30 минут или воспользуйтесь другим паком.
+            Данный пакет временно недоступен, напишите нам во <a href="https://vk.com/im?sel=-213480825">вконтакте</a> или в <a href="https://t.me/DonateGold">телеграм</a> и пополним вам вручную. Это временная мера.
           </div>
         ) : transError?.error === 'BALANCE_ERROR' ? (
           'Недостаточно средств'
@@ -273,16 +274,14 @@ function DrawerAppBar(props) {
                   <Typography sx={{ whiteSpace: 'nowrap', display: 'block', fontWeight: '600', mr: 1 }} color="success.light">
                     {currencyFormat(user.balance)}
                   </Typography>
-
-                  <Button
-                    variant="outlined"
+                  <GameButton
                     onClick={() => {
                       navigate('/account');
                     }}
-                    sx={{ mr: 1, ml: 1 }}>
-                    Игры
-                  </Button>
+                  />
+
                   <Button
+                    style={{ height: '30px', lineHeight: '2', textTransform: 'none', background: '#000000a3', color: ' rgb(255 255 255)', height: '30px', lineHeight: '2', textTransform: 'none', border: '1px solid rgb(255 255 255 / 50%)' }}
                     variant="outlined"
                     onClick={() => {
                       navigate('/profile');
@@ -366,7 +365,7 @@ function DrawerAppBar(props) {
                     <div style={{ paddingBottom: '14px', borderBottom: '1px solid #474747', paddingTop: indexCart == 0 ? '0' : '14px' }}>
                       <div style={{ display: 'grid', alignItems: 'center', gridGap: '60px', gridTemplateColumns: 'auto auto' }}>
                         <div class="game-card__middle" style={{ marginBottom: '6px', fontSize: '14px' }}>
-                          {`× ${itemCart?.name} печатей`}
+                          {itemCart?.name}
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           <TextField

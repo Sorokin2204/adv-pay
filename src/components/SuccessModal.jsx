@@ -21,7 +21,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 
 export default function SuccessModal(props) {
-  const { onClose, selectedValue, open, fullWidth, text = 'Платеж успешно завершен' } = props;
+  const { onClose, selectedValue, open, fullWidth, text = 'Донат успешно отправлен в игру' } = props;
 
   const handleClose = () => {
     onClose(selectedValue);

@@ -31,6 +31,8 @@ export default function TrancTable({ title }) {
               <TableCell align="center">Номер транзакции</TableCell>
               <TableCell align="center">Игровая валюта</TableCell>
               <TableCell align="center">Сервер</TableCell>
+              <TableCell align="center">Игра</TableCell>
+              <TableCell align="center">Статус</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -42,7 +44,9 @@ export default function TrancTable({ title }) {
                 <TableCell align="center">{currencyFormat(row?.price)}</TableCell>
                 <TableCell align="center">{row?.number}</TableCell>
                 <TableCell align="center">{row?.packageName}</TableCell>
-                <TableCell align="center">{row?.serverid === 2001 ? 'Asia' : row?.serverid === 2011 ? 'NA and EU' : ''}</TableCell>
+                <TableCell align="center">{row?.serverid === 2001 ? 'Asia' : row?.serverid === 2011 ? 'NA and EU' : row?.serverid == 1 ? 'America' : row?.serverid == 2 ? 'Europe' : row?.serverid == 3 ? 'Asia' : row?.serverid == 4 ? 'TW, HK, MO' : ''}</TableCell>
+                <TableCell align="center">{row?.typeGame?.name}</TableCell>
+                <TableCell align="center">{row?.status === 'processing' ? 'Выполняется' : row?.status === 'completed' ? 'Выполнен' : 'refunded'}</TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -44,7 +44,7 @@ const darkTheme = createTheme({
       styleOverrides: {
         paper: {
           backgroundImage: 'none',
-          backgroundColor: '#111',
+          backgroundColor: 'rgb(6, 6, 6)',
         },
       },
     },

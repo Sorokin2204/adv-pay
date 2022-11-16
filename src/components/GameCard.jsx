@@ -7,15 +7,12 @@ const GameCard = ({ img, disabled, price, label, value, onClickCard, onClickCart
   return (
     <div className={`game-card ${active && 'game-card--active'}`} onClick={onClickCard}>
       <img src={img} alt="" className="game-card__img" />
-      <div className="game-card__middle">{`× ${label} печатей`}</div>
+      <div className="game-card__middle">{label}</div>
       <div className="game-card__bottom">
         <div className="game-card__price">{currencyFormat(price)}</div>
         <div className="game-card__btn-box">
           <button className="game-card__cart" onClick={onClickCart}>
             Купить
-          </button>
-          <button disabled={disabled} className={`game-card__donate ${active && 'game-card__donate--active'}`} onClick={onClick}>
-            Задонатить
           </button>
         </div>
       </div>
