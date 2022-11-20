@@ -166,7 +166,7 @@ function DrawerAppBar(props) {
       const err =
         transError?.error === 'PACKAGE_NOT_ACTIVE' ? (
           <div>
-            Данный пакет временно недоступен, напишите нам во <a href="https://vk.com/im?sel=-213480825">вконтакте</a> или в <a href="https://t.me/DonateGold">телеграм</a> и пополним вам вручную. Это временная мера.
+            Данный пакет временно недоступен, напишите нам во <a href="https://vk.com/im?sel=-213480825">вконтакте</a> или в <a href="https://t.me/DonateGold">телеграм</a> и мы отправим вам печати, списав деньги с вашего личного счета сайта. Приносим извинения за временное неудобство.
           </div>
         ) : transError?.error === 'BALANCE_ERROR' ? (
           'Недостаточно средств'
@@ -213,13 +213,7 @@ function DrawerAppBar(props) {
           },
         }}>
         <Box sx={{ display: 'flex', height: '70%' }}>
-          <AppBar
-            component="nav"
-            sx={{
-              boxShadow: 3,
-              //   borderBottom: '1px solid grey',
-              // background: '',
-            }}>
+          <AppBar component="nav" sx={{ boxShadow: 0, backgroundColor: '#060606'}}>
             <Toolbar variant="dense" sx={{ minHeight: '60px' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -272,7 +266,7 @@ function DrawerAppBar(props) {
                   </Button>
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                  <Typography sx={{ whiteSpace: 'nowrap', display: 'block', fontWeight: '600', mr: 1 }} color="success.light">
+                  <Typography sx={{ whiteSpace: 'nowrap', display: 'block', marginRight: '20px!important', fontWeight: '400!important', mr: 1 }} color="success.light">
                     {currencyFormat(user.balance)}
                   </Typography>
                   <GameButton
@@ -298,13 +292,12 @@ function DrawerAppBar(props) {
                         cursor: 'pointer',
                         marginLeft: '16px',
                         marginRight: '4px',
-
-                        '& .MuiBadge-badge': { color: '#e2ba7e', backgroundColor: '#9c2628', fontWeight: '600 !important' },
+                        '& .MuiBadge-badge': { color: '#e7e1d8', backgroundColor: '#9c2628', fontWeight: '600 !important' },
                         '& svg': {
-                          fill: '#e2ba7e',
+                          fill: '#e9a317',
                         },
                       }}>
-                      <ShoppingCartIcon sx={{ fontSize: '30px' }} />
+                      <ShoppingCartIcon sx={{ fontSize: '28px' }} />
                     </Badge>
                   </div>
                   {/* <IconButton
@@ -477,7 +470,7 @@ function DrawerAppBar(props) {
                     Очистить корзину
                   </Button>
                   <Box sx={{ maxWidth: '260px', fontSize: '14px', textAlign: 'left', backgroundColor: 'rgb(8 3 3)', padding: '16px', borderRadius: '8px' }}>
-                    После оплаты деньги поступят на ваш лицевой счет сайта. После этого не забудьте задонатить игровую валюту в игру. Кнопка "Задонатить" под вводом ID.
+                    После оплаты деньги поступят на ваш лицевой счет сайта. Далее не забудьте задонатить игровую валюту в игру, кнопка "Задонатить" под вводом ID. Деньги спишутся с вашего лицевого счета.
                   </Box>
                 </>
               ) : (

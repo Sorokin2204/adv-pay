@@ -38,6 +38,11 @@ const SupportPage = () => {
                 <a class="link" href="https://passport.webmoney.ru/asp/certview.asp?wmid=386255644072" target="_blank">
                   <span>Проверить аттестат</span>
                 </a>
+				<br /><br />
+				Наш маскот - японский котик Манэки-нэко, который желает счастье тем, кто пользуются сервисом. Автор логотипа и задумки - наш пользователь сервиса <a class="link" href="https://vk.com/my.chicken.nuggets" target="_blank"> Ян Вэй.</a><br /><br />
+				<img src="/logo_orig.png" style={{ width: 250 }} />
+				
+				
               </Typography>
             </Box>
           </Box>

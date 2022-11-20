@@ -58,10 +58,10 @@ const HomeSlider = () => {
               }}>
               <div data-swiper-parallax={parallaxAmount} data-swiper-parallax-opacity={parallaxOpacity}>
                 <Box className="" sx={{ marginBottom: '5px', fontSize: { mobile: '24px', xs: '18px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Кроссовер Identity V x Bungou Stray Dogs!
+                  Identity V × Project Zero II: Crimson Butterfly
                 </Box>
                 <Box className="mb-5 small" sx={{ opacity: '0.7', marginBottom: { mobile: '0px', xs: '15px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Событие уже в игре!
+                  Событие доступно с 24.11
                 </Box>
               </div>{' '}
               {/* <button class="slider-button">Identity V</button> */}
@@ -69,7 +69,7 @@ const HomeSlider = () => {
           </div>
         </div>
         {/* 2 */}
-        <div className="hero-slide">
+        {/*<div className="hero-slide">
           <div className="slide-image" data-swiper-parallax={parallaxAmount} data-swiper-parallax-opacity={parallaxOpacity}>
             <img src={image2} alt="image2" />
           </div>
@@ -88,16 +88,16 @@ const HomeSlider = () => {
               }}>
               <div data-swiper-parallax={parallaxAmount} data-swiper-parallax-opacity={parallaxOpacity}>
                 <Box className="" sx={{ marginBottom: '5px', fontSize: { mobile: '24px', xs: '18px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Костюм Акробата S класса «Шляпник»
+                  Identity V × Project Zero II: Crimson Butterfly
                 </Box>
                 <Box className="mb-5 small" sx={{ opacity: '0.7', marginBottom: { mobile: '0px', xs: '15px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Хэллоуин событие доступно с 20.10
+                  Событие доступно с 24.11
                 </Box>
               </div>{' '}
-              {/* <button class="slider-button">Find out Now</button> */}
+              {/* <button class="slider-button">Find out Now</button>
             </Box>
-          </div>
-        </div>
+          </div> 
+        </div> */}
       </Swiper>
       {/* <div className="swiper-pagination-custom"></div> */}
     </div>

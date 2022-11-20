@@ -66,7 +66,8 @@ function HomeLayout(props) {
         <AppBar
           component="nav"
           sx={{
-            boxShadow: 3,
+            boxShadow: 0,
+			backgroundColor: '#060606',
           }}>
           <Toolbar variant="dense">
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
