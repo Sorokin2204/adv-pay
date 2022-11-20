@@ -22,7 +22,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { currencyFormat } from '../utils/currencyFormat';
 import { useDispatch, useSelector } from 'react-redux';
-import { initPaymentCard, setUpdateCartEmpty } from '../redux/slices/user.slice';
+import { initPaymentCard, setAddedCart, setUpdateCartEmpty } from '../redux/slices/user.slice';
 import Loading from './Loading';
 import axios from 'axios';
 import md5 from 'md5';
@@ -60,6 +60,10 @@ export default function PaymentGameCardModal(props) {
     }
     handleClose();
     dispatch(setUpdateCartEmpty());
+    dispatch(setAddedCart(true));
+    setTimeout(() => {
+      dispatch(setAddedCart(false));
+    }, 1000);
   };
 
   return (

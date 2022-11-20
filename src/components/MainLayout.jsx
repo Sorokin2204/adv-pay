@@ -120,6 +120,7 @@ function DrawerAppBar(props) {
 
   const {
     getUserState: { data: user },
+    addedCart,
   } = useSelector((state) => state.user);
 
   const handleClickOpen = () => {
@@ -288,6 +289,24 @@ function DrawerAppBar(props) {
                     }}>
                     Кабинет
                   </Button>
+                  <div class={addedCart && 'cart-moving'}>
+                    <Badge
+                      onClick={handleOpenCart}
+                      badgeContent={cart?.length || 0}
+                      color="primary"
+                      sx={{
+                        cursor: 'pointer',
+                        marginLeft: '16px',
+                        marginRight: '4px',
+
+                        '& .MuiBadge-badge': { color: '#e2ba7e', backgroundColor: '#9c2628', fontWeight: '600 !important' },
+                        '& svg': {
+                          fill: '#e2ba7e',
+                        },
+                      }}>
+                      <ShoppingCartIcon sx={{ fontSize: '30px' }} />
+                    </Badge>
+                  </div>
                   {/* <IconButton
                     onClick={() => {
                       navigate('/account');
@@ -457,12 +476,15 @@ function DrawerAppBar(props) {
                     sx={{ '&:hover': { backgroundColor: 'transparent' }, marginTop: '16px', textTransform: 'none' }}>
                     Очистить корзину
                   </Button>
+                  <Box sx={{ maxWidth: '260px', fontSize: '14px', textAlign: 'left', backgroundColor: 'rgb(8 3 3)', padding: '16px', borderRadius: '8px' }}>
+                    После оплаты деньги поступят на ваш лицевой счет сайта. После этого не забудьте задонатить игровую валюту в игру. Кнопка "Задонатить" под вводом ID.
+                  </Box>
                 </>
               ) : (
                 <div style={{ margin: '0 auto' }}>Корзина пуста</div>
               )}
             </Drawer>
-            <Badge
+            {/* <Badge
               onClick={handleOpenCart}
               badgeContent={cart?.length || 0}
               color="primary"
@@ -477,7 +499,7 @@ function DrawerAppBar(props) {
                 },
               }}>
               <ShoppingCartIcon sx={{ fontSize: '30px' }} />
-            </Badge>
+            </Badge> */}
             <PaymentCardModal open={openPaymentModal} onClose={handleClosePaymentCardModal} />
           </Box>
           {/* <Box
