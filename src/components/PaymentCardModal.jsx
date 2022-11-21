@@ -66,16 +66,16 @@ export default function PaymentCardModal(props) {
       sx={{
         '& .MuiPaper-root': {
           width: '100%',
-          maxWidth: '500px', // Set your width here
+          maxWidth: '400px', // Set your width here
         },
       }}>
       {}
-      <DialogContent sx={{ height: { xs: '280px', mob: '280px' } }}>
+      <DialogContent sx={{ height: { xs: '80px', mob: '80px' } }}>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <Typography variant="h5" sx={{ maxWidth: { xs: '203px', mob: 'none' }, mb: '24px', mx: 'auto', fontWeight: '600', fontSize: { mob: '24px', textAlign: 'center' } }}>
+          <Typography variant="h5" sx={{ maxWidth: { xs: '203px', mob: 'none' }, mt: '40px', mx: 'auto', fontWeight: '600', fontSize: { mob: '24px', textAlign: 'center' } }}>
             {`Пополнить счет на ${currencyFormat(cart?.map((cartItem) => cartItem?.price * cartItem?.count).reduce((partialSum, a) => partialSum + a, 0))}?`}
           </Typography>
-          <FormControl>
+          {/* <FormControl>
             <FormLabel id="demo-controlled-radio-buttons-group" sx={{ mb: '8px', mx: { xs: 'auto', mob: '0' } }}>
               Способ пополнения
             </FormLabel>
@@ -88,14 +88,9 @@ export default function PaymentCardModal(props) {
               <FormControlLabel sx={{ '& img': { userSelect: 'none', pointerEvents: 'none', boxSizing: 'border-box', p: '0px', width: '140px', height: '80px', objectFit: 'contain', display: 'block' } }} value="1" control={<Radio />} label={<img src="/pay-1.png" style={{}} />} />
               <FormControlLabel sx={{ '& img': { pointerEvents: 'none', boxSizing: 'border-box', p: '10px', width: '140px', height: '80px', objectFit: 'contain', display: 'block', userSelect: 'none' } }} value="2" control={<Radio />} label={<img src="/pay-2.png" style={{}} />} />
               <FormControlLabel sx={{ userSelect: 'none', '& img': { pointerEvents: 'none', userSelect: 'none', width: '140px', height: '80px', objectFit: 'contain', display: 'block' } }} value="3" control={<Radio />} label={<img src="/pay-3.png" style={{}} />} />
-              {/* <FormControlLabel
-                sx={{ userSelect: 'none', '& img': { pointerEvents: 'none', boxSizing: 'border-box', p: '18px', backgroundColor: '#fff', width: '140px', height: '80px', objectFit: 'contain', display: 'block', userSelect: 'none' } }}
-                value="4"
-                control={<Radio />}
-                label={<img src="/pay-4.png" style={{}} />}
-              />  */}
+            
             </RadioGroup>
-          </FormControl>
+          </FormControl> */}
           {(loadingPayment || dataPayment) && <Loading />}
         </div>
       </DialogContent>
