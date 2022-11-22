@@ -21,11 +21,12 @@ const GamePage = () => {
             <li className="game__list-item"> ваш донат полностью легален, печати засчитываются в накопительный игровой счет Мисс Соловья</li>
             <li className="game__list-item"> если возникла ошибка при донате, повторите попытку или напишите нам</li>
             <li className="game__list-item"> мы не несем ответственности, если вы указали неверный ID</li>
+			<li className="game__list-item"> деньги сначала зачисляются на ваш лицевой счет сайта, потом вы их донатите в игру</li>
           </ul>
         </>
       ),
-      helpImage: `/game-img-1.png`,
-      background: '/game-bg.jpg',
+      helpImage: `/id_idv.jpg`,
+      background: '/gameidv-bg.jpg',
       checkPlayer: true,
       serverList: [
         {
@@ -38,19 +39,12 @@ const GamePage = () => {
         },
       ],
       pacakgeImageList: [`/game-img-1.png`, `/game-img-2.png`, `/game-img-3.png`, `/game-img-4.png`, `/game-img-5.png`],
-      privacyContent: (
-        <>
-          Игровую валюту на данной странице вы донатите в пользу NetEase Games. Мы не являемся правообладателем игровой валюты Identity V, не определяем порядок её использования и функционирования в игре. Производя донат в игру Identity V вы соглашаетесь с данным{' '}
-          <a class="link" href="https://game.longeplay.com.tw/member/complete_agreement">
-            пользовательским соглашением
-          </a>
-          , пользовательским соглашением Donate Gold и политикой конфиденциальности.
-        </>
+      privacyContent: (<>Игровую валюту на данной странице вы донатите в пользу NetEase Games. Мы не являемся правообладателем игровой валюты Identity V, не определяем порядок её использования и функционирования в игре. Производя донат в игру Identity V вы соглашаетесь с данным <a class="link" href="https://game.longeplay.com.tw/member/complete_agreement">           пользовательским соглашением</a>, <a class="link" href=" https://donate-gold.ru/terms-of-use">пользовательским соглашением Donate Gold</a> и нашей <a class="link" href="https://donate-gold.ru/privacy-policy">политикой конфиденциальности</a>. </>
       ),
     },
     {
       id: 2,
-      name: 'Донат в игру Genshin',
+      name: 'Донат в игру Genshin Impact',
       desc: (
         <>
           <ul className="game__list">

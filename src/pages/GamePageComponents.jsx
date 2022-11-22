@@ -175,7 +175,7 @@ const GamePageComponent = ({ data }) => {
                   }}>
                   <div className="check-id-label">
                     <span>Ваш игровой ID</span>
-                    {/* <div style={{ position: 'relative' }}>
+                     <div style={{ position: 'relative' }}>
                       <IconButton
                         onClick={() => {
                           setShowHelp(!showHelp);
@@ -185,7 +185,7 @@ const GamePageComponent = ({ data }) => {
                         <HelpOutlineOutlined sx={{ fontSize: '20px', color: '#e2ba7e' }} />
                       </IconButton>
                       <img style={{ position: 'absolute', bottom: '100%', left: 0, maxHeight: '200px', transition: 'opacity 0.3s, visibility 0.3s', ...(!showHelp && { visibility: 'hidden', opacity: '0' }) }} src={data?.helpImage} />
-                    </div> */}
+                    </div>
                   </div>
                 </OutsideClickHandler>
 
