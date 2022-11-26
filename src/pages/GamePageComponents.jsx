@@ -184,7 +184,7 @@ const GamePageComponent = ({ data }) => {
                         sx={{ p: 0, ml: 1, mb: '2px' }}>
                         <HelpOutlineOutlined sx={{ fontSize: '20px', color: '#e2ba7e' }} />
                       </IconButton>
-                      <img style={{ position: 'absolute', bottom: '100%', left: 0, maxHeight: '200px', transition: 'opacity 0.3s, visibility 0.3s', ...(!showHelp && { visibility: 'hidden', opacity: '0' }) }} src={data?.helpImage} />
+                      <img style={{ position: 'absolute', bottom: '150%', right: '-120px', maxHeight: '200px', transition: 'opacity 0.3s, visibility 0.3s', ...(!showHelp && { visibility: 'hidden', opacity: '0' }) }} src={data?.helpImage} />
                     </div>
                   </div>
                 </OutsideClickHandler>

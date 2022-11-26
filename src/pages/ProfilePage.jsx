@@ -1,7 +1,8 @@
-import { Box, Button, Container, IconButton, TextField, Tooltip, Typography } from '@mui/material';
+import { Box, Button, Container, IconButton, TextField, Tooltip, Typography, Paper } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router';
+import Alert from '@mui/material/Alert';
 import DrawerAppBar from '../components/MainLayout';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { currencyFormat } from '../utils/currencyFormat';
@@ -81,11 +82,8 @@ const ProfilePage = () => {
           </Typography>
           <Typography variant="body1" sx={{}}>
             {`${data?.name}`}
-          </Typography>{' '}
-          <Button onClick={handleClickOpenPay} sx={{ mt: 3 }} variant="outlined" size="large">
-            Пополнить
-          </Button>
-          <Typography variant="h5" sx={{ mt: 8, mb: 1 }}>
+          </Typography>
+		  <Typography variant="h5" sx={{ mt: 5, mb: 1 }}>
             Ваш ID на сайте
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
@@ -114,16 +112,26 @@ const ProfilePage = () => {
               </Tooltip>
             </Box>
           </Box>
-          <Typography variant="h5" sx={{ mt: 8, mb: 1 }}>
+
+<Box sx={{ mt: 5, textAlign: 'center', }}>
+		  <Button onClick={handleClickOpenPay} sx={{ mt: 3, }} variant="outlined" size="large">
+            Пополнить счет
+          </Button>
+		  <Typography variant="body1" sx={{ mb: 1, marginTop: '10px'}}>
+            <Alert severity="success">Данный метод пополнения счета больше резервный. В нем иногда не проходит оплата. Лучше воспользуйтесь пополнением счета через страницу игры — кнопочка "купить" в блоке пака, собрав корзину заказа.</Alert>
+          </Typography>
+		  
+</Box>		  
+          <Typography variant="h5" sx={{ mt: 5, mb: 1 }}>
             Реферальная программа
           </Typography>
-          <Typography variant="body1" sx={{ mb: 1, textAlign: 'center' }}>
-            Код вашей реферальной программы
+          <Typography variant="body1" sx={{ mb: 1, textAlign: 'center', fontSize: '12px' }}>
+            Ниже ваш код реферальной программы. Если пользователь зарегистрировался под вашим кодом, то вы будете получать 1% с его доната на ваш личный счет на время действия кода. Код действителен 30 дней, потом нужно создавать новый (появится соответствующая кнопка). Для администраторов сообществ действуют специальные предложения. Если у вас есть сообщество, свяжитесь с нами для экслюзивных условий.
           </Typography>{' '}
           {promoActive !== null && (
             <>
-              <Typography variant="h5" sx={{ mt: 5, mb: 2 }}>
-                Ваш ID промокод
+              <Typography variant="h5" sx={{ mt: 5, mb: 2, marginTop: '-3px' }}>
+                Ваш промокод
               </Typography>
               <Box
                 sx={{
@@ -170,7 +178,7 @@ const ProfilePage = () => {
                 {promoActive ? (
                   <>
                     {' '}
-                    активен в течении <Box sx={{ display: 'inline-block', fontWeight: '600 !important', color: 'success.main' }}>{diffDaysPromo < 1 ? 'сегодняшнего дня' : `${diffDaysPromo} дней`}</Box>
+                    активен в течение <Box sx={{ display: 'inline-block', fontWeight: '600 !important', color: 'success.main' }}>{diffDaysPromo < 1 ? 'сегодняшнего дня' : `${diffDaysPromo} дней`}</Box>
                   </>
                 ) : (
                   'промокод неактивен'
@@ -185,18 +193,18 @@ const ProfilePage = () => {
           )}
         </Box>
         {promoActive !== null && (
-          <Box sx={{ display: 'grid', justifyContent: 'space-evenly', mt: 3, gridTemplateColumns: '300px 300px' }}>
+          <Box sx={{ display: 'grid', justifyContent: 'space-evenly', mt: 3, }}>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Typography variant="h6" sx={{ mb: 1 }}>
                 Начислено всего по программе
               </Typography>
-              {<Box sx={{ fontWeight: '600 !important', fontSize: '24px' }}>{data?.totalRefferal ? currencyFormat(parseFloat(data?.totalRefferal)) : currencyFormat(0)}</Box>}
+              {<Box sx={{ fontWeight: '600 !important', fontSize: '20px' }}>{data?.totalRefferal ? currencyFormat(parseFloat(data?.totalRefferal)) : currencyFormat(0)}</Box>}
             </Box>
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <Typography variant="h6" sx={{ mb: 1 }}>
+              <Typography variant="h6" sx={{ mb: 1, mt: 3 }}>
                 Начислено сегодня
               </Typography>
-              {<Box sx={{ fontWeight: '600 !important', fontSize: '24px' }}>{data?.totalRefferalToday ? currencyFormat(parseFloat(data?.totalRefferalToday)) : currencyFormat(0)}</Box>}
+              {<Box sx={{ fontWeight: '600 !important', fontSize: '20px' }}>{data?.totalRefferalToday ? currencyFormat(parseFloat(data?.totalRefferalToday)) : currencyFormat(0)}</Box>}
             </Box>
           </Box>
         )}
@@ -209,7 +217,7 @@ const ProfilePage = () => {
             onClick={() => {
               onExit();
             }}>
-            Выход
+            Выйти из аккаунта
           </Button>
         </Box>
         {loadingGenPromo && <Loading />}
