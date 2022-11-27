@@ -76,6 +76,15 @@ export default function SelectPackageModal(props) {
                       label={
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '2px' }}>
                           <div class="game-card__middle" style={{ marginBottom: '5px', fontSize: '14px' }}>
+                            <img
+                              src={`/game-icon-${packageItem?.typeGameId}.png`}
+                              style={{
+                                objectFit: 'contain',
+                                display: 'block',
+                                width: '22px',
+                                height: '22px',
+                              }}
+                            />
                             {packageItem?.name}
                           </div>
                           <Box sx={{ fontWeight: '600 !important', fontSize: '18px', marginLeft: '12px' }}>{currencyFormat(packageItem?.price)}</Box>

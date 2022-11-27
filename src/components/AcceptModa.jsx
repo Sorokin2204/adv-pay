@@ -60,6 +60,15 @@ export default function AcceptModal(props) {
           </Typography>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '2px' }}>
             <div class="game-card__middle" style={{ marginBottom: '5px', fontSize: '14px' }}>
+              <img
+                src={`/game-icon-${activePackage?.typeGameId}.png`}
+                style={{
+                  objectFit: 'contain',
+                  display: 'block',
+                  width: '22px',
+                  height: '22px',
+                }}
+              />
               {activePackage?.name}
             </div>
             <Box sx={{ fontWeight: '600 !important', fontSize: '18px', marginLeft: '12px' }}>{currencyFormat(activePackage?.price)}</Box>
