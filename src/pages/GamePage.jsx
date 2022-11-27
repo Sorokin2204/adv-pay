@@ -38,7 +38,7 @@ const GamePage = () => {
           serverId: '2001',
         },
       ],
-      pacakgeImageList: [`/game-img-1.png`, `/game-img-2.png`, `/game-img-3.png`, `/game-img-4.png`, `/game-img-5.png`],
+      pacakgeImageList: [`/game-img-1.png`, `/game-img-2.png`, `/game-img-3.png`, `/game-img-4.png`, `/game-img-5.png` ,],
       privacyContent: (<>Игровую валюту на данной странице вы донатите в пользу NetEase Games. Мы не являемся правообладателем игровой валюты Identity V, не определяем порядок её использования и функционирования в игре. Производя донат в игру Identity V вы соглашаетесь с данным <a class="link" href="https://game.longeplay.com.tw/member/complete_agreement">           пользовательским соглашением</a>, <a class="link" href=" https://donate-gold.ru/terms-of-use">пользовательским соглашением Donate Gold</a> и нашей <a class="link" href="https://donate-gold.ru/privacy-policy">политикой конфиденциальности</a>. </>
       ),
     },
@@ -56,18 +56,18 @@ const GamePage = () => {
         </>
       ),
       helpImage: `/game-img-1.png`,
-      background: '/game-bg.jpg',
+      background: '/back-genshin.jpg',
       checkPlayer: false,
       serverList: [
-        {
-          name: 'America',
-          serverId: 'America',
-        },
         {
           name: 'Europe',
           serverId: 'Europe',
         },
-        {
+		{
+          name: 'America',
+          serverId: 'America',
+        },
+                {
           name: 'Asia',
           serverId: 'Asia',
         },
@@ -76,13 +76,9 @@ const GamePage = () => {
           serverId: 'TW, HK, MO',
         },
       ],
-      pacakgeImageList: [`/game-img-1.png`, `/game-img-2.png`, `/game-img-3.png`, `/game-img-4.png`, `/game-img-5.png`],
+      pacakgeImageList: [`/game-img-6-1.png`, `/game-img-6.png`, `/game-img-6.png`, `/game-img-6.png`, `/game-img-6.png`, `/game-img-6.png`, `/game-img-6.png`],
       privacyContent: (
-        <>
-          Политика
-          <a class="link" href="https://game.longeplay.com.tw/member/complete_agreement">
-            пользовательским соглашением
-          </a>
+        <>Игровую валюту на данной странице вы донатите в пользу HoYoverse (miHoYo). Мы не являемся правообладателем игровой валюты Genshin Impact, не определяем порядок её использования и функционирования в игре. Производя донат в игру Genshin Impact  вы соглашаетесь с данным <a class="link" href="https://genshin.hoyoverse.com/ru/company/privacy">           пользовательским соглашением</a>, <a class="link" href=" https://donate-gold.ru/terms-of-use">пользовательским соглашением Donate Gold</a> и нашей <a class="link" href="https://donate-gold.ru/privacy-policy">политикой конфиденциальности</a>.
         </>
       ),
     },
