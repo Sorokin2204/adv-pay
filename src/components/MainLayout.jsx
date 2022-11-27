@@ -213,7 +213,7 @@ function DrawerAppBar(props) {
           },
         }}>
         <Box sx={{ display: 'flex', height: '70%' }}>
-          <AppBar component="nav" sx={{ boxShadow: 0, backgroundColor: '#060606'}}>
+          <AppBar component="nav" sx={{ boxShadow: 0, backgroundColor: '#060606' }}>
             <Toolbar variant="dense" sx={{ minHeight: '60px' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -377,6 +377,15 @@ function DrawerAppBar(props) {
                     <div style={{ paddingBottom: '14px', borderBottom: '1px solid #474747', paddingTop: indexCart == 0 ? '0' : '14px' }}>
                       <div style={{ display: 'grid', alignItems: 'center', gridGap: '60px', gridTemplateColumns: 'auto auto' }}>
                         <div class="game-card__middle" style={{ marginBottom: '6px', fontSize: '14px' }}>
+                          <img
+                            src={`/game-icon-${dataPackages?.find((findPack) => findPack?.id === itemCart?.packageId)?.typeGameId}.png`}
+                            style={{
+                              objectFit: 'contain',
+                              display: 'block',
+                              width: '22px',
+                              height: '22px',
+                            }}
+                          />
                           {itemCart?.name}
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center' }}>

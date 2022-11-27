@@ -175,7 +175,7 @@ const GamePageComponent = ({ data }) => {
                   }}>
                   <div className="check-id-label">
                     <span>Ваш игровой ID</span>
-                     <div style={{ position: 'relative' }}>
+                    <div style={{ position: 'relative' }}>
                       <IconButton
                         onClick={() => {
                           setShowHelp(!showHelp);
@@ -260,6 +260,7 @@ const GamePageComponent = ({ data }) => {
                       img={data?.pacakgeImageList[index]}
                       price={packageItem?.price}
                       value={packageItem?.code}
+                      gameId={packageItem?.typeGameId}
                       label={packageItem?.name}
                       onClickCard={() => {
                         if (!disableDonate) setActiveCard(index);
