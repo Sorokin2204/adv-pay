@@ -6,6 +6,7 @@ import '../styles/ListGame.scss';
 import ItemGame from './ItemGame';
 const ListGame = () => {
   const listGame = [
+    { img: '/genshin-impact.jpg', name: 'Genshin Impact', link: 'genshin-impact' },
     { img: '/identityv.png', name: 'Identity V', link: 'identity-v' },
     { img: '/lotr-risetowar.jpg', name: 'Скоро!' },
     { img: '/oaglobalpay.jpg', name: 'Скоро!' },

@@ -60,7 +60,7 @@ const GamePage = () => {
 		</ul>
         </>
       ),
-      helpImage: `/game-img-1.png`,
+      helpImage: `/id_genshin.jpg`,
       background: '/back-genshin.jpg',
       checkPlayer: false,
       serverList: [
