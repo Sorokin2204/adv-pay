@@ -69,7 +69,7 @@ const HomeSlider = () => {
           </div>
         </div>
         {/* 2 */}
-        {/*<div className="hero-slide">
+        <div className="hero-slide">
           <div className="slide-image" data-swiper-parallax={parallaxAmount} data-swiper-parallax-opacity={parallaxOpacity}>
             <img src={image2} alt="image2" />
           </div>
@@ -88,18 +88,18 @@ const HomeSlider = () => {
               }}>
               <div data-swiper-parallax={parallaxAmount} data-swiper-parallax-opacity={parallaxOpacity}>
                 <Box className="" sx={{ marginBottom: '5px', fontSize: { mobile: '24px', xs: '18px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Identity V × Project Zero II: Crimson Butterfly
+                  Обновление 3.3. в Gensgin Impact!
                 </Box>
                 <Box className="mb-5 small" sx={{ opacity: '0.7', marginBottom: { mobile: '0px', xs: '15px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Событие доступно с 24.11
+                  Новый персонаж Скарамуччи доступен с 07.12
                 </Box>
               </div>{' '}
-              {/* <button class="slider-button">Find out Now</button>
+              {/* <button class="slider-button">Find out Now</button> */}
             </Box>
           </div> 
-        </div> */}
+        </div>
       </Swiper>
-      {/* <div className="swiper-pagination-custom"></div> */}
+      <div className="swiper-pagination-custom"></div>
     </div>
   );
 };

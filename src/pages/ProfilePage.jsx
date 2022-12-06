@@ -143,7 +143,7 @@ const ProfilePage = () => {
                     Пополнить счет
                   </Button>
                   <Typography variant="body1" sx={{ mb: 1, marginTop: '10px' }}>
-                    <Alert severity="success">Данный метод пополнения счета больше резервный. В нем иногда не проходит оплата. Лучше воспользуйтесь пополнением счета через страницу игры — кнопочка "купить" в блоке пака, собрав корзину заказа.</Alert>
+                    <Alert severity="success">Через данную кнопку вы можете пополнить свой личный счет на сайте на любую сумму. Доступны оплаты по карте, Qiwi, YooMoney.</Alert>
                   </Typography>
                 </Box>
                 <Box sx={{ mt: 5, textAlign: 'center' }}>
