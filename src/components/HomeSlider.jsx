@@ -91,7 +91,7 @@ const HomeSlider = () => {
                   Обновление 3.3. в Gensgin Impact!
                 </Box>
                 <Box className="mb-5 small" sx={{ opacity: '0.7', marginBottom: { mobile: '0px', xs: '15px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Новый персонаж Скарамуччи доступен с 07.12
+                  Новый персонаж Странник доступен с 07.12
                 </Box>
               </div>{' '}
               {/* <button class="slider-button">Find out Now</button> */}
