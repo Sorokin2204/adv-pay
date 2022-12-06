@@ -256,7 +256,7 @@ const GamePageComponent = ({ data }) => {
                 </button>
               </div>
             </Box>
-            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '60px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '55px' }}>
               <div className="game__card-grid">
                 {packageList
                   ?.filter((pack) => pack?.typeGameId === data?.id)
