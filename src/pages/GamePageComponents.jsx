@@ -101,7 +101,7 @@ const GamePageComponent = ({ data }) => {
       const playerId = getValues('playerId');
       const serverId = getValues('serverId');
       if (playerId) {
-        dispatch(checkUser({ playerId, serverId }));
+        dispatch(checkUser({ playerId, serverId, typeGameId: data?.id }));
       }
     }
   };
@@ -146,6 +146,7 @@ const GamePageComponent = ({ data }) => {
   const [selectedGameCode, setselectedGameCode] = useState(null);
   const [selectedPackageId, setSelectedPackageId] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
+  const [policyLight, setPolicyLight] = useState(false);
   return (
     <>
       <div className="game" style={{ backgroundImage: `url("${data?.background}")` }}>
@@ -197,14 +198,13 @@ const GamePageComponent = ({ data }) => {
                     </button>
                   )}
                 </Box>
-                <label class="accept-checkbox" id="agree-block">
+                <label style={{ backgroundColor: policyLight ? '#ad2305' : 'transparent', transition: 'background-color 0.5s' }} class="accept-checkbox" id="agree-block">
                   <input type="checkbox" name="accept" onClick={handleAgree} checked={isAgree} />
                   <span>{data?.privacyContent}</span>
                 </label>
               </div>
 
               <div style={{ height: data?.checkPlayer ? '130px' : '22px', display: 'flex', marginRight: 'auto', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-                {' '}
                 {checkLoading ? (
                   <div style={{ display: 'flex', margin: '0 auto', marginTop: '30px', justifyContent: 'center' }}>
                     {' '}
@@ -213,15 +213,19 @@ const GamePageComponent = ({ data }) => {
                 ) : !checkData && !checkError && !checkLoading ? (
                   <></>
                 ) : checkData && !checkError ? (
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', marginRight: 'auto' }}>
-                    <div className="check-id-label">Ваш ник</div>
-                    <Box className="" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '20px', mb: '4px', mt: '-4px' }}>
-                      <b> {checkData?.nickname}</b>
-                      <img src="/check.png" style={{ marginLeft: '6px' }} />
-                    </Box>{' '}
-                    <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '20px', mt: '2px' }}>
-                      <b> {checkData?.id}</b>
-                    </Box>
+                  <div>
+                    {checkData?.image && <img style={{ borderRadius: '8px', background: 'white', width: '120px', position: 'absolute', left: 0, top: '10px' }} src={checkData?.image} />}
+
+                    <div style={{ paddingLeft: checkData?.image ? '130px' : '0px', display: 'flex', flexDirection: 'column', alignItems: 'start', marginRight: 'auto' }}>
+                      <div className="check-id-label">Ваш ник</div>
+                      <Box className="" sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: '20px', mb: '4px', mt: '-4px' }}>
+                        <b> {checkData?.nickname}</b>
+                        <img src="/check.png" style={{ marginLeft: '6px' }} />
+                      </Box>{' '}
+                      <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '20px', mt: '2px' }}>
+                        <b> {checkData?.id}</b>
+                      </Box>
+                    </div>
                   </div>
                 ) : (
                   <div style={{ marginTop: '40px', marginLeft: '10px', display: 'flex', flexDirection: 'column', margin: '0 auto' }}>
@@ -232,16 +236,19 @@ const GamePageComponent = ({ data }) => {
                   </div>
                 )}
                 <button
-                  disabled={disableDonate}
+                  disabled={data?.checkRequired === false ? data?.checkRequired : disableDonate}
                   class="check-id-btn finish-donate"
-                  style={{ marginTop: '10px', position: 'absolute', ...(!disableDonate || checkData ? { bottom: '-30px' } : { top: '0px' }), left: 0 }}
+                  style={{ marginLeft: checkData?.image ? '130px' : '0px', marginTop: '10px', position: 'absolute', ...(!disableDonate || checkData ? { bottom: checkData?.image ? '-50px' : '-30px' } : { top: '0px' }), left: 0 }}
                   onClick={() => {
                     const playerIdData = getValues('playerId');
                     if (playerIdData) {
                       if (isAgree) {
                         handleOpenSelectPackage();
                       } else {
-                        document.getElementById('agree-block').scrollIntoView({ behavior: 'smooth' });
+                        setPolicyLight(true);
+                        setTimeout(() => {
+                          setPolicyLight(false);
+                        }, 500);
                       }
                     }
                   }}>

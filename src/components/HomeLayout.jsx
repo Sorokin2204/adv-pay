@@ -34,6 +34,7 @@ import Footer from './Footer';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ResetPassModal from './ResetPassModal';
+import GameButton from './GameButton';
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
@@ -67,7 +68,7 @@ function HomeLayout(props) {
           component="nav"
           sx={{
             boxShadow: 0,
-			backgroundColor: '#060606',
+            backgroundColor: '#060606',
           }}>
           <Toolbar variant="dense">
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
@@ -124,12 +125,19 @@ function HomeLayout(props) {
                     <span> Войти</span>
                   </Button>
                 ) : (
-                  <Button
-                    style={{ height: '30px', lineHeight: '2', textTransform: 'none', background: '#000000a3', color: ' rgb(255 255 255)', height: '30px', lineHeight: '2', textTransform: 'none', border: '1px solid rgb(255 255 255 / 50%)' }}
-                    variant="outlined"
-                    onClick={() => navigate('/account')}>
-                    Кабинет
-                  </Button>
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <GameButton
+                      onClick={() => {
+                        navigate('/account');
+                      }}
+                    />
+                    <Button
+                      style={{ height: '30px', lineHeight: '2', textTransform: 'none', background: '#000000a3', color: ' rgb(255 255 255)', height: '30px', lineHeight: '2', textTransform: 'none', border: '1px solid rgb(255 255 255 / 50%)' }}
+                      variant="outlined"
+                      onClick={() => navigate('/profile')}>
+                      Кабинет
+                    </Button>
+                  </div>
                 )}
               </Box>
             </Box>

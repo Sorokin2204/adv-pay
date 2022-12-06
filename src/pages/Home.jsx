@@ -15,13 +15,13 @@ import PaymentTable from '../components/PaymentTable';
 import Footer from '../components/Footer';
 import ListGame from '../components/ListGame';
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+export function TabPanel(props) {
+  const { children, value, index, styleBox = {}, ...other } = props;
 
   return (
     <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 3, ...styleBox }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -29,7 +29,7 @@ function TabPanel(props) {
   );
 }
 
-function a11yProps(index) {
+export function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
@@ -51,20 +51,10 @@ const HomePage = () => {
             <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%', height: 'auto' }}>
               <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                 <Tab label="Игры" {...a11yProps(0)} />
-                <Tab label="Донаты " {...a11yProps(1)} />
-                <Tab label="Пополнение счета" {...a11yProps(2)} />
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              {' '}
               <ListGame />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              {' '}
-              <TrancTable title="Последние донаты" />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-              <PaymentTable title="Пополнение счета" />
             </TabPanel>
           </Box>
         </Paper>

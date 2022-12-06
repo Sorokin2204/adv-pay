@@ -65,6 +65,9 @@ export const checkUser = createAsyncThunk('user/checkUser', (ids, { rejectWithVa
 
   return axios
     .get(`${process.env.REACT_APP_SERVER_URL}/user/check/${ids.playerId}/${ids.serverId}`, {
+      params: {
+        typeGameId: ids.typeGameId,
+      },
       headers: {
         request_token: token,
       },

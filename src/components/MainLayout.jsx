@@ -388,7 +388,7 @@ function DrawerAppBar(props) {
                           />
                           {itemCart?.name}
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
                           <TextField
                             onChange={(event) => {
                               let updateCount = parseInt(event.target.value);
