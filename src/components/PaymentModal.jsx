@@ -28,7 +28,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { a11yProps, TabPanel } from '../pages/Home';
 import { initPaymentCard } from '../redux/slices/user.slice';
 export default function PaymentModal(props) {
-  const { onClose, selectedValue, open } = props;
+  const { onClose, selectedValue, open, typePay } = props;
   const defaultValues = {
     price: '',
   };
@@ -53,7 +53,7 @@ export default function PaymentModal(props) {
   const {
     getUserState: { data: user },
   } = useSelector((state) => state.user);
-  const [value, setValueTab] = React.useState(0);
+  const [value, setValueTab] = React.useState(typePay);
 
   const handleChange = (event, newValue) => {
     setValueTab(newValue);
@@ -65,88 +65,95 @@ export default function PaymentModal(props) {
       <form method="POST" action="https://merchant.webmoney.ru/lmi/payment_utf.asp?at=authtype_16" accept-charset="utf-8">
         <DialogContent sx={{ pb: '16px', pt: '0px', pb: '24px' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%', height: 'auto' }}>
-            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+            {/* <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
               <Tab label="Webmoney" {...a11yProps(0)} />
               <Tab label="Карта" {...a11yProps(1)} />
-            </Tabs>
+            </Tabs> */}
           </Box>
-          <TabPanel value={value} index={0} styleBox={{ p: 1, height: '91px' }}>
-            <div style={{ justifyContent: 'center', display: 'flex', alignItems: 'center' }}>
-              <IconButton
-                sx={{ mt: '16px' }}
-                onClick={() => {
-                  if (sum !== 5) setSum(sum - 5);
-                }}>
-                <MinusIcon />
-              </IconButton>
+          {typePay === 1 ? (
+            <Box styleBox={{ p: 1, height: '91px' }}>
               <TextField
                 onChange={(e) => {
-                  e.stopPropagation();
+                  setCardSum(e.target.value);
+                }}
+                onBlur={(e) => {
+                  const valSum = parseInt(e.target.value);
+                  if (valSum < 100 || !valSum || isNaN(valSum)) {
+                    setCardSum(100);
+                  }
+
+                  if (valSum > 75000) {
+                    setCardSum(75000);
+                  }
                 }}
                 name="LMI_PAYMENT_AMOUNT"
                 prefix={'sdf'}
-                value={sum}
+                value={cardSum}
                 type="number"
-                inputProps={{ min: 0, style: { textAlign: 'center', paddingLeft: '24px' } }}
-                sx={{ mt: '16px', maxWidth: '100px', textAlign: 'center' }}
+                inputProps={{ min: 100, style: { textAlign: 'center', paddingLeft: '24px' } }}
+                sx={{ mt: '16px', mx: 'auto', display: 'flex', maxWidth: '100px', textAlign: 'center' }}
                 label={'Сумма'}
                 variant="outlined"
                 size="small"
                 autoComplete="off"
                 InputProps={{
-                  endAdornment: <InputAdornment position="end">$</InputAdornment>,
+                  endAdornment: <InputAdornment position="end">₽</InputAdornment>,
                 }}
-              />{' '}
-              <IconButton
-                sx={{ mt: '16px' }}
-                onClick={() => {
-                  if (sum !== 300) setSum(sum + 5);
-                }}>
-                <AddIcon />
-              </IconButton>
-            </div>
-            <div className="" style={{ marginTop: '8px', display: 'flex', alignItems: 'center', fontSize: '14px' }}>
-              <p style={{ opacity: '0.6', margin: 0 }}>Будет зачисленно&nbsp;</p>
-              <b>{currencyFormat(parseFloat(rate?.replace(',', '.')) * sum)}</b>
-            </div>
-          </TabPanel>
-          <TabPanel value={value} index={1} styleBox={{ p: 1, height: '91px' }}>
-            <TextField
-              onChange={(e) => {
-                setCardSum(e.target.value);
-              }}
-              onBlur={(e) => {
-                const valSum = parseInt(e.target.value);
-                if (valSum < 100 || !valSum || isNaN(valSum)) {
-                  setCardSum(100);
-                }
-
-                if (valSum > 75000) {
-                  setCardSum(75000);
-                }
-              }}
-              name="LMI_PAYMENT_AMOUNT"
-              prefix={'sdf'}
-              value={cardSum}
-              type="number"
-              inputProps={{ min: 100, style: { textAlign: 'center', paddingLeft: '24px' } }}
-              sx={{ mt: '16px', mx: 'auto', display: 'flex', maxWidth: '100px', textAlign: 'center' }}
-              label={'Сумма'}
-              variant="outlined"
-              size="small"
-              autoComplete="off"
-              InputProps={{
-                endAdornment: <InputAdornment position="end">₽</InputAdornment>,
-              }}
-            />
-          </TabPanel>
+              />
+              <div className="" style={{ marginTop: '8px', display: 'flex', alignItems: 'center', fontSize: '14px' }}>
+                <p style={{ opacity: '0.6', margin: 0 }}>мин</p> <b>&nbsp;{currencyFormat(100)}</b>
+                <p style={{ opacity: '0.6', margin: 0 }}>, макс</p> <b>&nbsp;{currencyFormat(75000)}</b>
+              </div>
+            </Box>
+          ) : (
+            <Box styleBox={{ p: 1, height: '91px' }}>
+              <div style={{ justifyContent: 'center', display: 'flex', alignItems: 'center' }}>
+                <IconButton
+                  sx={{ mt: '16px' }}
+                  onClick={() => {
+                    if (sum !== 5) setSum(sum - 5);
+                  }}>
+                  <MinusIcon />
+                </IconButton>
+                <TextField
+                  onChange={(e) => {
+                    e.stopPropagation();
+                  }}
+                  name="LMI_PAYMENT_AMOUNT"
+                  prefix={'sdf'}
+                  value={sum}
+                  type="number"
+                  inputProps={{ min: 0, style: { textAlign: 'center', paddingLeft: '24px' } }}
+                  sx={{ mt: '16px', maxWidth: '100px', textAlign: 'center' }}
+                  label={'Сумма'}
+                  variant="outlined"
+                  size="small"
+                  autoComplete="off"
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">$</InputAdornment>,
+                  }}
+                />{' '}
+                <IconButton
+                  sx={{ mt: '16px' }}
+                  onClick={() => {
+                    if (sum !== 300) setSum(sum + 5);
+                  }}>
+                  <AddIcon />
+                </IconButton>
+              </div>
+              <div className="" style={{ marginTop: '8px', display: 'flex', alignItems: 'center', fontSize: '14px' }}>
+                <p style={{ opacity: '0.6', margin: 0 }}>Будет зачисленно&nbsp;</p>
+                <b>{currencyFormat(parseFloat(rate?.replace(',', '.')) * sum)}</b>
+              </div>
+            </Box>
+          )}
         </DialogContent>
         <DialogActions>
           <div style={{ display: 'grid', gridGap: '8px', gridTemplateColumns: '1fr 1fr' }}>
             <Button onClick={handleClose} autoFocus variant="text">
               Закрыть
             </Button>
-            {value === 0 ? (
+            {typePay === 2 ? (
               <Button type="submit" autoFocus variant="contained">
                 Пополнить
               </Button>

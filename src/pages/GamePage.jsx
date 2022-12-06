@@ -29,6 +29,7 @@ const GamePage = () => {
       background: '/gameidv-bg.jpg',
       checkPlayer: true,
       checkRequired: true,
+      checkText: 'Подтвердить',
       serverList: [
         {
           name: 'NA/EU',
@@ -81,6 +82,7 @@ const GamePage = () => {
       background: '/back-genshin.jpg',
       checkPlayer: true,
       checkRequired: false,
+      checkText: 'Проверить',
       serverList: [
         {
           name: 'Europe',

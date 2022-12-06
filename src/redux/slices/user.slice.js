@@ -75,6 +75,20 @@ export const checkUser = createAsyncThunk('user/checkUser', (ids, { rejectWithVa
     .then((response) => response.data)
     .catch((error) => rejectWithValue(error.response.data));
 });
+
+export const getBonus = createAsyncThunk('user/getBonus', (ids, { rejectWithValue }) => {
+  const token = localStorage?.getItem('token');
+  if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
+
+  return axios
+    .get(`${process.env.REACT_APP_SERVER_URL}/user/bonus`, {
+      headers: {
+        request_token: token,
+      },
+    })
+    .then((response) => response.data)
+    .catch((error) => rejectWithValue(error.response.data));
+});
 export const initPaymentCard = createAsyncThunk('user/initPaymentCard', (data, { rejectWithValue }) => {
   const token = localStorage?.getItem('token');
   if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
@@ -111,6 +125,11 @@ const userInitialState = {
     error: null,
   },
   resetPasswordUserState: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  getBonusState: {
     data: null,
     loading: false,
     error: null,
@@ -221,7 +240,28 @@ const userSlice = createSlice({
         error: action.payload,
       };
     },
-
+    // GET BONUS
+    [getBonus.pending]: (state, action) => {
+      state.getBonusState = {
+        loading: true,
+        data: null,
+        error: null,
+      };
+    },
+    [getBonus.fulfilled]: (state, action) => {
+      state.getBonusState = {
+        loading: false,
+        data: action.payload,
+        error: null,
+      };
+    },
+    [getBonus.rejected]: (state, action) => {
+      state.getBonusState = {
+        loading: false,
+        data: null,
+        error: action.payload,
+      };
+    },
     // LOGIN
     [checkUser.pending]: (state, action) => {
       state.checkUserState = {

@@ -19,6 +19,7 @@ const ProfilePage = () => {
     generatePromoCodeState: { loading: loadingGenPromo, data: dataGenPromo, error: errorGenPromo },
   } = useSelector((state) => state.user);
   const [openCopy, setOpenCopy] = React.useState(false);
+  const [typePay, setTypePay] = useState(1);
   const [promoActive, setPromoActive] = useState(null);
   const [diffDaysPromo, setDiffDaysPromo] = useState(null);
   const [openCopyPromo, setOpenCopyPromo] = React.useState(false);
@@ -27,8 +28,9 @@ const ProfilePage = () => {
   const handleTooltipClose = () => {
     setOpenCopy(false);
   };
-  const handleClickOpenPay = () => {
+  const handleClickOpenPay = (typePayParam) => {
     setOpenPay(true);
+    setTypePay(typePayParam);
   };
   const [value, setValue] = React.useState(0);
 
@@ -85,9 +87,9 @@ const ProfilePage = () => {
         <Box sx={{ width: '100%', height: '100%' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '100%', height: 'auto' }}>
             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ justifyContent: 'center' }}>
-              <Tab label="Личный кабинет" {...a11yProps(0)} />
+              <Tab label="Кабинет" {...a11yProps(0)} />
               <Tab label="Донаты" {...a11yProps(1)} />
-              <Tab label="Пополнение счета" {...a11yProps(2)} />
+              <Tab label="Оплаты" {...a11yProps(2)} />
             </Tabs>
           </Box>
 
@@ -131,8 +133,28 @@ const ProfilePage = () => {
                   </Box>
                 </Box>
                 <Box sx={{ mt: 5, textAlign: 'center' }}>
-                  <Button onClick={handleClickOpenPay} sx={{ mt: 3 }} variant="outlined" size="large">
+                  <Button
+                    onClick={() => {
+                      handleClickOpenPay(1);
+                    }}
+                    sx={{ mt: 3 }}
+                    variant="outlined"
+                    size="large">
                     Пополнить счет
+                  </Button>
+                  <Typography variant="body1" sx={{ mb: 1, marginTop: '10px' }}>
+                    <Alert severity="success">Данный метод пополнения счета больше резервный. В нем иногда не проходит оплата. Лучше воспользуйтесь пополнением счета через страницу игры — кнопочка "купить" в блоке пака, собрав корзину заказа.</Alert>
+                  </Typography>
+                </Box>
+                <Box sx={{ mt: 5, textAlign: 'center' }}>
+                  <Button
+                    onClick={() => {
+                      handleClickOpenPay(2);
+                    }}
+                    sx={{ mt: 3 }}
+                    variant="outlined"
+                    size="large">
+                    Пополнить счет (резерв)
                   </Button>
                   <Typography variant="body1" sx={{ mb: 1, marginTop: '10px' }}>
                     <Alert severity="success">Данный метод пополнения счета больше резервный. В нем иногда не проходит оплата. Лучше воспользуйтесь пополнением счета через страницу игры — кнопочка "купить" в блоке пака, собрав корзину заказа.</Alert>
@@ -248,7 +270,7 @@ const ProfilePage = () => {
           </TabPanel>
         </Box>
       </Paper>
-      <PaymentModal open={openPay} onClose={handleClosePay} />
+      <PaymentModal open={openPay} typePay={typePay} onClose={handleClosePay} />
     </DrawerAppBar>
   );
 };

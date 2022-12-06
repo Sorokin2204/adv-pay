@@ -194,7 +194,7 @@ const GamePageComponent = ({ data }) => {
                   <Controller control={control} rules={{ required: true }} name="playerId" render={({ field }) => <input class="check-id-input" {...field} type="number" disabled={checkLoading || disableCheck} autoComplete="off" />} />
                   {data?.checkPlayer && (
                     <button class="check-id-btn" onClick={() => onCheckPlayer()} disabled={checkLoading} style={{ opacity: checkLoading ? '0.7' : '1', minWidth: '210px', cursor: checkLoading ? 'auto' : 'pointer' }}>
-                      {repeatCheck ? 'Ввести снова' : 'Подтвердить'}
+                      {repeatCheck ? 'Ввести снова' : data?.checkText}
                     </button>
                   )}
                 </Box>
@@ -238,7 +238,7 @@ const GamePageComponent = ({ data }) => {
                 <button
                   disabled={data?.checkRequired === false ? data?.checkRequired : disableDonate}
                   class="check-id-btn finish-donate"
-                  style={{ marginLeft: checkData?.image ? '130px' : '0px', marginTop: '10px', position: 'absolute', ...(!disableDonate || checkData ? { bottom: checkData?.image ? '-50px' : '-30px' } : { top: '0px' }), left: 0 }}
+                  style={{ marginLeft: '0px', marginTop: '10px', position: 'absolute', ...(!disableDonate || checkData ? { bottom: checkData?.image ? '-50px' : '-30px' } : { top: '0px' }), left: 0 }}
                   onClick={() => {
                     const playerIdData = getValues('playerId');
                     if (playerIdData) {

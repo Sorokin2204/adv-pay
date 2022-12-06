@@ -40,6 +40,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import PaymentCardModal from './PaymentCardModal';
 import GameButton from './GameButton';
+import BonusMenu from './BonusMenu';
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
@@ -61,6 +62,7 @@ function DrawerAppBar(props) {
     getUserState: { loading, data, error },
     cart,
     updateCartEmpty,
+    getBonusState: { loading: loadingBonus, data: dataBonus, error: dataError },
   } = useSelector((state) => state.user);
   const {
     getCreditCardState: { error: errorCreditCard },
@@ -201,6 +203,7 @@ function DrawerAppBar(props) {
   const handleOpenCart = () => {
     setShowCart(true);
   };
+
   return !loading && data && !error ? (
     <>
       <Paper
@@ -522,6 +525,8 @@ function DrawerAppBar(props) {
             На сайте ведутся технические работы. Скоро сайт заработает
           </Box> */}
         </Box>{' '}
+        {loadingBonus && <Loading />}
+        <BonusMenu />
       </Paper>
     </>
   ) : (

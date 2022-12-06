@@ -94,9 +94,11 @@ function HomeLayout(props) {
                     <MenuItem onClick={() => navigate('/support')}>Поддержка</MenuItem>
                   </Menu>
                 </Box>
-                <Link to="/">
-                  <img src="/logo.png" style={{ height: '60px', width: '101px', objectFit: 'cover', display: 'block' }} />
-                </Link>
+                <Box sx={{ display: { mobile: 'block', xs: ' none' } }}>
+                  <Link to="/">
+                    <img src="/logo.png" style={{ height: '60px', width: '101px', objectFit: 'cover', display: 'block' }} />
+                  </Link>
+                </Box>
               </Box>
               <Box sx={{ display: { mobile: 'flex', xs: 'none' }, justifyContent: 'center', alignItems: 'center', mr: 1 }}>
                 <Button disableRipple={true} onClick={() => navigate('/about')} sx={{ textTransform: 'none', '&:hover': { backgroundColor: 'transparent' }, my: 2, color: 'white', display: 'block' }}>
