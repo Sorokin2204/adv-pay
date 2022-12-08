@@ -105,6 +105,11 @@ const GamePageComponent = ({ data }) => {
       }
     }
   };
+  useEffect(() => {
+    return () => {
+      dispatch(checkUserReset());
+    };
+  }, []);
 
   const onSubmit = (packageId) => {
     const playerIdData = getValues('playerId');
@@ -147,6 +152,12 @@ const GamePageComponent = ({ data }) => {
   const [selectedPackageId, setSelectedPackageId] = useState(null);
   const [showHelp, setShowHelp] = useState(false);
   const [policyLight, setPolicyLight] = useState(false);
+  useEffect(() => {
+    return () => {
+      // dispatch(resetCheck)
+    };
+  }, []);
+
   return (
     <>
       <div className="game" style={{ backgroundImage: `url("${data?.background}")` }}>
@@ -191,7 +202,39 @@ const GamePageComponent = ({ data }) => {
                 </OutsideClickHandler>
 
                 <Box sx={{ display: 'flex', flexDirection: { xs: 'column', mob: 'row' } }}>
-                  <Controller control={control} rules={{ required: true }} name="playerId" render={({ field }) => <input class="check-id-input" {...field} type="number" disabled={checkLoading || disableCheck} autoComplete="off" />} />
+                  <Controller
+                    control={control}
+                    rules={{ required: true }}
+                    name="playerId"
+                    render={({ field }) => (
+                      <input
+                        class="check-id-input"
+                        {...field}
+                        onChange={(event) => {
+                          const newVal = event.target.value;
+                          if (newVal.length <= 9) {
+                            field.onChange(event.target.value);
+                          }
+                          if (data.id === 2 && newVal?.length >= 1) {
+                            const firstServerId = newVal.substring(0, 1);
+                            console.log(firstServerId);
+                            if (firstServerId === '6') {
+                              setValue('serverId', 'America');
+                            } else if (firstServerId === '7') {
+                              setValue('serverId', 'Europe');
+                            } else if (firstServerId === '8') {
+                              setValue('serverId', 'Asia');
+                            } else if (firstServerId === '9') {
+                              setValue('serverId', 'TW, HK, MO');
+                            }
+                          }
+                        }}
+                        type="number"
+                        disabled={checkLoading || disableCheck}
+                        autoComplete="off"
+                      />
+                    )}
+                  />
                   {data?.checkPlayer && (
                     <button class="check-id-btn" onClick={() => onCheckPlayer()} disabled={checkLoading} style={{ opacity: checkLoading ? '0.7' : '1', minWidth: '210px', cursor: checkLoading ? 'auto' : 'pointer' }}>
                       {repeatCheck ? 'Ввести снова' : data?.checkText}

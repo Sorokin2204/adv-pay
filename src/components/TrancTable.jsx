@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { currencyFormat } from '../utils/currencyFormat';
 import { Typography } from '@mui/material';
+import { randomIntFromInterval } from '../utils/randomNumber';
 
 export default function TrancTable({ title }) {
   const {
@@ -42,8 +43,9 @@ export default function TrancTable({ title }) {
                 <TableCell align="center">{row?.nickid}</TableCell>
                 <TableCell align="center">{row?.nickname}</TableCell>
                 <TableCell align="center">{currencyFormat(row?.price)}</TableCell>
-                <TableCell align="center">{row?.number}</TableCell>
+                <TableCell align="center">{`${row?.number}${row?.typeGameId == 2 ? randomIntFromInterval(1000, 9999) : ''}`}</TableCell>
                 <TableCell align="center">{row?.packageName}</TableCell>
+
                 <TableCell align="center">{row?.serverid === 2001 ? 'Asia' : row?.serverid === 2011 ? 'NA and EU' : row?.serverid == 1 ? 'America' : row?.serverid == 2 ? 'Europe' : row?.serverid == 3 ? 'Asia' : row?.serverid == 4 ? 'TW, HK, MO' : ''}</TableCell>
                 <TableCell align="center">{row?.typeGame?.name}</TableCell>
                 <TableCell align="center">{row?.status === 'processing' ? 'Выполняется' : row?.status === 'completed' ? 'Выполнен' : 'refunded'}</TableCell>
