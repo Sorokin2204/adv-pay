@@ -219,7 +219,6 @@ const GamePageComponent = ({ data }) => {
                           }
                           if (data.id === 2 && newVal?.length >= 1) {
                             const firstServerId = newVal.substring(0, 1);
-                            console.log(firstServerId);
                             if (firstServerId === '6') {
                               setValue('serverId', 'America');
                             } else if (firstServerId === '7') {
@@ -272,7 +271,7 @@ const GamePageComponent = ({ data }) => {
                       </Box>
                       {data?.id === 2 && (
                         <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '20px', mt: '2px' }}>
-                          <b> {lastServer}</b>
+                          <b> {checkData?.id.substring(0, 1) === '6' ? 'America' : checkData?.id.substring(0, 1) === '7' ? 'Europe' : checkData?.id.substring(0, 1) === '8' ? 'Asia' : checkData?.id.substring(0, 1) === '9' ? 'TW, HK, MO' : ''}</b>
                         </Box>
                       )}
                     </div>
