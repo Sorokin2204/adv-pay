@@ -100,6 +100,7 @@ const GamePageComponent = ({ data }) => {
     } else {
       const playerId = getValues('playerId');
       const serverId = getValues('serverId');
+      setLastServer(serverId);
       if (playerId) {
         dispatch(checkUser({ playerId, serverId, typeGameId: data?.id }));
       }
@@ -118,6 +119,7 @@ const GamePageComponent = ({ data }) => {
       dispatch(createTransaction({ playerId: playerIdData, serverId: serverIdData, packageId, typeGameId: data?.id }));
     }
   };
+  const [lastServer, setLastServer] = useState(null);
   const [openAccept, setOpenAccept] = useState(false);
   const [openPaymentModal, setOpenPaymentModal] = useState(false);
   const [openSelectPackage, setOpenSelectPackage] = useState(false);
@@ -268,6 +270,11 @@ const GamePageComponent = ({ data }) => {
                       <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '20px', mt: '2px' }}>
                         <b> {checkData?.id}</b>
                       </Box>
+                      {data?.id === 2 && (
+                        <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '20px', mt: '2px' }}>
+                          <b> {lastServer}</b>
+                        </Box>
+                      )}
                     </div>
                   </div>
                 ) : (
