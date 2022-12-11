@@ -41,6 +41,8 @@ import { useEffect } from 'react';
 import PaymentCardModal from './PaymentCardModal';
 import GameButton from './GameButton';
 import BonusMenu from './BonusMenu';
+import axios from 'axios';
+import moment from 'moment';
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
@@ -163,6 +165,24 @@ function DrawerAppBar(props) {
     setAnchorEl(null);
   };
   const openMenu = Boolean(anchorEl);
+  const [settingsData, setSettingsData] = useState(null);
+  const [showWarning, setShowWarning] = useState(false);
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/settings`).then((resp) => {
+      setSettingsData(resp.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (settingsData) {
+      const warningDate = moment(localStorage.getItem('warningTime'));
+      if (settingsData?.[0]?.activeWarning && warningDate.isValid()) {
+        if (moment().isAfter(warningDate)) {
+          setShowWarning(true);
+        }
+      }
+    }
+  }, [settingsData]);
   React.useEffect(() => {
     if (transError) {
       const err =
@@ -524,6 +544,20 @@ function DrawerAppBar(props) {
             }}>
             На сайте ведутся технические работы. Скоро сайт заработает
           </Box> */}
+          {showWarning && (
+            <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, background: '#555', padding: '30px', width: '100vw', zIndex: '1000000', color: 'white', textAlign: 'center', boxSizing: 'border-box' }}>
+              <Box sx={{ maxWidth: '80%', margin: '0 auto', textAlign: 'center', lineHeight: '24px' }}>{settingsData?.[0]?.textWarning}</Box>
+              <IconButton
+                onClick={() => {
+                  setShowWarning(false);
+                  localStorage.setItem('warningTime', moment().add(3, 'hours').toDate());
+                }}
+                disableRipple
+                sx={{ position: 'fixed', right: '10px', top: '5px' }}>
+                <CloseIcon />
+              </IconButton>
+            </Box>
+          )}
         </Box>{' '}
         {loadingBonus && <Loading />}
         <BonusMenu />
