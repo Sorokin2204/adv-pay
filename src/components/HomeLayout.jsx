@@ -67,9 +67,14 @@ function HomeLayout(props) {
 
   useEffect(() => {
     if (settingsData) {
-      const warningDate = moment(localStorage.getItem('warningTime'));
-      if (settingsData?.[0]?.activeWarning && warningDate.isValid()) {
-        if (moment().isAfter(warningDate)) {
+      if (settingsData?.[0]?.activeWarning) {
+        const warningDate = localStorage.getItem('warningTime');
+        const warningDateMoment = moment(warningDate);
+        if (warningDateMoment.isValid()) {
+          if (moment().isAfter(warningDateMoment)) {
+            setShowWarning(true);
+          }
+        } else {
           setShowWarning(true);
         }
       }
