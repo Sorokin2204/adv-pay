@@ -13,6 +13,7 @@ import PaymentModal from '../components/PaymentModal';
 import { a11yProps, TabPanel } from './Home';
 import TrancTable from '../components/TrancTable';
 import PaymentTable from '../components/PaymentTable';
+import BonusMenu from '../components/BonusMenu';
 const ProfilePage = () => {
   const {
     getUserState: { loading, data, error },
@@ -142,6 +143,7 @@ const ProfilePage = () => {
                     size="large">
                     Пополнить счет
                   </Button>
+
                   <Typography variant="body1" sx={{ mb: 1, marginTop: '10px' }}>
                     <Alert severity="success">Через данную кнопку вы можете пополнить свой личный счет на сайте на любую сумму. Доступны оплаты по карте, Qiwi, YooMoney.</Alert>
                   </Typography>
@@ -158,6 +160,12 @@ const ProfilePage = () => {
                   </Button>
                   <Typography variant="body1" sx={{ mb: 1, marginTop: '10px' }}>
                     <Alert severity="success">Данный метод пополнения счета больше резервный. В нем иногда не проходит оплата. Лучше воспользуйтесь пополнением счета через страницу игры — кнопочка "купить" в блоке пака, собрав корзину заказа.</Alert>
+                  </Typography>
+                </Box>
+                <Box sx={{ mt: 5, textAlign: 'center' }}>
+                  <BonusMenu />
+                  <Typography variant="body1" sx={{ mb: 1, marginTop: '10px' }}>
+                    <Alert severity="success">В копилку вам приходит 0,5% от всех донатов, по достижению определенной суммы вы их сможете забрать.</Alert>
                   </Typography>
                 </Box>
                 <Typography variant="h5" sx={{ mt: 5, mb: 1 }}>

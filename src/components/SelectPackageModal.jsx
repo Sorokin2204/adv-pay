@@ -27,6 +27,7 @@ import Loading from './Loading';
 import axios from 'axios';
 import md5 from 'md5';
 import { useEffect } from 'react';
+import TransitionDialog from './TransitionDialog';
 
 export default function SelectPackageModal(props) {
   const { onClose, open, onNext, gameId } = props;
@@ -49,6 +50,7 @@ export default function SelectPackageModal(props) {
 
   return (
     <Dialog
+      TransitionComponent={TransitionDialog}
       onClose={handleClose}
       open={open}
       sx={{

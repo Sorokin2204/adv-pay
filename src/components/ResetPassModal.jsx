@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { resetPasswordUser } from '../redux/slices/user.slice';
 import Loading from './Loading';
 import { useEffect } from 'react';
+import TransitionDialog from './TransitionDialog';
 
 export default function ResetPassModal(props) {
   const { onClose, text, open } = props;
@@ -59,6 +60,7 @@ export default function ResetPassModal(props) {
   return (
     <>
       <Dialog
+        TransitionComponent={TransitionDialog}
         onClose={handleClose}
         open={open}
         sx={{

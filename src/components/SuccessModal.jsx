@@ -19,6 +19,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import TransitionDialog from './TransitionDialog';
 
 export default function SuccessModal(props) {
   const { onClose, selectedValue, open, fullWidth, text = 'Донат успешно отправлен в игру' } = props;
@@ -33,6 +34,7 @@ export default function SuccessModal(props) {
 
   return (
     <Dialog
+      TransitionComponent={TransitionDialog}
       fullWidth={fullWidth}
       maxWidth="sm"
       onClose={handleClose}

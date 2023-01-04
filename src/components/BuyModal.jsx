@@ -27,6 +27,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { checkUser, checkUserReset, getUser } from '../redux/slices/user.slice';
 import axios from 'axios';
 import { createTransaction } from '../redux/slices/transaction.slice';
+import TransitionDialog from './TransitionDialog';
 export default function BuyModal(props) {
   const dispatch = useDispatch();
   const {
@@ -90,10 +91,10 @@ export default function BuyModal(props) {
     dispatch(createTransaction({ playerId: data.playerId, serverId: data.serverId, packageId: data.packageId }));
   };
   return (
-    <Dialog fullWidth maxWidth="sm" onClose={handleClose} open={open}>
+    <Dialog TransitionComponent={TransitionDialog} fullWidth maxWidth="sm" onClose={handleClose} open={open}>
       <DialogTitle sx={{ pb: '8px' }}>Задонатить</DialogTitle>
       <DialogContent sx={{}}>
-<FormControl>
+        <FormControl>
           <FormLabel sx={{ mt: '16px' }}>Выберите сервер</FormLabel>
           <Controller
             rules={{ required: true }}
@@ -110,7 +111,7 @@ export default function BuyModal(props) {
                     </div>
                   }
                 />
-        <FormControlLabel
+                <FormControlLabel
                   value={'2001'}
                   control={<Radio disabled={checkLoading} />}
                   label={

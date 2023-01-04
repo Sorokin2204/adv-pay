@@ -27,6 +27,7 @@ import { currencyFormat } from '../utils/currencyFormat';
 import { useDispatch, useSelector } from 'react-redux';
 import { a11yProps, TabPanel } from '../pages/Home';
 import { initPaymentCard } from '../redux/slices/user.slice';
+import TransitionDialog from './TransitionDialog';
 export default function PaymentModal(props) {
   const { onClose, selectedValue, open, typePay } = props;
   const defaultValues = {
@@ -60,7 +61,7 @@ export default function PaymentModal(props) {
   };
   const dispatch = useDispatch();
   return (
-    <Dialog maxWidth="sm" onClose={handleClose} open={open}>
+    <Dialog TransitionComponent={TransitionDialog} maxWidth="sm" onClose={handleClose} open={open}>
       <DialogTitle sx={{ pb: '8px' }}>Пополнить баланс</DialogTitle>
       <form method="POST" action="https://merchant.webmoney.ru/lmi/payment_utf.asp?at=authtype_16" accept-charset="utf-8">
         <DialogContent sx={{ pb: '16px', pt: '0px', pb: '24px' }}>

@@ -27,6 +27,9 @@ import GuarantePage from './pages/GuarantePage';
 import ReturnPolicyPage from './pages/ReturnPolicyPage';
 import ProfilePage from './pages/ProfilePage';
 import { gapi } from 'gapi-script';
+import { useState } from 'react';
+import axios from 'axios';
+import WorkOnSite from './components/WorkOnSite';
 
 function App() {
   const location = useLocation();
@@ -35,6 +38,7 @@ function App() {
   const {
     getUserState: { loading, data, error },
   } = useSelector((state) => state.user);
+  const [settingsData, setSettingsData] = useState({ loading: true, data: null, error: null });
   useEffect(() => {
     function start() {
       gapi.client.init({
@@ -43,7 +47,16 @@ function App() {
     }
     gapi.load('client:auth2', start);
     dispatch(getUser());
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/settings`)
+      .then((resp) => {
+        setSettingsData({ loading: false, data: resp.data, error: null });
+      })
+      .catch(() => {
+        setSettingsData({ loading: false, data: null, error: true });
+      });
   }, []);
+  console.log(settingsData);
   useEffect(() => {
     const staticPageRule =
       location.pathname.substring(0, 5) !== '/auth' &&
@@ -77,7 +90,7 @@ function App() {
     { path: '/return-policy', element: <ReturnPolicyPage /> },
     { path: '/profile', element: <ProfilePage /> },
   ]);
-  return !loading && (data || error) && routes;
+  return !settingsData.loading ? settingsData?.data?.[1]?.activeWarning == true ? <WorkOnSite /> : !loading && (data || error) && routes : <></>;
 }
 
 export default App;

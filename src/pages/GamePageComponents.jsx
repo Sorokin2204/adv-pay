@@ -214,19 +214,25 @@ const GamePageComponent = ({ data }) => {
                         {...field}
                         onChange={(event) => {
                           const newVal = event.target.value;
-                          if (newVal.length <= 9) {
-                            field.onChange(event.target.value);
-                          }
-                          if (data.id === 2 && newVal?.length >= 1) {
-                            const firstServerId = newVal.substring(0, 1);
-                            if (firstServerId === '6') {
-                              setValue('serverId', 'America');
-                            } else if (firstServerId === '7') {
-                              setValue('serverId', 'Europe');
-                            } else if (firstServerId === '8') {
-                              setValue('serverId', 'Asia');
-                            } else if (firstServerId === '9') {
-                              setValue('serverId', 'TW, HK, MO');
+                          if (data.id === 3) {
+                            if (newVal.length <= 10) {
+                              field.onChange(event.target.value);
+                            }
+                          } else {
+                            if (newVal.length <= 9) {
+                              field.onChange(event.target.value);
+                            }
+                            if (data.id === 2 && newVal?.length >= 1) {
+                              const firstServerId = newVal.substring(0, 1);
+                              if (firstServerId === '6') {
+                                setValue('serverId', 'America');
+                              } else if (firstServerId === '7') {
+                                setValue('serverId', 'Europe');
+                              } else if (firstServerId === '8') {
+                                setValue('serverId', 'Asia');
+                              } else if (firstServerId === '9') {
+                                setValue('serverId', 'TW, HK, MO');
+                              }
                             }
                           }
                         }}
@@ -269,6 +275,11 @@ const GamePageComponent = ({ data }) => {
                       <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '20px', mt: '2px' }}>
                         <b> {checkData?.id}</b>
                       </Box>
+                      {data?.id == 3 && checkData?.device == 'app_store' && (
+                        <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '20px', transform: ' translateY(10px)', backgroundColor: '#ad2305' }}>
+                          <b> Донат доступен только для аккаунтов, созданных на Android</b>
+                        </Box>
+                      )}
                       {data?.id === 2 && (
                         <Box className="" sx={{ flexDirection: 'column', display: 'flex', fontSize: '20px', mt: '2px' }}>
                           <b> {checkData?.id.substring(0, 1) === '6' ? 'America' : checkData?.id.substring(0, 1) === '7' ? 'Europe' : checkData?.id.substring(0, 1) === '8' ? 'Asia' : checkData?.id.substring(0, 1) === '9' ? 'TW, HK, MO' : ''}</b>
@@ -285,9 +296,9 @@ const GamePageComponent = ({ data }) => {
                   </div>
                 )}
                 <button
-                  disabled={data?.checkRequired === false ? data?.checkRequired : disableDonate}
+                  disabled={(data?.checkRequired === false ? data?.checkRequired : disableDonate) || (data?.id == 3 && checkData?.device == 'app_store') || checkLoading}
                   class="check-id-btn finish-donate"
-                  style={{ marginLeft: '0px', marginTop: '10px', position: 'absolute', ...(!disableDonate || checkData ? { bottom: checkData?.image ? '-50px' : '-30px' } : { top: '0px' }), left: 0 }}
+                  style={{ marginLeft: '0px', marginTop: '10px', position: 'absolute', ...(!disableDonate || checkData ? { bottom: checkData?.image || checkData?.device == 'app_store' ? '-50px' : '-30px' } : { top: '0px' }), left: 0 }}
                   onClick={() => {
                     const playerIdData = getValues('playerId');
                     if (playerIdData) {

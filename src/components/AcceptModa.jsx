@@ -21,6 +21,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useSelector } from 'react-redux';
 import { currencyFormat } from '../utils/currencyFormat';
+import TransitionDialog from './TransitionDialog';
 
 export default function AcceptModal(props) {
   const { onClose, text, open, onNext, selectedPackage } = props;
@@ -45,6 +46,7 @@ export default function AcceptModal(props) {
 
   return (
     <Dialog
+      TransitionComponent={TransitionDialog}
       onClose={handleClose}
       open={open}
       sx={{

@@ -58,15 +58,18 @@ const BonusMenu = () => {
   };
   return (
     <div>
-      <Fab
-        sx={{ position: 'fixed', background: '#e9a317', bottom: '20px', left: '20px' }}
+      <Button
         onClick={() => {
           handleOpenDrawer();
         }}
-        size="medium"
-        aria-label="add">
-        <Savings sx={{ color: '#9c2628' }} />
-      </Fab>{' '}
+        sx={{ mt: 3, backgroundColor: '#e9a317 !important', color: '#9c2628', fontWeight: '500 !important' }}
+        disableRipple
+        variant="contained"
+        size="large"
+        endIcon={<Savings sx={{ color: '#9c2628' }} />}>
+        Копилка
+      </Button>
+
       <Drawer anchor={'left'} open={openDrawer} onClose={handleCloseDrawer}>
         <Box sx={{ width: '160px', marginTop: '150px', marginBottom: '100px', transform: 'translateX(0px)' }}>
           <Box sx={{ position: 'relative' }}>

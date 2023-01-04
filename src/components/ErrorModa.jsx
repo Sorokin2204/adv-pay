@@ -13,12 +13,13 @@ import AddIcon from '@mui/icons-material/Add';
 import ErrorIcon from '@mui/icons-material/Error';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
-import { Box, DialogActions, DialogContent, DialogContentText, Input, TextField } from '@mui/material';
+import { Box, DialogActions, DialogContent, DialogContentText, Input, Slide, TextField } from '@mui/material';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import TransitionDialog from './TransitionDialog';
 
 export default function ErrorModal(props) {
   const { onClose, text, open } = props;
@@ -28,8 +29,8 @@ export default function ErrorModal(props) {
   };
 
   return (
-    <Dialog fullWidth onClose={handleClose} open={open}>
-      <DialogContent sx={{ height: { xs: '100px', sm: '170px' } }}>
+    <Dialog TransitionComponent={TransitionDialog} fullWidth onClose={handleClose} open={open}>
+      <DialogContent sx={{ height: { xs: '190px', mobile: '160px' } }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', transform: 'translateY(20px)' }}>
           <Typography variant="h5" sx={{ fontWeight: '600', fontSize: { xs: '16px', mob: '24px' } }}>
             {text}

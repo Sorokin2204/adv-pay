@@ -192,9 +192,17 @@ function DrawerAppBar(props) {
     if (transError) {
       const err =
         transError?.error === 'PACKAGE_NOT_ACTIVE' ? (
-          <div>
-            Данный пакет временно недоступен, напишите нам во <a href="https://vk.com/im?sel=-213480825">вконтакте</a> или в <a href="https://t.me/DonateGold">телеграм</a> и мы отправим вам печати, списав деньги с вашего личного счета сайта. Приносим извинения за временное неудобство.
-          </div>
+          <Box sx={{ fontSize: { mobile: '20px', xs: '16px' } }}>
+            Данный пакет временно недоступен, напишите нам во{' '}
+            <a style={{ color: '#e08418' }} href="https://vk.com/im?sel=-213480825">
+              вконтакте
+            </a>{' '}
+            или в{' '}
+            <a style={{ color: '#e08418' }} href="https://t.me/DonateGold">
+              телеграм
+            </a>{' '}
+            и мы отправим вам печати, списав деньги с вашего личного счета сайта. Приносим извинения за временное неудобство.
+          </Box>
         ) : transError?.error === 'BALANCE_ERROR' ? (
           'Недостаточно средств'
         ) : transError?.error === 'ACCOUNT_NOT_FOUND' ? (
@@ -565,7 +573,6 @@ function DrawerAppBar(props) {
           )}
         </Box>{' '}
         {loadingBonus && <Loading />}
-        <BonusMenu />
       </Paper>
     </>
   ) : (

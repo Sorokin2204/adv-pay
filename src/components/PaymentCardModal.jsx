@@ -27,6 +27,7 @@ import Loading from './Loading';
 import axios from 'axios';
 import md5 from 'md5';
 import { useEffect } from 'react';
+import TransitionDialog from './TransitionDialog';
 
 export default function PaymentCardModal(props) {
   const { onClose, price, open } = props;
@@ -61,6 +62,7 @@ export default function PaymentCardModal(props) {
   console.log(cart);
   return (
     <Dialog
+      TransitionComponent={TransitionDialog}
       onClose={handleClose}
       open={open}
       sx={{
