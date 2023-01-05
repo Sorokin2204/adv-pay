@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <Box sx={{ marginTop: 'auto', flexShrink: '1', pt: 2, borderTop: '1px solid rgba(255,255,255,0.2)' }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <Typography variant="subtitle2">Donate Gold © 2022</Typography>
+        <Typography variant="subtitle2">Donate Gold © 2022-2023</Typography>
         <Box sx={{ display: 'grid', gridTemplateColumns: { mobile: 'repeat(4,88px)', xs: 'repeat(2,88px)' }, gridGap: '10px', mt: 2 }}>
           <img key={2} src="/visa.png" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
           <img key={3} src="/mc.png" style={{ height: '31px', width: '88px', objectFit: 'cover' }} />
@@ -48,7 +48,7 @@ const Footer = () => {
             Политика возврата
           </Button>
         </Box>
-        <Typography style={{ fontSize: '12px', opacity: '0.3', margin: '0 auto' }}>v 1.1.0</Typography>
+        <Typography style={{ fontSize: '12px', opacity: '0.3', margin: '0 auto' }}>v 1.3</Typography>
       </Box>
     </Box>
   );

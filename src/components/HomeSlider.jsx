@@ -58,10 +58,10 @@ const HomeSlider = () => {
               }}>
               <div data-swiper-parallax={parallaxAmount} data-swiper-parallax-opacity={parallaxOpacity}>
                 <Box className="" sx={{ marginBottom: '5px', fontSize: { mobile: '24px', xs: '18px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Identity V × Project Zero II: Crimson Butterfly
+                  Identity V × B.Duck возвращение кроссовера
                 </Box>
                 <Box className="mb-5 small" sx={{ opacity: '0.7', marginBottom: { mobile: '0px', xs: '15px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Событие доступно с 24.11
+                  Событие доступно с 05.01
                 </Box>
               </div>{' '}
               {/* <button class="slider-button">Identity V</button> */}
@@ -88,10 +88,10 @@ const HomeSlider = () => {
               }}>
               <div data-swiper-parallax={parallaxAmount} data-swiper-parallax-opacity={parallaxOpacity}>
                 <Box className="" sx={{ marginBottom: '5px', fontSize: { mobile: '24px', xs: '18px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Обновление 3.3. в Gensgin Impact!
+                  Обновление 3.3. фаза 2 в Gensgin Impact!
                 </Box>
                 <Box className="mb-5 small" sx={{ opacity: '0.7', marginBottom: { mobile: '0px', xs: '15px' }, textAlign: { mobile: 'left', xs: 'center' } }}>
-                  Новый персонаж Странник доступен с 07.12
+                  Возвращение персонажа Сёгун Райдэн с 27.12
                 </Box>
               </div>{' '}
               {/* <button class="slider-button">Find out Now</button> */}

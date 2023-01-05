@@ -17,7 +17,7 @@ const DonatePage = () => {
                 Инструкция
               </Typography>
 <Typography variant="body1" sx={{ maxWidth: '100%', width: '100%', height: '600px', mt: 2 }}>
-        <iframe style={{width: '100%',height: '600px'}} src="https://vk.com/video_ext.php?oid=-213480825&id=456239024&hash=05f99572efb915b0&hd=4" width="1920" height="1080" allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" frameborder="0" allowfullscreen></iframe>
+        <iframe style={{width: '100%',height: '600px'}} src="https://vk.com/video_ext.php?oid=-217542887&id=456239022&hash=d53fb04986567dec&hd=4" width="1920" height="1080" allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" frameborder="0" allowfullscreen></iframe>
          </Typography>
             </Box>
           </Box>

@@ -81,7 +81,7 @@ const GamePage = () => {
       helpImage: `/id_genshin.jpg`,
       background: '/back-genshin.jpg',
       checkPlayer: true,
-      checkRequired: false,
+      checkRequired: true,
       checkText: 'Проверить',
       serverList: [
         {
