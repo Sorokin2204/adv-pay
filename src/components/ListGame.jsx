@@ -8,8 +8,8 @@ const ListGame = () => {
   const listGame = [
     { img: '/genshin-impact.jpg', name: 'Genshin Impact', link: 'genshin-impact' },
     { img: '/identityv.png', name: 'Identity V', link: 'identity-v' },
-    { img: '/lotr-risetowar.jpg', name: 'Скоро!' },
-    { img: '/oaglobalpay.jpg', name: 'Скоро!' },
+    { img: '/onmyoji-arena.jpg', name: 'Onmyoji Arena', link: 'onmyoji-arena' },
+	{ img: '/lotr-risetowar.jpg', name: 'Скоро!' },
   ];
   return (
     <>
