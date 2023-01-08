@@ -24,7 +24,7 @@ import { currencyFormat } from '../utils/currencyFormat';
 import TransitionDialog from './TransitionDialog';
 
 export default function AcceptModal(props) {
-  const { onClose, text, open, onNext, selectedPackage } = props;
+  const { onClose, text, open, onNext, selectedPackage, typeGameId } = props;
   const {
     getPackageState: { data: packageList },
   } = useSelector((state) => state.package);
@@ -34,7 +34,7 @@ export default function AcceptModal(props) {
   const [activePackage, setActivePackage] = React.useState(null);
   React.useEffect(() => {
     if (packageList) {
-      const defaultPackage = packageList?.find((item, index) => item?.code === selectedPackage);
+      const defaultPackage = packageList?.find((item, index) => item?.code === selectedPackage && item?.typeGameId == typeGameId);
       setActivePackage(defaultPackage);
     }
   }, [selectedPackage, packageList]);

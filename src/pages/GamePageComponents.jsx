@@ -351,7 +351,7 @@ const GamePageComponent = ({ data }) => {
           </div>
         </Container>
       </div>
-      <AcceptModal open={openAccept} selectedPackage={selectedGameCode} text={'Подтверждаем донат?'} onClose={handleCloseAccept} onNext={handleNext} />
+      <AcceptModal open={openAccept} selectedPackage={selectedGameCode} text={'Подтверждаем донат?'} typeGameId={data?.id} onClose={handleCloseAccept} onNext={handleNext} />
       <SelectPackageModal
         gameId={data?.id}
         open={openSelectPackage}
