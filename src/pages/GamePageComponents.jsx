@@ -40,6 +40,7 @@ import PaymentGameCardModal from '../components/PaymentGameCardModal';
 import SelectPackageModal from '../components/SelectPackageModal';
 import { HelpOutlineOutlined } from '@mui/icons-material';
 import OutsideClickHandler from 'react-outside-click-handler';
+import SelectRadio from '../components/SelectRadio';
 const GamePageComponent = ({ data }) => {
   const dispatch = useDispatch();
   const {
@@ -64,6 +65,7 @@ const GamePageComponent = ({ data }) => {
     control,
     register,
     getValues,
+    watch,
   } = useForm({ defaultValues });
   const [playerId, setPlayerId] = React.useState('');
   const [isAgree, setIsAgree] = useState(false);
@@ -159,7 +161,7 @@ const GamePageComponent = ({ data }) => {
       // dispatch(resetCheck)
     };
   }, []);
-
+  const watchServerId = watch('serverId');
   return (
     <>
       <div className="game" style={{ backgroundImage: `url("${data?.background}")` }}>
@@ -171,16 +173,17 @@ const GamePageComponent = ({ data }) => {
             <div style={{ marginTop: '16px' }} class="custom-radio-label">
               Выберите сервер
             </div>
-            <div class="custom-radio" style={{ opacity: checkLoading || disableCheck ? '0.7' : '1' }}>
-              {data?.serverList?.map((serverItem) => (
-                <label>
-                  <input {...register('serverId', { required: true })} type="radio" value={serverItem?.serverId} disabled={checkLoading || disableCheck} />
+            <SelectRadio selectedItem={watchServerId} active={data.isSelectServer} list={data?.serverList}>
+              <div class="custom-radio" style={{ opacity: checkLoading || disableCheck ? '0.7' : '1' }}>
+                {data?.serverList?.map((serverItem) => (
+                  <label>
+                    <input {...register('serverId', { required: true })} type="radio" value={serverItem?.serverId} disabled={checkLoading || disableCheck} />
 
-                  <span>{serverItem?.name}</span>
-                </label>
-              ))}
-            </div>
-
+                    <span>{serverItem?.name}</span>
+                  </label>
+                ))}
+              </div>
+            </SelectRadio>
             <Box className="" sx={{ mt: { xs: 1, sm: 0 }, display: 'flex', alignItems: { xs: 'center', mob: 'stretch' }, flexDirection: 'column' }}>
               <div className="check-id-box">
                 <OutsideClickHandler
@@ -214,7 +217,7 @@ const GamePageComponent = ({ data }) => {
                         {...field}
                         onChange={(event) => {
                           const newVal = event.target.value;
-                          if (data.id === 3) {
+                          if (data.id === 3 || data.id === 4) {
                             if (newVal.length <= 10) {
                               field.onChange(event.target.value);
                             }
@@ -352,6 +355,22 @@ const GamePageComponent = ({ data }) => {
         </Container>
       </div>
       <AcceptModal open={openAccept} selectedPackage={selectedGameCode} text={'Подтверждаем донат?'} typeGameId={data?.id} onClose={handleCloseAccept} onNext={handleNext} />
+      {transLoading && (
+        <Box
+          sx={{
+            position: 'fixed',
+            top: { xs: 'calc(50% + 70px)', mob: 'calc(50% + 60px)' },
+            left: '50%',
+            transform: 'translate(-50%,-50%)',
+            zIndex: '100000',
+            textAlign: 'center',
+            fontSize: { xs: '20px', mob: '22px' },
+            whiteSpace: { xs: 'normal', mob: 'nowrap' },
+            width: { xs: '262px', mob: 'auto' },
+          }}>
+          Ваш донат отправляется, дождитесь окончания <br /> и не закрывайте страницу
+        </Box>
+      )}
       <SelectPackageModal
         gameId={data?.id}
         open={openSelectPackage}

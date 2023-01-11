@@ -102,6 +102,19 @@ export const initPaymentCard = createAsyncThunk('user/initPaymentCard', (data, {
     .then((response) => response.data)
     .catch((error) => rejectWithValue(error.response.data));
 });
+export const uploadAvatar = createAsyncThunk('user/uploadAvatar', (data, { rejectWithValue }) => {
+  const token = localStorage?.getItem('token');
+  if (!token) rejectWithValue({ error: 'PROBLEM_WITH_TOKEN' });
+
+  return axios
+    .post(`${process.env.REACT_APP_SERVER_URL}/user/upload-avatar`, data, {
+      headers: {
+        request_token: token,
+      },
+    })
+    .then((response) => response.data)
+    .catch((error) => rejectWithValue(error.response.data));
+});
 
 const userInitialState = {
   createUserState: {
@@ -145,6 +158,11 @@ const userInitialState = {
     error: null,
   },
   initPaymentCardState: {
+    data: null,
+    loading: false,
+    error: null,
+  },
+  uploadAvatarState: {
     data: null,
     loading: false,
     error: null,
@@ -235,6 +253,27 @@ const userSlice = createSlice({
     },
     [createUser.rejected]: (state, action) => {
       state.createUserState = {
+        loading: false,
+        data: null,
+        error: action.payload,
+      };
+    },
+    // UPLOAD AVATAR
+    [uploadAvatar.pending]: (state, action) => {
+      state.uploadAvatarState = {
+        loading: true,
+        error: null,
+      };
+    },
+    [uploadAvatar.fulfilled]: (state, action) => {
+      state.uploadAvatarState = {
+        loading: false,
+        data: action.payload,
+        error: null,
+      };
+    },
+    [uploadAvatar.rejected]: (state, action) => {
+      state.uploadAvatarState = {
         loading: false,
         data: null,
         error: action.payload,

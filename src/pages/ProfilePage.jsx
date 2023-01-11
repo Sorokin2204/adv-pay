@@ -14,6 +14,7 @@ import { a11yProps, TabPanel } from './Home';
 import TrancTable from '../components/TrancTable';
 import PaymentTable from '../components/PaymentTable';
 import BonusMenu from '../components/BonusMenu';
+import ProfileAvatar from '../components/ProfileAvatar';
 const ProfilePage = () => {
   const {
     getUserState: { loading, data, error },
@@ -96,7 +97,8 @@ const ProfilePage = () => {
 
           <TabPanel value={value} index={0}>
             <Container>
-              <Box sx={{ mt: 6, display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '500px', mt: 6, mx: 'auto' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: '500px', mt: 3, mx: 'auto' }}>
+                <ProfileAvatar />
                 <Typography variant="h4">Личный кабинет</Typography>
                 <Typography variant="body1" sx={{ opacity: 0.7 }}>
                   {`Аккаунт ${data?.email}`}
